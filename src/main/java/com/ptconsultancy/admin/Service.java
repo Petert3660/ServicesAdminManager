@@ -5,6 +5,7 @@ public class Service {
     private String name;
     private String absolutePath;
     private boolean running;
+    private String url;
 
     public Service (String absolutePath, boolean running) {
         this.absolutePath = absolutePath;
@@ -34,5 +35,13 @@ public class Service {
 
     public void setAbsolutePath(String absolutePath) {
         this.absolutePath = absolutePath;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getUrl() {
+        return url;
     }
 }

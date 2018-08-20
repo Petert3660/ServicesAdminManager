@@ -1,5 +1,8 @@
 package com.ptconsultancy.admin;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +26,46 @@ public class Admin {
         }
 
         Service service = new Service(servicePath, false);
+        service.setUrl(findTheServiceUrl(service.getName()));
         allServices.add(service);
 
         return true;
+    }
+
+    private String findTheServiceUrl(String name) {
+
+        String host = "";
+        String port = "";
+        String filename = "c:/GradleTutorials/" + name + "/src/main/resources/application.properties";
+        BufferedReader br = null;
+
+        try {
+
+            br = new BufferedReader(new FileReader(filename));
+
+            String sCurrentLine;
+            while ((sCurrentLine = br.readLine()) != null) {
+                if (sCurrentLine.contains("spring.data.rest.base-path=")) {
+                    host = sCurrentLine.substring(sCurrentLine.lastIndexOf("spring.data.rest.base-path=") + 27);
+                }
+                if (sCurrentLine.contains("server.port=")) {
+                    port = sCurrentLine.substring(sCurrentLine.lastIndexOf("server.port=") + 12);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (br != null)
+                    br.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        String url = host + ":" + port;
+
+        return url;
     }
 
     public void removeService(String servicePath) {
