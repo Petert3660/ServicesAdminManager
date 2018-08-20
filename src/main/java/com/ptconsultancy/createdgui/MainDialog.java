@@ -4,6 +4,7 @@
 
 package com.ptconsultancy.createdgui;
 
+import com.ptconsultancy.admin.Admin;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -13,7 +14,10 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MainDialog extends JFrame {
 
     private static final String MAIN_HEADING = "Services Admin Manager";
@@ -26,7 +30,13 @@ public class MainDialog extends JFrame {
 
     private JMenuBar menuBar = new JMenuBar();
 
-    public MainDialog() {
+    private Admin admin;
+
+    @Autowired
+    public MainDialog(Admin admin) {
+
+        this.admin = admin;
+
         this.setTitle(TITLE);
         this.setSize(FRAME_X_SIZE, FRAME_Y_SIZE);
 
@@ -34,7 +44,7 @@ public class MainDialog extends JFrame {
         p1.setLayout(null);
         p1.setBackground(col);
 
-        com.thehutgroup.guicomponents.FreeLabel l0 = new com.thehutgroup.guicomponents.FreeLabel(MAIN_HEADING, 30, 30, 500, 20, new Font("", Font.BOLD + Font.ITALIC, 20));
+        com.thehutgroup.guicomponents.FreeLabel l0 = new com.thehutgroup.guicomponents.FreeLabel(MAIN_HEADING, 30, 30, 500, 30, new Font("", Font.BOLD + Font.ITALIC, 20));
 
         com.thehutgroup.guicomponents.FreeButton b0 = new com.thehutgroup.guicomponents.FreeButton("Exit", 460, 800, 80);
 
@@ -105,6 +115,11 @@ public class MainDialog extends JFrame {
         menu1.add(menuItem10);
         JMenuItem menuItem11 = new JMenuItem("New Web Service");
         menu1.add(menuItem11);
+        menu1.addSeparator();
+        JMenuItem menuItem12 = new JMenuItem("Add Existing Service");
+        menu1.add(menuItem12);
+        JMenuItem menuItem13 = new JMenuItem("Remove Service");
+        menu1.add(menuItem13);
 
         // This is the control for the Services/New REST Service menu item
         menuItem10.addActionListener(new ActionListener() {
@@ -117,6 +132,20 @@ public class MainDialog extends JFrame {
         menuItem11.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Menu item - New Web Service in the Services menu has been clicked");
+            }
+        });
+
+        // This is the control for the Add Existing Service menu item
+        menuItem12.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Menu item - Add Existing Service in the Services menu has been clicked");
+            }
+        });
+
+        // This is the control for the Remove Service menu item
+        menuItem13.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Menu item - Remove Service in the Services menu has been clicked");
             }
         });
 
