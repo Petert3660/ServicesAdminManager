@@ -146,7 +146,8 @@ public class MainDialog extends JFrame {
         // This is the control for the Remove Service menu item
         menuItem13.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Menu item - Remove Service in the Services menu has been clicked");
+                RemoveServicesDialog removeServicesDialog = new RemoveServicesDialog(tg, admin);
+                GuiHelper.showFrame(removeServicesDialog);
             }
         });
 

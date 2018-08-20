@@ -39,4 +39,8 @@ public class Admin {
         }
         System.out.println("----------------------------------------------------------------\n\n");
     }
+
+    public ArrayList<String> getAllServices() {
+        return allServices;
+    }
 }
