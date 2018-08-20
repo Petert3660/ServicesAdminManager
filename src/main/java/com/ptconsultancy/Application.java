@@ -1,6 +1,8 @@
 package com.ptconsultancy;
 
 import com.ptconsultancy.admin.adminsupport.BuildVersion;
+import com.ptconsultancy.createdgui.MainDialog;
+import com.ptconsultancy.guis.GuiHelper;
 import com.ptconsultancy.messages.MessageHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +42,9 @@ public class Application implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {
         outputMessage();
+
+        MainDialog md = new MainDialog();
+        GuiHelper.showFrame(md);
     }
 
     private void outputMessage() {
