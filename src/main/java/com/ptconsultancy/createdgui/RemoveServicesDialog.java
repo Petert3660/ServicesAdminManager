@@ -5,6 +5,7 @@
 package com.ptconsultancy.createdgui;
 
 import com.ptconsultancy.admin.Admin;
+import com.ptconsultancy.admin.Service;
 import com.ptconsultancy.guicomponents.FreeButton;
 import com.ptconsultancy.guicomponents.FreeLabel;
 import com.ptconsultancy.guicomponents.FreeLabelComboBoxPair;
@@ -55,8 +56,8 @@ public class RemoveServicesDialog extends JFrame {
 
         ArrayList<String> items0 = new ArrayList<String>();
         items0.add("--Select");
-        for (String service : admin.getAllServices()) {
-            items0.add(service);
+        for (Service service : admin.getAllServicesByName()) {
+            items0.add(service.getName());
         }
         FreeLabelComboBoxPair comp0 = new FreeLabelComboBoxPair(col, "Please select service to remove:", 30, 90, 240, items0);
 

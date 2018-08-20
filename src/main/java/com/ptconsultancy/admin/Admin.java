@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Admin {
 
-    private ArrayList<String> allServices = new ArrayList<>();
+    private ArrayList<Service> allServices = new ArrayList<>();
 
     @Autowired
     public Admin() {
@@ -16,13 +16,14 @@ public class Admin {
 
     public boolean addService(String servicePath) {
 
-        for (String service : allServices) {
-            if (servicePath.equals(service)) {
+        for (Service service : allServices) {
+            if (servicePath.equals(service.getName())) {
                 return false;
             }
         }
 
-        allServices.add(servicePath);
+        Service service = new Service(servicePath, false);
+        allServices.add(service);
 
         return true;
     }
@@ -35,23 +36,24 @@ public class Admin {
         System.out.println("\n\n----------------------------------------------------------------");
         System.out.println("List of currently active services");
         System.out.println("----------------------------------------------------------------");
-        for (String service : allServices) {
-            System.out.println(service);
+        for (Service service : allServices) {
+            System.out.println(service.getName());
         }
         System.out.println("----------------------------------------------------------------\n\n");
     }
 
-    private void sortAllServices() {
-            allServices.sort(new Comparator<String>() {
+    private void sortAllServicesByName() {
+            allServices.sort(new Comparator<Service>() {
             @Override
-            public int compare(String o1, String o2) {
-                return o1.compareTo(o2);
+            public int compare(Service o1, Service o2) {
+                return o1.getName().compareTo(o2.getName());
             }
         });
     }
 
-    public ArrayList<String> getAllServices() {
-        sortAllServices();
+    public ArrayList<Service> getAllServicesByName() {
+        sortAllServicesByName();
+
         return allServices;
     }
 }
