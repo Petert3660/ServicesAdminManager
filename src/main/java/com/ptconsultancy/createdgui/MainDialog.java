@@ -32,10 +32,10 @@ public class MainDialog extends JFrame {
 
     private JMenuBar menuBar = new JMenuBar();
 
-    @Autowired
     private Admin admin;
 
-    public MainDialog() {
+    @Autowired
+    public MainDialog(Admin admin) {
 
         this.admin = admin;
 
@@ -138,7 +138,7 @@ public class MainDialog extends JFrame {
         // This is the control for the Add Existing Service menu item
         menuItem12.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                AddServicesDialog addServicesDialog = new AddServicesDialog(tg);
+                AddServicesDialog addServicesDialog = new AddServicesDialog(tg, admin);
                 GuiHelper.showFrame(addServicesDialog);
             }
         });

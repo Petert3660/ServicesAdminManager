@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -31,11 +32,11 @@ public class AddServicesDialog extends JFrame {
 
     private MainDialog mainDialog;
 
-    @Autowired
     private Admin admin;
 
-    public AddServicesDialog(MainDialog mainDialog) {
-
+    @Autowired
+    public AddServicesDialog(MainDialog mainDialog, Admin admin) {
+        this.admin = admin;
         this.mainDialog = mainDialog;
         mainDialog.setEnabled(false);
 
@@ -57,6 +58,14 @@ public class AddServicesDialog extends JFrame {
         // This is the control for the OK button
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                if (!admin.addService(comp0.getText())) {
+                    JOptionPane.showMessageDialog(tg, "Service " + comp0.getText() + " has already been added",
+                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(tg, "Service " + comp0.getText() + " has been successfully added",
+                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                }
+                admin.listAllActiveServices();
                 b1.doClick();
             }
         });
