@@ -120,6 +120,9 @@ public class MainDialog extends JFrame {
         menu1.add(menuItem12);
         JMenuItem menuItem13 = new JMenuItem("Remove Service");
         menu1.add(menuItem13);
+        menu1.addSeparator();
+        JMenuItem menuItem14 = new JMenuItem("Monitor Service");
+        menu1.add(menuItem14);
 
         // This is the control for the Services/New REST Service menu item
         menuItem10.addActionListener(new ActionListener() {
