@@ -5,6 +5,9 @@
 package com.ptconsultancy.createdgui;
 
 import com.ptconsultancy.admin.Admin;
+import com.ptconsultancy.guicomponents.FreeButton;
+import com.ptconsultancy.guicomponents.FreeLabel;
+import com.ptconsultancy.guicomponents.FreeTextArea;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -44,12 +47,11 @@ public class MainDialog extends JFrame {
         p1.setLayout(null);
         p1.setBackground(col);
 
-        com.thehutgroup.guicomponents.FreeLabel l0 = new com.thehutgroup.guicomponents.FreeLabel(MAIN_HEADING, 30, 30, 500, 30, new Font("", Font.BOLD + Font.ITALIC, 20));
+        FreeLabel l0 = new FreeLabel(MAIN_HEADING, 30, 30, 500, 30, new Font("", Font.BOLD + Font.ITALIC, 20));
 
-        com.thehutgroup.guicomponents.FreeButton b0 = new com.thehutgroup.guicomponents.FreeButton("Exit", 460, 800, 80);
+        FreeButton b0 = new FreeButton("Exit", 460, 800, 80);
 
-
-        com.thehutgroup.guicomponents.FreeTextArea comp0 = new com.thehutgroup.guicomponents.FreeTextArea(col, "<Description label for TextArea>:", 30, 90, 200, 935, 620, false);
+        FreeTextArea comp0 = new FreeTextArea(col, "<Description label for TextArea>:", 30, 90, 200, 935, 620, false);
 
         // This is the control for the Exit-implement button
         b0.addActionListener(new ActionListener() {
@@ -65,7 +67,6 @@ public class MainDialog extends JFrame {
         setUpMenuBar();
           this.setJMenuBar(menuBar);
         this.add(p1);
-
     }
 
     private void setUpMenuBar() {
@@ -138,7 +139,8 @@ public class MainDialog extends JFrame {
         // This is the control for the Add Existing Service menu item
         menuItem12.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Menu item - Add Existing Service in the Services menu has been clicked");
+
+
             }
         });
 
@@ -217,7 +219,5 @@ public class MainDialog extends JFrame {
         });
 
         menuBar.add(menu4);
-
     }
-
 }

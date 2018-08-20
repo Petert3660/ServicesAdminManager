@@ -1,4 +1,4 @@
-package com.thehutgroup.guicomponents;
+package com.ptconsultancy.guicomponents;
 
 import javax.swing.*;
 import java.util.ArrayList;
