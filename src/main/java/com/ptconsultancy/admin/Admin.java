@@ -37,7 +37,12 @@ public class Admin {
         System.out.println("List of currently active services");
         System.out.println("----------------------------------------------------------------");
         for (Service service : allServices) {
-            System.out.println(service.getName());
+            System.out.print(service.getName());
+            if (service.isRunning()) {
+                System.out.println("  Status: Running");
+            } else {
+                System.out.println("  Status: Not Running");
+            }
         }
         System.out.println("----------------------------------------------------------------\n\n");
     }
@@ -55,5 +60,49 @@ public class Admin {
         sortAllServicesByName();
 
         return allServices;
+    }
+
+    public boolean noServices() {
+        if (allServices.size() > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean allServicesRunning() {
+        int count = 0;
+        for (Service service : allServices) {
+            if (service.isRunning()) {
+                count++;
+            }
+        }
+
+        if (count == allServices.size()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public Service getServiceByName(String name) {
+
+        for (Service service : allServices) {
+            if (name.equals(service.getName())) {
+                return service;
+            }
+        }
+
+        return null;
+    }
+
+    public void setServiceRunningByName(String name) {
+
+        for (Service service : allServices) {
+            if (name.equals(service.getName())) {
+                service.setRunning(true);
+                break;
+            }
+        }
     }
 }

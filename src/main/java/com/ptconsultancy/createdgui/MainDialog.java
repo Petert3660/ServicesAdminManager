@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -172,7 +173,16 @@ public class MainDialog extends JFrame {
         // This is the control for the Start Services/Start Services menu item
         menuItem21.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Menu item - Start Services in the Start Services menu has been clicked");
+                if (admin.noServices()) {
+                    JOptionPane.showMessageDialog(tg, "There are no services added as yet - you must add services before they can be started",
+                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                } else if (admin.allServicesRunning()) {
+                    JOptionPane.showMessageDialog(tg, "All available services are already running - you cannot run any further services",
+                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    StartServiceDialog startServiceDialog = new StartServiceDialog(tg, admin);
+                    GuiHelper.showFrame((startServiceDialog));
+                }
             }
         });
 

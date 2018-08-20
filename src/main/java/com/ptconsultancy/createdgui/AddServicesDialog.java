@@ -83,7 +83,7 @@ public class AddServicesDialog extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fc = new JFileChooser();
                 fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                fc.setCurrentDirectory(new File("C:/GradleTutorials"));
+                fc.setCurrentDirectory(new File("C:/PTConsultancy/LocalTestEnvironment"));
                 int returnVal = fc.showDialog(tg, "Select");
                 if (returnVal == 0) {
                     comp0.setText(fc.getSelectedFile().getAbsolutePath());
