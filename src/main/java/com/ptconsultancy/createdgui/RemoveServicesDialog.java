@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -63,6 +64,9 @@ public class RemoveServicesDialog extends JFrame {
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 admin.removeService(comp0.getSelectedItem());
+                JOptionPane.showMessageDialog(tg, "Service " + comp0.getSelectedItem() + " has been successfully added",
+                    TITLE, JOptionPane.INFORMATION_MESSAGE);
+                admin.listAllActiveServices();
                 b1.doClick();
             }
         });

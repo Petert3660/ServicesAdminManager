@@ -1,6 +1,7 @@
 package com.ptconsultancy.admin;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -40,7 +41,17 @@ public class Admin {
         System.out.println("----------------------------------------------------------------\n\n");
     }
 
+    private void sortAllServices() {
+            allServices.sort(new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o1.compareTo(o2);
+            }
+        });
+    }
+
     public ArrayList<String> getAllServices() {
+        sortAllServices();
         return allServices;
     }
 }

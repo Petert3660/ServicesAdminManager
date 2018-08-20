@@ -198,7 +198,7 @@ public class MainDialog extends JFrame {
         menuBar.add(menu3);
 
         JMenu menu4 = new JMenu("Help");
-        JMenuItem menuItem40 = new JMenuItem("<MenuItem51>");
+        JMenuItem menuItem40 = new JMenuItem("Help");
         menu4.add(menuItem40);
         menu4.addSeparator();
         JMenuItem menuItem42 = new JMenuItem("About");
@@ -207,7 +207,7 @@ public class MainDialog extends JFrame {
         // This is the control for the Help/<MenuItem51> menu item
         menuItem40.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Menu item - <MenuItem51> in the Help menu has been clicked");
+                System.out.println("Menu item - Help in the Help menu has been clicked");
             }
         });
 
