@@ -4,6 +4,7 @@
 
 package com.ptconsultancy.createdgui;
 
+import com.ptconsultancy.admin.Admin;
 import com.ptconsultancy.guicomponents.FreeButton;
 import com.ptconsultancy.guicomponents.FreeLabel;
 import com.ptconsultancy.guicomponents.FreeLabelTextButtonTriple;
@@ -11,8 +12,11 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class AddServicesDialog extends JFrame {
 
@@ -25,7 +29,16 @@ public class AddServicesDialog extends JFrame {
 
     private AddServicesDialog tg = this;
 
-    public AddServicesDialog() {
+    private MainDialog mainDialog;
+
+    @Autowired
+    private Admin admin;
+
+    public AddServicesDialog(MainDialog mainDialog) {
+
+        this.mainDialog = mainDialog;
+        mainDialog.setEnabled(false);
+
         this.setTitle(TITLE);
         this.setSize(FRAME_X_SIZE, FRAME_Y_SIZE);
 
@@ -44,13 +57,14 @@ public class AddServicesDialog extends JFrame {
         // This is the control for the OK button
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Button output - " + b0.getButtonText());
+                b1.doClick();
             }
         });
 
         // This is the control for the Cancel-implement button
         b1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                mainDialog.setEnabled(true);
                 tg.dispose();
             }
         });
@@ -58,7 +72,13 @@ public class AddServicesDialog extends JFrame {
         // This is the control for the Browse button on the triple Label, Text, Button
         comp0.getButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Button - " + comp0.getButtonText() + " in the triple group has been clicked");
+                JFileChooser fc = new JFileChooser();
+                fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                fc.setCurrentDirectory(new File("C:/GradleTutorials"));
+                int returnVal = fc.showDialog(tg, "Select");
+                if (returnVal == 0) {
+                    comp0.setText(fc.getSelectedFile().getAbsolutePath());
+                }
             }
         });
 

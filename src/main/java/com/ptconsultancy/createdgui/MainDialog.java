@@ -8,6 +8,7 @@ import com.ptconsultancy.admin.Admin;
 import com.ptconsultancy.guicomponents.FreeButton;
 import com.ptconsultancy.guicomponents.FreeLabel;
 import com.ptconsultancy.guicomponents.FreeTextArea;
+import com.ptconsultancy.guis.GuiHelper;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -18,9 +19,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-@Component
 public class MainDialog extends JFrame {
 
     private static final String MAIN_HEADING = "Services Admin Manager";
@@ -33,10 +32,10 @@ public class MainDialog extends JFrame {
 
     private JMenuBar menuBar = new JMenuBar();
 
+    @Autowired
     private Admin admin;
 
-    @Autowired
-    public MainDialog(Admin admin) {
+    public MainDialog() {
 
         this.admin = admin;
 
@@ -139,8 +138,8 @@ public class MainDialog extends JFrame {
         // This is the control for the Add Existing Service menu item
         menuItem12.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
-
+                AddServicesDialog addServicesDialog = new AddServicesDialog(tg);
+                GuiHelper.showFrame(addServicesDialog);
             }
         });
 

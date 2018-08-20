@@ -1,6 +1,5 @@
 package com.ptconsultancy;
 
-import com.ptconsultancy.admin.Admin;
 import com.ptconsultancy.admin.adminsupport.BuildVersion;
 import com.ptconsultancy.createdgui.MainDialog;
 import com.ptconsultancy.guis.GuiHelper;
@@ -34,9 +33,6 @@ public class Application implements CommandLineRunner {
     @Autowired
     MessageHandler messageHandler;
 
-    @Autowired
-    Admin admin;
-
     public static void main(String[] args) {
         new SpringApplicationBuilder(Application.class)
             .headless(false)
@@ -47,7 +43,7 @@ public class Application implements CommandLineRunner {
     public void run(String... strings) throws Exception {
         outputMessage();
 
-        MainDialog md = new MainDialog(admin);
+        MainDialog md = new MainDialog();
         GuiHelper.showFrame(md);
     }
 
