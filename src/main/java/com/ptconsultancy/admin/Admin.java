@@ -74,8 +74,8 @@ public class Admin {
         return keyValuePairs;
     }
 
-    public void removeService(String servicePath) {
-        allServices.remove(servicePath);
+    public void removeService(String serviceName) {
+        allServices.remove(getServiceByName(serviceName));
     }
 
     public void listAllActiveServices() {
