@@ -260,7 +260,15 @@ public class MainDialog extends JFrame {
         // This is the control for the Stop Services/Stop All Services menu item
         menuItem30.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Menu item - Stop All Services in the Stop Services menu has been clicked");
+                if (admin.noServices()) {
+                    JOptionPane.showMessageDialog(tg, "There are no services added as yet - you must add services before they can be stopped",
+                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                } else if (admin.noServiceRunning()) {
+                    JOptionPane.showMessageDialog(tg, "There are no services currently running - there must be services running before they can be stopped",
+                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    stopAllServices();
+                }
             }
         });
 
@@ -271,7 +279,7 @@ public class MainDialog extends JFrame {
                     JOptionPane.showMessageDialog(tg, "There are no services added as yet - you must add services before they can be stopped",
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else if (admin.noServiceRunning()) {
-                    JOptionPane.showMessageDialog(tg, "There are no services running yet - there must be services running before they can be stopped",
+                    JOptionPane.showMessageDialog(tg, "There are no services currently running - there must be services running before they can be stopped",
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     StopServiceDialog stopServiceDialog = new StopServiceDialog(tg, admin, restTemplate);
@@ -325,6 +333,22 @@ public class MainDialog extends JFrame {
         }
         ScriptRunner sr = new ScriptRunner(filename);
         sr.start();
+    }
+
+    private void stopAllServices() {
+        for (Service service : admin.getAllServicesByName()) {
+            String endpoint = "http://" + service.getUrl() + "/securitytoken";
+            String token = restTemplate.getForObject(endpoint, String.class);
+            endpoint = "http://" + service.getUrl() + "/shutdown/" + service.getCredentials().getUserId() + "/"+
+                service.getCredentials().getPassword() + "/" + token;
+            try {
+                restTemplate.postForObject(endpoint, null, String.class);
+            } catch(Exception e1) {
+                System.out.println("Exception during shutdown ignored");
+            }
+            admin.stopServiceRunningByName(service.getName());
+        }
+        admin.outputServiceStatus();
     }
 
     private void startAllServices() {

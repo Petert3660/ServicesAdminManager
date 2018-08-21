@@ -60,7 +60,9 @@ public class StopServiceDialog extends JFrame {
         ArrayList<String> items0 = new ArrayList<String>();
         items0.add("--Select");
         for (Service service : admin.getAllServicesByName()) {
-            items0.add(service.getName());
+            if (service.isRunning()) {
+                items0.add(service.getName());
+            }
         }
         FreeLabelComboBoxPair comp0 = new FreeLabelComboBoxPair(col, "Please select service to stop:", 30, 90, 240, items0);
 
@@ -70,9 +72,17 @@ public class StopServiceDialog extends JFrame {
                 if (!comp0.isFirstItemSelected()) {
                     Service service = admin.getServiceByName(comp0.getSelectedItem());
                     String endpoint = "http://" + service.getUrl() + "/securitytoken";
-
+                    String token = restTemplate.getForObject(endpoint, String.class);
+                    endpoint = "http://" + service.getUrl() + "/shutdown/" + service.getCredentials().getUserId() + "/"+
+                        service.getCredentials().getPassword() + "/" + token;
+                    try {
+                        restTemplate.postForObject(endpoint, null, String.class);
+                    } catch(Exception e1) {
+                        System.out.println("Exception during shutdown ignored");
+                    }
                     JOptionPane.showMessageDialog(tg, "Service " + comp0.getSelectedItem() + " has been successfully stopped",
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    admin.stopServiceRunningByName(service.getName());
                     admin.outputServiceStatus();
                     b1.doClick();
                 }

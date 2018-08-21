@@ -204,6 +204,16 @@ public class Admin {
         }
     }
 
+    public void stopServiceRunningByName(String name) {
+
+        for (Service service : allServices) {
+            if (name.equals(service.getName())) {
+                service.setRunning(false);
+                break;
+            }
+        }
+    }
+
     public void setServiceUrlByname(String name, String url) {
         getServiceByName(name).setUrl(url);
     }
