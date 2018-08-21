@@ -67,6 +67,9 @@ public class MainDialog extends JFrame {
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 removeRunServiceFiles();
+                if (!admin.noServiceRunning()) {
+                    stopAllServices();
+                }
                 System.exit(EXIT_STATUS);
             }
         });
@@ -337,16 +340,18 @@ public class MainDialog extends JFrame {
 
     private void stopAllServices() {
         for (Service service : admin.getAllServicesByName()) {
-            String endpoint = "http://" + service.getUrl() + "/securitytoken";
-            String token = restTemplate.getForObject(endpoint, String.class);
-            endpoint = "http://" + service.getUrl() + "/shutdown/" + service.getCredentials().getUserId() + "/"+
-                service.getCredentials().getPassword() + "/" + token;
-            try {
-                restTemplate.postForObject(endpoint, null, String.class);
-            } catch(Exception e1) {
-                System.out.println("Exception during shutdown ignored");
+            if (service.isRunning()) {
+                String endpoint = "http://" + service.getUrl() + "/securitytoken";
+                String token = restTemplate.getForObject(endpoint, String.class);
+                endpoint = "http://" + service.getUrl() + "/shutdown/" + service.getCredentials().getUserId() + "/" +
+                    service.getCredentials().getPassword() + "/" + token;
+                try {
+                    restTemplate.postForObject(endpoint, null, String.class);
+                } catch (Exception e1) {
+                    System.out.println("Exception during shutdown ignored");
+                }
+                admin.stopServiceRunningByName(service.getName());
             }
-            admin.stopServiceRunningByName(service.getName());
         }
         admin.outputServiceStatus();
     }

@@ -57,7 +57,9 @@ public class RemoveServicesDialog extends JFrame {
         ArrayList<String> items0 = new ArrayList<String>();
         items0.add("--Select");
         for (Service service : admin.getAllServicesByName()) {
-            items0.add(service.getName());
+            if (!service.isRunning()) {
+                items0.add(service.getName());
+            }
         }
         FreeLabelComboBoxPair comp0 = new FreeLabelComboBoxPair(col, "Please select service to remove:", 30, 90, 240, items0);
 
