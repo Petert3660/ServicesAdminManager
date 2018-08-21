@@ -183,7 +183,15 @@ public class MainDialog extends JFrame {
         // This is the control for the Start Services/Start All Services menu item
         menuItem20.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                startAllServices();
+                if (admin.noServices()) {
+                    JOptionPane.showMessageDialog(tg, "There are no services added as yet - you must add services before they can be started",
+                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                } else if (admin.allServicesRunning()) {
+                    JOptionPane.showMessageDialog(tg, "All available services are already running - you cannot run any further services",
+                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    startAllServices();
+                }
             }
         });
 
