@@ -63,6 +63,7 @@ public class MainDialog extends JFrame {
         // This is the control for the Exit-implement button
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                removeRunServiceFiles()
                 System.exit(EXIT_STATUS);
             }
         });
@@ -74,6 +75,15 @@ public class MainDialog extends JFrame {
         setUpMenuBar();
           this.setJMenuBar(menuBar);
         this.add(p1);
+    }
+
+    private void removeRunServiceFiles() {
+        for (int i = 0; i < admin.getAllServicesByName().size(); i++) {
+            File file = new File("run" + String.valueOf(i) + ".bat");
+            if (file.exists()) {
+                file.delete();
+            }
+        }
     }
 
     private void setUpMenuBar() {
