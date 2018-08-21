@@ -165,4 +165,24 @@ public class Admin {
             }
         }
     }
+
+    public void setServiceUrlByname(String name, String url) {
+        getServiceByName(name).setUrl(url);
+    }
+
+    public int reportHostPortConflict() {
+
+        int count = 0;
+        for (Service service : allServices) {
+            for (Service service1 : allServices) {
+                if (!service.getName().equals(service1.getName())) {
+                    if (service.getUrl().equals(service1.getUrl())) {
+                        count++;
+                    }
+                }
+            }
+        }
+
+        return count / 2;
+    }
 }

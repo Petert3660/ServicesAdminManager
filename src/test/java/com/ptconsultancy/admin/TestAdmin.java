@@ -15,6 +15,8 @@ public class TestAdmin {
     private static final String TEST_PATH_1 = "c:\\test\\" + TEST_SERVICE_NAME_1;
     private static final String TEST_SERVICE_NAME_2 = "anotherService";
     private static final String TEST_PATH_2 = "c:\\test\\" + TEST_SERVICE_NAME_2;
+    private static final String TEST_URL_1 = "localhost:8080";
+    private static final String TEST_URL_2 = "localhost:8200";
 
     private Admin admin;
 
@@ -107,5 +109,29 @@ public class TestAdmin {
         admin.setServiceRunningByName(TEST_SERVICE_NAME_2);
 
         assertThat(admin.allServicesRunning(), is(true));
+    }
+
+    @Test
+    public void test_reportHostPortConflict_No_Conflicts() {
+
+        assertThat(admin.addService(TEST_PATH_1), is(true));
+        assertThat(admin.addService(TEST_PATH_2), is(true));
+
+        admin.setServiceUrlByname(TEST_SERVICE_NAME_1, TEST_URL_1);
+        admin.setServiceUrlByname(TEST_SERVICE_NAME_2, TEST_URL_2);
+
+        assertThat(admin.reportHostPortConflict(), is(0));
+    }
+
+    @Test
+    public void test_reportHostPortConflict_Conflicts() {
+
+        assertThat(admin.addService(TEST_PATH_1), is(true));
+        assertThat(admin.addService(TEST_PATH_2), is(true));
+
+        admin.setServiceUrlByname(TEST_SERVICE_NAME_1, TEST_URL_1);
+        admin.setServiceUrlByname(TEST_SERVICE_NAME_2, TEST_URL_1);
+
+        assertThat(admin.reportHostPortConflict(), is(1));
     }
 }
