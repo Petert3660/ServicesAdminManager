@@ -18,25 +18,28 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.client.RestTemplate;
 
-public class RemoveServicesDialog extends JFrame {
+public class StopServiceDialog extends JFrame {
 
     private static final String MAIN_HEADING = "Services Admin Manager";
-    private static final String SUB_HEADING = "Remove Service";
+    private static final String SUB_HEADING = "Stop Service";
     private static final String TITLE = MAIN_HEADING + " - " + SUB_HEADING;
     private static final int FRAME_X_SIZE = 550;
     private static final int FRAME_Y_SIZE = 250;
     private Color col = new Color(230, 255, 255);
 
-    private RemoveServicesDialog tg = this;
+    private StopServiceDialog tg = this;
 
     private MainDialog mainDialog;
 
     private Admin admin;
+    private RestTemplate restTemplate;
 
     @Autowired
-    public RemoveServicesDialog(MainDialog mainDialog, Admin admin) {
+    public StopServiceDialog(MainDialog mainDialog, Admin admin, RestTemplate restTemplate) {
         this.admin = admin;
+        this.restTemplate = restTemplate;
         this.mainDialog = mainDialog;
         mainDialog.setEnabled(false);
 
@@ -59,14 +62,14 @@ public class RemoveServicesDialog extends JFrame {
         for (Service service : admin.getAllServicesByName()) {
             items0.add(service.getName());
         }
-        FreeLabelComboBoxPair comp0 = new FreeLabelComboBoxPair(col, "Please select service to remove:", 30, 90, 240, items0);
+        FreeLabelComboBoxPair comp0 = new FreeLabelComboBoxPair(col, "Please select service to stop:", 30, 90, 240, items0);
 
         // This is the control for the OK button
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (!comp0.isFirstItemSelected()) {
                     admin.removeService(comp0.getSelectedItem());
-                    JOptionPane.showMessageDialog(tg, "Service " + comp0.getSelectedItem() + " has been successfully removed",
+                    JOptionPane.showMessageDialog(tg, "Service " + comp0.getSelectedItem() + " has been successfully stopped",
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                     admin.outputServiceStatus();
                     b1.doClick();

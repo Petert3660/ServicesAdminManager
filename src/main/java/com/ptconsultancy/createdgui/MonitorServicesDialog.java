@@ -68,16 +68,18 @@ public class MonitorServicesDialog extends JFrame {
         // This is the control for the OK button
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Service service = admin.getServiceByName(comp0.getSelectedItem());
-                String endpoint = "http://" + service.getUrl() + "/healthcheck";
-                String message;
-                try {
-                    message = "Healthcheck response:- " + restTemplate.getForObject(endpoint, String.class);
-                } catch (Exception e1) {
-                    message = "Still trying to connect....";
+                if (!comp0.isFirstItemSelected()) {
+                    Service service = admin.getServiceByName(comp0.getSelectedItem());
+                    String endpoint = "http://" + service.getUrl() + "/healthcheck";
+                    String message;
+                    try {
+                        message = "Healthcheck response:- " + restTemplate.getForObject(endpoint, String.class);
+                    } catch (Exception e1) {
+                        message = "Still trying to connect....";
+                    }
+                    admin.outputMonitoringStatus(service, message);
+                    b1.doClick();
                 }
-                admin.outputMonitoringStatus(service, message);
-                b1.doClick();
             }
         });
 

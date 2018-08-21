@@ -267,7 +267,8 @@ public class MainDialog extends JFrame {
         // This is the control for the Stop Services/Stop Services menu item
         menuItem31.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Menu item - Stop Services in the Stop Services menu has been clicked");
+                StopServiceDialog stopServiceDialog = new StopServiceDialog(tg, admin, restTemplate);
+                GuiHelper.showFrame(stopServiceDialog);
             }
         });
 
