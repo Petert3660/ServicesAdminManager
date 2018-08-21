@@ -65,7 +65,9 @@ public class MonitorServicesDialog extends JFrame {
         // This is the control for the OK button
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
+                Service service = admin.getServiceByName(comp0.getSelectedItem());
+                admin.outputMonitoringStatus(service);
+                b1.doClick();
             }
         });
 

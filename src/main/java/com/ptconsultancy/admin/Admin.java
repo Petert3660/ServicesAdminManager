@@ -107,6 +107,13 @@ public class Admin {
         }
     }
 
+    public void outputMonitoringStatus(Service service) {
+        if (freeTextArea != null) {
+            freeTextArea.clearTextArea();
+            freeTextArea.appendNewLine("This is where the healthCheck will appear for service " + service.getName());
+        }
+    }
+
     private void sortAllServicesByName() {
             allServices.sort(new Comparator<Service>() {
             @Override
