@@ -5,14 +5,20 @@
 package com.ptconsultancy.createdgui;
 
 import com.ptconsultancy.admin.Admin;
+import com.ptconsultancy.admin.Service;
 import com.ptconsultancy.guicomponents.FreeButton;
 import com.ptconsultancy.guicomponents.FreeLabel;
 import com.ptconsultancy.guicomponents.FreeTextArea;
 import com.ptconsultancy.guis.GuiHelper;
+import com.ptconsultancy.runners.ScriptRunner;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -166,7 +172,7 @@ public class MainDialog extends JFrame {
         // This is the control for the Start Services/Start All Services menu item
         menuItem20.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Menu item - Start All Services in the Start Services menu has been clicked");
+                startAllServices();
             }
         });
 
@@ -232,5 +238,38 @@ public class MainDialog extends JFrame {
         });
 
         menuBar.add(menu4);
+    }
+
+    public void prepareAndExecuteOutputFile(Service service) {
+        File file = new File("run.bat");
+        if (file.exists()) {
+            file.delete();
+        }
+        try {
+            RandomAccessFile fout = new RandomAccessFile("run.bat", "rw");
+            fout.writeBytes("cd\\\n");
+            fout.writeBytes("cd " + service.getAbsolutePath() + "\n\n");
+            fout.writeBytes("start /min java -jar " + service.getName() + ".jar\n");
+            fout.close();
+        } catch (FileNotFoundException e1) {
+            e1.printStackTrace();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+        ScriptRunner sr = new ScriptRunner();
+        sr.start();
+    }
+
+    private void startAllServices() {
+        if (admin.reportHostPortConflict() == 0) {
+            for (Service service : admin.getAllServicesByName()) {
+                prepareAndExecuteOutputFile(service);
+                admin.setServiceRunningByName(service.getName());
+                admin.outputServiceStatus();
+            }
+        } else {
+            JOptionPane.showMessageDialog(tg, "There are host/port conflicts between imported services - please resolve before starting all",
+                TITLE, JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 }

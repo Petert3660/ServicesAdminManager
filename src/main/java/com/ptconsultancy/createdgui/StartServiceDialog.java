@@ -9,15 +9,10 @@ import com.ptconsultancy.admin.Service;
 import com.ptconsultancy.guicomponents.FreeButton;
 import com.ptconsultancy.guicomponents.FreeLabel;
 import com.ptconsultancy.guicomponents.FreeLabelComboBoxPair;
-import com.ptconsultancy.runners.ScriptRunner;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -71,7 +66,7 @@ public class StartServiceDialog extends JFrame {
         // This is the control for the OK button
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                prepareAndExecuteOutputFile(admin.getServiceByName(comp0.getSelectedItem()));
+                mainDialog.prepareAndExecuteOutputFile(admin.getServiceByName(comp0.getSelectedItem()));
                 JOptionPane.showMessageDialog(tg, "Service " + comp0.getSelectedItem() + " has been successfully started",
                     TITLE, JOptionPane.INFORMATION_MESSAGE);
                 admin.setServiceRunningByName(comp0.getSelectedItem());
@@ -95,23 +90,23 @@ public class StartServiceDialog extends JFrame {
         this.add(p1);
     }
 
-    private void prepareAndExecuteOutputFile(Service service) {
-        File file = new File("run.bat");
-        if (file.exists()) {
-            file.delete();
-        }
-        try {
-            RandomAccessFile fout = new RandomAccessFile("run.bat", "rw");
-            fout.writeBytes("cd\\\n");
-            fout.writeBytes("cd " + service.getAbsolutePath() + "\n\n");
-            fout.writeBytes("start /min java -jar " + service.getName() + ".jar\n");
-            fout.close();
-        } catch (FileNotFoundException e1) {
-            e1.printStackTrace();
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
-        ScriptRunner sr = new ScriptRunner();
-        sr.start();
-    }
+//    private void prepareAndExecuteOutputFile(Service service) {
+//        File file = new File("run.bat");
+//        if (file.exists()) {
+//            file.delete();
+//        }
+//        try {
+//            RandomAccessFile fout = new RandomAccessFile("run.bat", "rw");
+//            fout.writeBytes("cd\\\n");
+//            fout.writeBytes("cd " + service.getAbsolutePath() + "\n\n");
+//            fout.writeBytes("start /min java -jar " + service.getName() + ".jar\n");
+//            fout.close();
+//        } catch (FileNotFoundException e1) {
+//            e1.printStackTrace();
+//        } catch (IOException e1) {
+//            e1.printStackTrace();
+//        }
+//        ScriptRunner sr = new ScriptRunner();
+//        sr.start();
+//    }
 }
