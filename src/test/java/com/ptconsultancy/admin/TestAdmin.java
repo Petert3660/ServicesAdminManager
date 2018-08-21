@@ -76,4 +76,36 @@ public class TestAdmin {
         assertThat(result.get(0).getName(), is(TEST_SERVICE_NAME_2));
         assertThat(result.get(1).getName(), is(TEST_SERVICE_NAME_1));
     }
+
+    @Test
+    public void test_allServiceRunning_No_Services_Running() {
+
+        assertThat(admin.addService(TEST_PATH_1), is(true));
+        assertThat(admin.addService(TEST_PATH_2), is(true));
+
+        assertThat(admin.allServicesRunning(), is(false));
+    }
+
+    @Test
+    public void test_allServiceRunning_Some_Services_Running() {
+
+        assertThat(admin.addService(TEST_PATH_1), is(true));
+        assertThat(admin.addService(TEST_PATH_2), is(true));
+
+        admin.setServiceRunningByName(TEST_SERVICE_NAME_1);
+
+        assertThat(admin.allServicesRunning(), is(false));
+    }
+
+    @Test
+    public void test_allServiceRunning_All_Services_Running() {
+
+        assertThat(admin.addService(TEST_PATH_1), is(true));
+        assertThat(admin.addService(TEST_PATH_2), is(true));
+
+        admin.setServiceRunningByName(TEST_SERVICE_NAME_1);
+        admin.setServiceRunningByName(TEST_SERVICE_NAME_2);
+
+        assertThat(admin.allServicesRunning(), is(true));
+    }
 }
