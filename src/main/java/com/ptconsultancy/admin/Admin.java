@@ -107,10 +107,14 @@ public class Admin {
         }
     }
 
-    public void outputMonitoringStatus(Service service) {
+    public void outputMonitoringStatus(Service service, String message) {
         if (freeTextArea != null) {
             freeTextArea.clearTextArea();
-            freeTextArea.appendNewLine("This is where the healthCheck will appear for service " + service.getName());
+            freeTextArea.appendNewLine("----------------------------------------------------------------------------------------------------");
+            freeTextArea.appendNewLine("Monitoring for service: " + service.getName());
+            freeTextArea.appendNewLine("----------------------------------------------------------------------------------------------------");
+            freeTextArea.appendNewLine(message);
+            freeTextArea.appendNewLine("----------------------------------------------------------------------------------------------------");
         }
     }
 

@@ -26,6 +26,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.client.RestTemplate;
 
 public class MainDialog extends JFrame {
 
@@ -41,14 +42,16 @@ public class MainDialog extends JFrame {
     private JMenuBar menuBar = new JMenuBar();
 
     private Admin admin;
+    private RestTemplate restTemplate;
 
     FreeButton b0 = new FreeButton("Exit", 460, 800, 80);
     FreeTextArea comp0 = new FreeTextArea(col, "Output:", 30, 90, 200, 935, 620, false);
 
     @Autowired
-    public MainDialog(Admin admin) {
+    public MainDialog(Admin admin, RestTemplate restTemplate) {
 
         this.admin = admin;
+        this.restTemplate = restTemplate;
         this.admin.setFreeTextArea(comp0);
 
         this.setTitle(TITLE);
@@ -182,7 +185,7 @@ public class MainDialog extends JFrame {
                     JOptionPane.showMessageDialog(tg, "There are no services running yet - there must be services running before they can be monitored",
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    MonitorServicesDialog monitorServicesDialog = new MonitorServicesDialog(tg, admin);
+                    MonitorServicesDialog monitorServicesDialog = new MonitorServicesDialog(tg, admin, restTemplate);
                     GuiHelper.showFrame(monitorServicesDialog);
                 }
             }

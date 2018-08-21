@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.client.RestTemplate;
 
 public class MonitorServicesDialog extends JFrame {
 
@@ -32,10 +33,12 @@ public class MonitorServicesDialog extends JFrame {
     private MainDialog mainDialog;
 
     private Admin admin;
+    private RestTemplate restTemplate;
 
     @Autowired
-    public MonitorServicesDialog(MainDialog mainDialog, Admin admin) {
+    public MonitorServicesDialog(MainDialog mainDialog, Admin admin, RestTemplate restTemplate) {
         this.admin = admin;
+        this.restTemplate = restTemplate;
         this.mainDialog = mainDialog;
         mainDialog.setEnabled(false);
 
@@ -66,7 +69,14 @@ public class MonitorServicesDialog extends JFrame {
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Service service = admin.getServiceByName(comp0.getSelectedItem());
-                admin.outputMonitoringStatus(service);
+                String endpoint = "http://" + service.getUrl() + "/healthcheck";
+                String message;
+                try {
+                    message = "Healthcheck response:- " + restTemplate.getForObject(endpoint, String.class);
+                } catch (Exception e1) {
+                    message = "Still trying to connect....";
+                }
+                admin.outputMonitoringStatus(service, message);
                 b1.doClick();
             }
         });
