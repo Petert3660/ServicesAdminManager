@@ -63,7 +63,7 @@ public class MainDialog extends JFrame {
         // This is the control for the Exit-implement button
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                removeRunServiceFiles()
+                removeRunServiceFiles();
                 System.exit(EXIT_STATUS);
             }
         });
