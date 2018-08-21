@@ -66,7 +66,7 @@ public class StartServiceDialog extends JFrame {
         // This is the control for the OK button
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mainDialog.prepareAndExecuteOutputFile(admin.getServiceByName(comp0.getSelectedItem()));
+                mainDialog.prepareAndExecuteOutputFile(admin.getServiceByName(comp0.getSelectedItem()), 0);
                 JOptionPane.showMessageDialog(tg, "Service " + comp0.getSelectedItem() + " has been successfully started",
                     TITLE, JOptionPane.INFORMATION_MESSAGE);
                 admin.setServiceRunningByName(comp0.getSelectedItem());

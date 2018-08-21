@@ -34,6 +34,7 @@ public class MainDialog extends JFrame {
     private static final int FRAME_X_SIZE = 1000;
     private static final int FRAME_Y_SIZE = 900;
     private Color col = new Color(235, 255, 255);
+    private static final int EXIT_STATUS = 0;
 
     private MainDialog tg = this;
 
@@ -41,6 +42,7 @@ public class MainDialog extends JFrame {
 
     private Admin admin;
 
+    FreeButton b0 = new FreeButton("Exit", 460, 800, 80);
     FreeTextArea comp0 = new FreeTextArea(col, "Output:", 30, 90, 200, 935, 620, false);
 
     @Autowired
@@ -57,12 +59,11 @@ public class MainDialog extends JFrame {
         p1.setBackground(col);
 
         FreeLabel l0 = new FreeLabel(MAIN_HEADING, 30, 30, 500, 30, new Font("", Font.BOLD + Font.ITALIC, 20));
-        FreeButton b0 = new FreeButton("Exit", 460, 800, 80);
 
         // This is the control for the Exit-implement button
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.exit(0);
+                System.exit(EXIT_STATUS);
             }
         });
 
@@ -111,7 +112,7 @@ public class MainDialog extends JFrame {
         // This is the control for the Project/Exit-implement menu item
         menuItem04.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.exit(0);
+                b0.doClick();
             }
         });
 
@@ -240,13 +241,14 @@ public class MainDialog extends JFrame {
         menuBar.add(menu4);
     }
 
-    public void prepareAndExecuteOutputFile(Service service) {
-        File file = new File("run.bat");
+    public void prepareAndExecuteOutputFile(Service service, int count) {
+        String filename = "run" + String.valueOf(count) + ".bat";
+        File file = new File(filename);
         if (file.exists()) {
             file.delete();
         }
         try {
-            RandomAccessFile fout = new RandomAccessFile("run.bat", "rw");
+            RandomAccessFile fout = new RandomAccessFile(filename, "rw");
             fout.writeBytes("cd\\\n");
             fout.writeBytes("cd " + service.getAbsolutePath() + "\n\n");
             fout.writeBytes("start /min java -jar " + service.getName() + ".jar\n");
@@ -256,17 +258,22 @@ public class MainDialog extends JFrame {
         } catch (IOException e1) {
             e1.printStackTrace();
         }
-        ScriptRunner sr = new ScriptRunner();
+        ScriptRunner sr = new ScriptRunner(filename);
         sr.start();
     }
 
     private void startAllServices() {
         if (admin.reportHostPortConflict() == 0) {
+            int count = 0;
             for (Service service : admin.getAllServicesByName()) {
-                prepareAndExecuteOutputFile(service);
-                admin.setServiceRunningByName(service.getName());
-                admin.outputServiceStatus();
+                prepareAndExecuteOutputFile(service, count++);
             }
+
+            for (int i = 0; i < count; i++) {
+                Service service = admin.getAllServicesByName().get(i);
+                admin.setServiceRunningByName(service.getName());
+            }
+            admin.outputServiceStatus();
         } else {
             JOptionPane.showMessageDialog(tg, "There are host/port conflicts between imported services - please resolve before starting all",
                 TITLE, JOptionPane.INFORMATION_MESSAGE);
