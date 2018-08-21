@@ -179,6 +179,11 @@ public class MainDialog extends JFrame {
         menu2.add(menuItem20);
         JMenuItem menuItem21 = new JMenuItem("Start Services");
         menu2.add(menuItem21);
+        menu2.addSeparator();
+        JMenuItem menuItem23 = new JMenuItem("Restart All Services");
+        menu2.add(menuItem23);
+        JMenuItem menuItem24 = new JMenuItem("Restart Services");
+        menu2.add(menuItem24);
 
         // This is the control for the Start Services/Start All Services menu item
         menuItem20.addActionListener(new ActionListener() {
