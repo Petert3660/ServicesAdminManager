@@ -22,7 +22,7 @@ public class Admin {
     public boolean addService(String servicePath) {
 
         for (Service service : allServices) {
-            if (servicePath.equals(service.getName())) {
+            if (servicePath.equals(service.getAbsolutePath())) {
                 return false;
             }
         }
