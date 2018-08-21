@@ -1,5 +1,6 @@
 package com.ptconsultancy.admin;
 
+import com.ptconsultancy.admin.adminsupport.Credentials;
 import com.ptconsultancy.guicomponents.FreeTextArea;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -32,6 +33,7 @@ public class Admin {
 
         Service service = new Service(servicePath, false);
         service.setUrl(findTheServiceUrl(service.getName()));
+        service.setCredentials(findTheServiceCredentials(service.getName()));
         allServices.add(service);
 
         return true;
@@ -39,17 +41,27 @@ public class Admin {
 
     private String findTheServiceUrl(String name) {
 
-        HashMap<String, String> filePairs = (HashMap) getKeyValuePairsFromFile(name);
+        String filename = "c:/GradleTutorials/" + name + "/src/main/resources/application.properties";
+        HashMap<String, String> filePairs = (HashMap) getKeyValuePairsFromFile(filename);
         String url = filePairs.get("spring.data.rest.base-path") + ":" + filePairs.get("server.port");
 
         return url;
     }
 
-    private Map<String, String> getKeyValuePairsFromFile(String name) {
+    private Credentials findTheServiceCredentials(String name) {
+
+        String filename = "c:/GradleTutorials/" + name + "/src/main/resources/auth.properties";
+        HashMap<String, String> filePairs = (HashMap) getKeyValuePairsFromFile(filename);
+        Credentials creds = new Credentials();
+        creds.setUserId(filePairs.get("auth.admin.id"));
+        creds.setPassword(filePairs.get("auth.admin.password"));
+
+        return creds;
+    }
+
+    private Map<String, String> getKeyValuePairsFromFile(String filename) {
 
         HashMap<String, String> keyValuePairs = new HashMap<>();
-
-        String filename = "c:/GradleTutorials/" + name + "/src/main/resources/application.properties";
         BufferedReader br = null;
 
         try {

@@ -267,8 +267,16 @@ public class MainDialog extends JFrame {
         // This is the control for the Stop Services/Stop Services menu item
         menuItem31.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                StopServiceDialog stopServiceDialog = new StopServiceDialog(tg, admin, restTemplate);
-                GuiHelper.showFrame(stopServiceDialog);
+                if (admin.noServices()) {
+                    JOptionPane.showMessageDialog(tg, "There are no services added as yet - you must add services before they can be stopped",
+                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                } else if (admin.noServiceRunning()) {
+                    JOptionPane.showMessageDialog(tg, "There are no services running yet - there must be services running before they can be stopped",
+                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    StopServiceDialog stopServiceDialog = new StopServiceDialog(tg, admin, restTemplate);
+                    GuiHelper.showFrame(stopServiceDialog);
+                }
             }
         });
 

@@ -1,11 +1,14 @@
 package com.ptconsultancy.admin;
 
+import com.ptconsultancy.admin.adminsupport.Credentials;
+
 public class Service {
 
     private String name;
     private String absolutePath;
     private boolean running;
     private String url;
+    private Credentials credentials;
 
     public Service (String absolutePath, boolean running) {
         this.absolutePath = absolutePath;
@@ -43,5 +46,13 @@ public class Service {
 
     public String getUrl() {
         return url;
+    }
+
+    public Credentials getCredentials() {
+        return credentials;
+    }
+
+    public void setCredentials(Credentials credentials) {
+        this.credentials = credentials;
     }
 }

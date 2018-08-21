@@ -68,7 +68,9 @@ public class StopServiceDialog extends JFrame {
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (!comp0.isFirstItemSelected()) {
-                    admin.removeService(comp0.getSelectedItem());
+                    Service service = admin.getServiceByName(comp0.getSelectedItem());
+                    String endpoint = "http://" + service.getUrl() + "/securitytoken";
+
                     JOptionPane.showMessageDialog(tg, "Service " + comp0.getSelectedItem() + " has been successfully stopped",
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                     admin.outputServiceStatus();
