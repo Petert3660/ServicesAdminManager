@@ -172,6 +172,19 @@ public class MainDialog extends JFrame {
             }
         });
 
+        // This is the control for the Services/Monitor Service menu item
+        menuItem14.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (admin.noServices()) {
+                    JOptionPane.showMessageDialog(tg, "There are no services added as yet - you must add services before they can be monitored",
+                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    MonitorServicesDialog monitorServicesDialog = new MonitorServicesDialog(tg, admin);
+                    GuiHelper.showFrame(monitorServicesDialog);
+                }
+            }
+        });
+
         menuBar.add(menu1);
 
         JMenu menu2 = new JMenu("Start Services");
