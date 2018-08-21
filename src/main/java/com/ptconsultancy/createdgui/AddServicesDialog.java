@@ -59,10 +59,10 @@ public class AddServicesDialog extends JFrame {
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (!admin.addService(comp0.getText())) {
-                    JOptionPane.showMessageDialog(tg, "Service " + comp0.getText() + " has already been added",
+                    JOptionPane.showMessageDialog(tg, "Service " + comp0.getText().substring(comp0.getText().lastIndexOf("\\") + 1) + " has already been added",
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(tg, "Service " + comp0.getText() + " has been successfully added",
+                    JOptionPane.showMessageDialog(tg, "Service " + comp0.getText().substring(comp0.getText().lastIndexOf("\\") + 1) + " has been successfully added",
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 }
                 admin.outputServiceStatus();
