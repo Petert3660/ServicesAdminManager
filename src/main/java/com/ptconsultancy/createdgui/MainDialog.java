@@ -216,6 +216,20 @@ public class MainDialog extends JFrame {
             }
         });
 
+        // This is the control for the Start Services/Restart All Services menu item
+        menuItem23.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Menu item - Restart All Services in the Start Services menu has been clicked");
+            }
+        });
+
+        // This is the control for the Start Services/Restart Services menu item
+        menuItem24.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Menu item - Restart Services in the Start Services menu has been clicked");
+            }
+        });
+
         menuBar.add(menu2);
 
         JMenu menu3 = new JMenu("Stop Services");
