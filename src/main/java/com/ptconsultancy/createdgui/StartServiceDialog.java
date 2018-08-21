@@ -75,7 +75,7 @@ public class StartServiceDialog extends JFrame {
                 JOptionPane.showMessageDialog(tg, "Service " + comp0.getSelectedItem() + " has been successfully started",
                     TITLE, JOptionPane.INFORMATION_MESSAGE);
                 admin.setServiceRunningByName(comp0.getSelectedItem());
-                admin.listAllActiveServices();
+                admin.outputServiceStatus();
                 b1.doClick();
             }
         });

@@ -35,10 +35,13 @@ public class MainDialog extends JFrame {
 
     private Admin admin;
 
+    FreeTextArea comp0 = new FreeTextArea(col, "Output:", 30, 90, 200, 935, 620, false);
+
     @Autowired
     public MainDialog(Admin admin) {
 
         this.admin = admin;
+        this.admin.setFreeTextArea(comp0);
 
         this.setTitle(TITLE);
         this.setSize(FRAME_X_SIZE, FRAME_Y_SIZE);
@@ -48,10 +51,7 @@ public class MainDialog extends JFrame {
         p1.setBackground(col);
 
         FreeLabel l0 = new FreeLabel(MAIN_HEADING, 30, 30, 500, 30, new Font("", Font.BOLD + Font.ITALIC, 20));
-
         FreeButton b0 = new FreeButton("Exit", 460, 800, 80);
-
-        FreeTextArea comp0 = new FreeTextArea(col, "Output:", 30, 90, 200, 935, 620, false);
 
         // This is the control for the Exit-implement button
         b0.addActionListener(new ActionListener() {

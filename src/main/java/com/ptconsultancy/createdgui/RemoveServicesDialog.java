@@ -67,7 +67,7 @@ public class RemoveServicesDialog extends JFrame {
                 admin.removeService(comp0.getSelectedItem());
                 JOptionPane.showMessageDialog(tg, "Service " + comp0.getSelectedItem() + " has been successfully removed",
                     TITLE, JOptionPane.INFORMATION_MESSAGE);
-                admin.listAllActiveServices();
+                admin.outputServiceStatus();
                 b1.doClick();
             }
         });

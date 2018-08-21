@@ -65,7 +65,7 @@ public class AddServicesDialog extends JFrame {
                     JOptionPane.showMessageDialog(tg, "Service " + comp0.getText() + " has been successfully added",
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 }
-                admin.listAllActiveServices();
+                admin.outputServiceStatus();
                 b1.doClick();
             }
         });

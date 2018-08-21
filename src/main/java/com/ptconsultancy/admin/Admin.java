@@ -1,5 +1,6 @@
 package com.ptconsultancy.admin;
 
+import com.ptconsultancy.guicomponents.FreeTextArea;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -9,11 +10,13 @@ import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.thymeleaf.util.StringUtils;
 
 @Component
 public class Admin {
 
     private ArrayList<Service> allServices = new ArrayList<>();
+    private FreeTextArea freeTextArea;
 
     @Autowired
     public Admin() {
@@ -55,7 +58,7 @@ public class Admin {
 
             String sCurrentLine;
             while ((sCurrentLine = br.readLine()) != null) {
-                if (sCurrentLine.charAt(0) != '#') {
+                if (!StringUtils.isEmpty(sCurrentLine) && sCurrentLine.charAt(0) != '#') {
                     String[] temp = sCurrentLine.split("=");
                     keyValuePairs.put(temp[0], temp[1]);
                 }
@@ -78,19 +81,30 @@ public class Admin {
         allServices.remove(getServiceByName(serviceName));
     }
 
-    public void listAllActiveServices() {
-        System.out.println("\n\n----------------------------------------------------------------");
-        System.out.println("List of currently active services");
-        System.out.println("----------------------------------------------------------------");
-        for (Service service : allServices) {
-            System.out.print(service.getName());
-            if (service.isRunning()) {
-                System.out.println("  Status: Running");
-            } else {
-                System.out.println("  Status: Not Running");
+    public void setFreeTextArea(FreeTextArea freeTextArea) {
+        this.freeTextArea = freeTextArea;
+    }
+
+    public void outputServiceStatus() {
+        if (freeTextArea != null) {
+            freeTextArea.clearTextArea();
+            freeTextArea.appendNewLine("----------------------------------------------------------------------------------------------------");
+            freeTextArea.appendNewLine("Services Added");
+            freeTextArea.appendNewLine("----------------------------------------------------------------------------------------------------");
+            for (Service service : getAllServicesByName()) {
+                freeTextArea.appendNewLine("----------------------------------------------------------------------------------------------------");
+                freeTextArea.appendNewLine("Service: " + service.getName());
+                freeTextArea.appendNewLine("----------------------------------------------------------------------------------------------------");
+                freeTextArea.appendNewLine("Service location: " + service.getAbsolutePath());
+                String status = "Not running";
+                if (service.isRunning()) {
+                    status = "Running";
+                }
+                freeTextArea.appendNewLine("Service status: " + status);
+                freeTextArea.appendNewLine("Service URL: " + service.getUrl());
+                freeTextArea.appendNewLine("----------------------------------------------------------------------------------------------------");
             }
         }
-        System.out.println("----------------------------------------------------------------\n\n");
     }
 
     private void sortAllServicesByName() {
