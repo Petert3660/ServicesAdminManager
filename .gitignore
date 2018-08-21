@@ -10,3 +10,7 @@ build/
 # DOS Batch Files
 run.bat
 
+# Any Temporary Java Files
+Temp.java
+
+
