@@ -51,7 +51,7 @@ public class MainDialog extends JFrame {
 
         FreeButton b0 = new FreeButton("Exit", 460, 800, 80);
 
-        FreeTextArea comp0 = new FreeTextArea(col, "<Description label for TextArea>:", 30, 90, 200, 935, 620, false);
+        FreeTextArea comp0 = new FreeTextArea(col, "Output:", 30, 90, 200, 935, 620, false);
 
         // This is the control for the Exit-implement button
         b0.addActionListener(new ActionListener() {

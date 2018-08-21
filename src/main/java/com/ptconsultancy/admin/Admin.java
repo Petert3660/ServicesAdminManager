@@ -5,6 +5,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -34,8 +36,16 @@ public class Admin {
 
     private String findTheServiceUrl(String name) {
 
-        String host = "";
-        String port = "";
+        HashMap<String, String> filePairs = (HashMap) getKeyValuePairsFromFile(name);
+        String url = filePairs.get("spring.data.rest.base-path") + ":" + filePairs.get("server.port");
+
+        return url;
+    }
+
+    private Map<String, String> getKeyValuePairsFromFile(String name) {
+
+        HashMap<String, String> keyValuePairs = new HashMap<>();
+
         String filename = "c:/GradleTutorials/" + name + "/src/main/resources/application.properties";
         BufferedReader br = null;
 
@@ -45,11 +55,9 @@ public class Admin {
 
             String sCurrentLine;
             while ((sCurrentLine = br.readLine()) != null) {
-                if (sCurrentLine.contains("spring.data.rest.base-path=")) {
-                    host = sCurrentLine.substring(sCurrentLine.lastIndexOf("spring.data.rest.base-path=") + 27);
-                }
-                if (sCurrentLine.contains("server.port=")) {
-                    port = sCurrentLine.substring(sCurrentLine.lastIndexOf("server.port=") + 12);
+                if (sCurrentLine.charAt(0) != '#') {
+                    String[] temp = sCurrentLine.split("=");
+                    keyValuePairs.put(temp[0], temp[1]);
                 }
             }
         } catch (IOException e) {
@@ -63,9 +71,7 @@ public class Admin {
             }
         }
 
-        String url = host + ":" + port;
-
-        return url;
+        return keyValuePairs;
     }
 
     public void removeService(String servicePath) {
