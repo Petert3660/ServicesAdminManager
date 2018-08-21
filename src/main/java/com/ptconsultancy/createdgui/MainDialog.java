@@ -178,6 +178,9 @@ public class MainDialog extends JFrame {
                 if (admin.noServices()) {
                     JOptionPane.showMessageDialog(tg, "There are no services added as yet - you must add services before they can be monitored",
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
+                } else if (admin.noServiceRunning()) {
+                    JOptionPane.showMessageDialog(tg, "There are no services running yet - there must be services running before they can be monitored",
+                        TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     MonitorServicesDialog monitorServicesDialog = new MonitorServicesDialog(tg, admin);
                     GuiHelper.showFrame(monitorServicesDialog);

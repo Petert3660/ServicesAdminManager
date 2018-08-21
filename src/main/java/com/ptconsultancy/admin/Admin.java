@@ -145,6 +145,21 @@ public class Admin {
         }
     }
 
+    public boolean noServiceRunning() {
+        int count = 0;
+        for (Service service : allServices) {
+            if (service.isRunning()) {
+                count++;
+            }
+        }
+
+        if (count == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public Service getServiceByName(String name) {
 
         for (Service service : allServices) {
