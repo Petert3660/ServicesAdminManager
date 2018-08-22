@@ -31,11 +31,17 @@ public class EndpointTestDialog extends JFrame {
     private static final int FRAME_Y_SIZE = 900;
     private Color col = new Color(230, 255, 255);
 
+    JPanel p1 = new JPanel();
+    // This is the output text area and is on screen at all times
+    FreeTextArea output = new FreeTextArea(col, "The output will be shown below:", 30, 240, 200, 635, 480, false);
+
     private EndpointTestDialog tg = this;
 
     private MainDialog mainDialog;
 
     private Admin admin;
+
+    private boolean getLastSelected = true;
 
     @Autowired
     public EndpointTestDialog(MainDialog mainDialog, Admin admin) {
@@ -47,7 +53,6 @@ public class EndpointTestDialog extends JFrame {
         this.setTitle(TITLE);
         this.setSize(FRAME_X_SIZE, FRAME_Y_SIZE);
 
-        JPanel p1 = new JPanel();
         p1.setLayout(null);
         p1.setBackground(col);
 
@@ -84,9 +89,9 @@ public class EndpointTestDialog extends JFrame {
 
         FreeLabelTextFieldPair comp2 = new FreeLabelTextFieldPair(col, "Please enter endpoint:", 30, 190, 240);
 
-        FreeTextArea comp3 = new FreeTextArea(col, "Body:", 30, 240, 200, 635, 220, false);
-
-        FreeTextArea comp4 = new FreeTextArea(col, "The output will be shown below:", 30, 490, 200, 635, 220, false);
+        // This is the Body text area and is only used when doing an active pasing of data (such as POST or PUT)
+        FreeTextArea body = new FreeTextArea(col, "Body:", 30, 240, 200, 635, 220, false);
+        body.getPanel().setVisible(false);
 
         // This is the control for the Test button
         b0.addActionListener(new ActionListener() {
@@ -113,28 +118,33 @@ public class EndpointTestDialog extends JFrame {
         // This is the control for the Get radio button
         rb0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Radio button output - " + rb0.getLabelText());
+                body.getPanel().setVisible(false);
+                resizeOutputForGet();
+                getLastSelected = true;
             }
         });
 
         // This is the control for the Post radio button
         rb1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Radio button output - " + rb1.getLabelText());
+                body.getPanel().setVisible(true);
+                resizeOutputForPost();
             }
         });
 
         // This is the control for the Put radio button
         rb2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Radio button output - " + rb2.getLabelText());
+                body.getPanel().setVisible(true);
+                resizeOutputForPost();
             }
         });
 
         // This is the control for the Delete radio button
         rb3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Radio button output - " + rb3.getLabelText());
+                body.getPanel().setVisible(true);
+                resizeOutputForPost();
             }
         });
 
@@ -147,9 +157,26 @@ public class EndpointTestDialog extends JFrame {
         p1.add(rb3);
         p1.add(comp1.getPanel());
         p1.add(comp2.getPanel());
-        p1.add(comp3.getPanel());
-        p1.add(comp4.getPanel());
+        p1.add(body.getPanel());
+        p1.add(output.getPanel());
         p1.add(l0);
         this.add(p1);
+    }
+
+    private void resizeOutputForGet() {
+        p1.remove(output.getPanel());
+        output = new FreeTextArea(col, "The output will be shown below:", 30, 240, 200, 635, 480, false);
+        p1.add(output.getPanel());
+        this.repaint();
+    }
+
+    private void resizeOutputForPost() {
+        if (getLastSelected) {
+            p1.remove(output.getPanel());
+            output = new FreeTextArea(col, "The output will be shown below:", 30, 490, 200, 635, 220, false);
+            p1.add(output.getPanel());
+            this.repaint();
+            getLastSelected = false;
+        }
     }
 }
