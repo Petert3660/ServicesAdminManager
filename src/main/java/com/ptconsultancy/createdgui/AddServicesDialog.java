@@ -6,6 +6,7 @@ package com.ptconsultancy.createdgui;
 
 import com.ptconsultancy.admin.Admin;
 import com.ptconsultancy.guicomponents.FreeButton;
+import com.ptconsultancy.guicomponents.FreeCheckBox;
 import com.ptconsultancy.guicomponents.FreeLabel;
 import com.ptconsultancy.guicomponents.FreeLabelTextButtonTriple;
 import java.awt.Color;
@@ -25,7 +26,7 @@ public class AddServicesDialog extends JFrame {
     private static final String SUB_HEADING = "Add Service";
     private static final String TITLE = MAIN_HEADING + " - " + SUB_HEADING;
     private static final int FRAME_X_SIZE = 700;
-    private static final int FRAME_Y_SIZE = 250;
+    private static final int FRAME_Y_SIZE = 300;
     private Color col = new Color(230, 255, 255);
 
     private AddServicesDialog tg = this;
@@ -49,23 +50,31 @@ public class AddServicesDialog extends JFrame {
 
         FreeLabel l0 = new FreeLabel(MAIN_HEADING, 30, 30, 500, 30, new Font("", Font.BOLD + Font.ITALIC, 20));
 
-        FreeButton b0 = new FreeButton("OK", 255, 150, 80);
+        FreeButton b0 = new FreeButton("OK", 255, 190, 80);
 
-        FreeButton b1 = new FreeButton("Cancel", 365, 150, 80);
+        FreeButton b1 = new FreeButton("Cancel", 365, 190, 80);
 
         FreeLabelTextButtonTriple comp0 = new FreeLabelTextButtonTriple(col, "Please enter location of service:", 30, 90, 10, "Browse");
+
+        FreeCheckBox runCheck = new FreeCheckBox(col, "Run service after add", 30, 150, 200, 20);
 
         // This is the control for the OK button
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                String serviceName = comp0.getText().substring(comp0.getText().lastIndexOf("\\") + 1);
                 if (!admin.addService(comp0.getText())) {
-                    JOptionPane.showMessageDialog(tg, "Service " + comp0.getText().substring(comp0.getText().lastIndexOf("\\") + 1) + " has already been added",
+                    JOptionPane.showMessageDialog(tg, "Service " + serviceName + " has already been added",
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(tg, "Service " + comp0.getText().substring(comp0.getText().lastIndexOf("\\") + 1) + " has been successfully added",
+                    JOptionPane.showMessageDialog(tg, "Service " + serviceName + " has been successfully added",
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 }
                 admin.outputServiceStatus();
+                if (runCheck.isSelected()) {
+                    mainDialog.prepareAndExecuteOutputFile(admin.getServiceByName(serviceName), 1);
+                    admin.setServiceRunningByName(serviceName);
+                    admin.outputServiceStatus();
+                }
                 b1.doClick();
             }
         });
@@ -95,6 +104,7 @@ public class AddServicesDialog extends JFrame {
         p1.add(b1);
         p1.add(comp0.getPanel());
         p1.add(l0);
+        p1.add(runCheck);
         this.add(p1);
     }
 }
