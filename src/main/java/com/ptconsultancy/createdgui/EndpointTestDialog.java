@@ -5,6 +5,7 @@
 package com.ptconsultancy.createdgui;
 
 import com.ptconsultancy.admin.Admin;
+import com.ptconsultancy.admin.Service;
 import com.ptconsultancy.guicomponents.FreeButton;
 import com.ptconsultancy.guicomponents.FreeLabel;
 import com.ptconsultancy.guicomponents.FreeLabelComboBoxPair;
@@ -74,8 +75,11 @@ public class EndpointTestDialog extends JFrame {
 
         ArrayList<String> items1 = new ArrayList<String>();
         items1.add("--Select");
-        items1.add("wp-rest-api");
-        items1.add("warehouse-platform-app");
+        for (Service service : admin.getAllServicesByName()) {
+            if (service.isRunning()) {
+                items1.add(service.getName());
+            }
+        }
         FreeLabelComboBoxPair comp1 = new FreeLabelComboBoxPair(col, "Please select the service name:", 30, 140, 240, items1);
 
         FreeLabelTextFieldPair comp2 = new FreeLabelTextFieldPair(col, "Please enter endpoint:", 30, 190, 240);
