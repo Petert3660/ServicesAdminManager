@@ -71,7 +71,7 @@ public class AddServicesDialog extends JFrame {
                 }
                 admin.outputServiceStatus();
                 if (runCheck.isSelected()) {
-                    mainDialog.prepareAndExecuteOutputFile(admin.getServiceByName(serviceName), 1);
+                    mainDialog.prepareAndExecuteOutputFile(admin.getServiceByName(serviceName), 0);
                     admin.setServiceRunningByName(serviceName);
                     admin.outputServiceStatus();
                 }
