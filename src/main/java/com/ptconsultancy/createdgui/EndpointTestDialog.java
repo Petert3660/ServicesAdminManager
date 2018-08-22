@@ -23,6 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestTemplate;
+import org.thymeleaf.util.StringUtils;
 
 public class EndpointTestDialog extends JFrame {
 
@@ -98,7 +99,7 @@ public class EndpointTestDialog extends JFrame {
         // This is the control for the Test button
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (comp1.getComboBox().getSelectedIndex() > 0) {
+                if (comp1.getComboBox().getSelectedIndex() > 0 && !StringUtils.isEmpty(comp2.getText())) {
                     RestTemplate restTemplate = new RestTemplate();
                     Service service = admin.getServiceByName(comp1.getSelectedItem());
                     String url = "http://" + service.getUrl() + "/" + comp2.getText();
@@ -113,12 +114,14 @@ public class EndpointTestDialog extends JFrame {
                     } else if (rb3.isSelected()) {
 
                     }
-                } else if (comp1.getComboBox().getSelectedIndex() == 0) {
-                    JOptionPane.showMessageDialog(tg, "No service selected - please select a service before continuing",
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(tg, "No endpoint selected - please select an endpoint before continuing",
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    if (comp1.getComboBox().getSelectedIndex() == 0) {
+                        JOptionPane.showMessageDialog(tg, "No service selected - please select a service before continuing",
+                            TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(tg, "No endpoint selected - please select an endpoint before continuing",
+                            TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
             }
         });
