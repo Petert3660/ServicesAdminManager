@@ -176,8 +176,13 @@ public class MainDialog extends JFrame {
         // This is the control for the Remove Service menu item
         menuItem13.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                RemoveServicesDialog removeServicesDialog = new RemoveServicesDialog(tg, admin);
-                GuiHelper.showFrame(removeServicesDialog);
+                if (admin.noServices()) {
+                    JOptionPane.showMessageDialog(tg, "There are no services added as yet - you must add services before they can be removed",
+                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    RemoveServicesDialog removeServicesDialog = new RemoveServicesDialog(tg, admin);
+                    GuiHelper.showFrame(removeServicesDialog);
+                }
             }
         });
 
