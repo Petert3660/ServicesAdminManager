@@ -19,6 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.thymeleaf.util.StringUtils;
 
 public class AddServicesDialog extends JFrame {
 
@@ -61,21 +62,26 @@ public class AddServicesDialog extends JFrame {
         // This is the control for the OK button
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String serviceName = comp0.getText().substring(comp0.getText().lastIndexOf("\\") + 1);
-                if (!admin.addService(comp0.getText())) {
-                    JOptionPane.showMessageDialog(tg, "Service " + serviceName + " has already been added",
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(tg, "Service " + serviceName + " has been successfully added",
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
-                }
-                admin.outputServiceStatus();
-                if (runCheck.isSelected()) {
-                    mainDialog.prepareAndExecuteOutputFile(admin.getServiceByName(serviceName), 0);
-                    admin.setServiceRunningByName(serviceName);
+                if (!StringUtils.isEmpty(comp0.getText())) {
+                    String serviceName = comp0.getText().substring(comp0.getText().lastIndexOf("\\") + 1);
+                    if (!admin.addService(comp0.getText())) {
+                        JOptionPane.showMessageDialog(tg, "Service " + serviceName + " has already been added",
+                            TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(tg, "Service " + serviceName + " has been successfully added",
+                            TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    }
                     admin.outputServiceStatus();
+                    if (runCheck.isSelected()) {
+                        mainDialog.prepareAndExecuteOutputFile(admin.getServiceByName(serviceName), 0);
+                        admin.setServiceRunningByName(serviceName);
+                        admin.outputServiceStatus();
+                    }
+                    b1.doClick();
+                } else {
+                    JOptionPane.showMessageDialog(tg, "No service selected - please enter/select a service before continuing",
+                        TITLE, JOptionPane.INFORMATION_MESSAGE);
                 }
-                b1.doClick();
             }
         });
 
