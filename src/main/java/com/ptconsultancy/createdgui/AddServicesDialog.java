@@ -36,6 +36,8 @@ public class AddServicesDialog extends JFrame {
 
     private Admin admin;
 
+    private String servicePath;
+
     @Autowired
     public AddServicesDialog(MainDialog mainDialog, Admin admin) {
         this.admin = admin;
@@ -63,8 +65,8 @@ public class AddServicesDialog extends JFrame {
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (!StringUtils.isEmpty(comp0.getText())) {
-                    String serviceName = comp0.getText().substring(comp0.getText().lastIndexOf("\\") + 1);
-                    if (!admin.addService(comp0.getText())) {
+                    String serviceName = comp0.getText();
+                    if (!admin.addService(servicePath)) {
                         JOptionPane.showMessageDialog(tg, "Service " + serviceName + " has already been added",
                             TITLE, JOptionPane.INFORMATION_MESSAGE);
                     } else {
@@ -101,7 +103,8 @@ public class AddServicesDialog extends JFrame {
                 fc.setCurrentDirectory(new File("C:/PTConsultancy/LocalTestEnvironment"));
                 int returnVal = fc.showDialog(tg, "Select");
                 if (returnVal == 0) {
-                    comp0.setText(fc.getSelectedFile().getAbsolutePath());
+                    comp0.setText(fc.getSelectedFile().getName());
+                    servicePath = fc.getSelectedFile().getAbsolutePath();
                 }
             }
         });
