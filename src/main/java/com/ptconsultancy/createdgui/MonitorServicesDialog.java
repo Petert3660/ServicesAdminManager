@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestTemplate;
@@ -79,6 +80,9 @@ public class MonitorServicesDialog extends JFrame {
                     }
                     admin.outputMonitoringStatus(service, message);
                     b1.doClick();
+                } else {
+                    JOptionPane.showMessageDialog(tg, "No service selected - please select a service before continuing",
+                        TITLE, JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });

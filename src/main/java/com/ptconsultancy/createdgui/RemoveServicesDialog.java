@@ -72,6 +72,9 @@ public class RemoveServicesDialog extends JFrame {
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                     admin.outputServiceStatus();
                     b1.doClick();
+                } else {
+                    JOptionPane.showMessageDialog(tg, "No service selected - please select a service before continuing",
+                        TITLE, JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });

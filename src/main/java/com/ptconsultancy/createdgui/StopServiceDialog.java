@@ -85,6 +85,9 @@ public class StopServiceDialog extends JFrame {
                     admin.stopServiceRunningByName(service.getName());
                     admin.outputServiceStatus();
                     b1.doClick();
+                } else {
+                    JOptionPane.showMessageDialog(tg, "No service selected - please select a service before continuing",
+                        TITLE, JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });

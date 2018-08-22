@@ -73,6 +73,9 @@ public class StartServiceDialog extends JFrame {
                     admin.setServiceRunningByName(comp0.getSelectedItem());
                     admin.outputServiceStatus();
                     b1.doClick();
+                } else {
+                    JOptionPane.showMessageDialog(tg, "No service selected - please select a service before continuing",
+                        TITLE, JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });
