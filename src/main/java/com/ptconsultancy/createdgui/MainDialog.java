@@ -304,6 +304,28 @@ public class MainDialog extends JFrame {
 
         menuBar.add(menu3);
 
+        JMenu menu5 = new JMenu("Endpoint Test");
+        JMenuItem menuItem50 = new JMenuItem("Endpoint Test");
+        menu5.add(menuItem50);
+
+        // This is the control for the Endpoint Test/Endpoint Test menu item
+        menuItem50.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (admin.noServices()) {
+                    JOptionPane.showMessageDialog(tg, "There are no services added as yet - you must add services before they're endpoints may be tested",
+                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                } else if (admin.noServiceRunning()) {
+                    JOptionPane.showMessageDialog(tg, "There are no services currently running - there must be services running before they're endpoints may be tested",
+                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    EndpointTestDialog endpointTestDialog = new EndpointTestDialog(tg, admin);
+                    GuiHelper.showFrame(endpointTestDialog);
+                }
+            }
+        });
+
+        menuBar.add(menu5);
+
         JMenu menu4 = new JMenu("Help");
         JMenuItem menuItem40 = new JMenuItem("Help");
         menu4.add(menuItem40);
@@ -311,7 +333,7 @@ public class MainDialog extends JFrame {
         JMenuItem menuItem42 = new JMenuItem("About");
         menu4.add(menuItem42);
 
-        // This is the control for the Help/<MenuItem51> menu item
+        // This is the control for the Help/Help menu item
         menuItem40.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Menu item - Help in the Help menu has been clicked");
