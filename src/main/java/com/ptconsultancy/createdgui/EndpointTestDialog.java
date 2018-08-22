@@ -19,8 +19,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.client.RestTemplate;
 
 public class EndpointTestDialog extends JFrame {
 
@@ -96,14 +98,39 @@ public class EndpointTestDialog extends JFrame {
         // This is the control for the Test button
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Button output - " + b0.getButtonText());
+                if (comp1.getComboBox().getSelectedIndex() > 0) {
+                    RestTemplate restTemplate = new RestTemplate();
+                    Service service = admin.getServiceByName(comp1.getSelectedItem());
+                    String url = "http://" + service.getUrl() + "/" + comp2.getText();
+                    if (rb0.isSelected()) {
+                        String response = restTemplate.getForObject(url, String.class);
+                        output.clearTextArea();
+                        output.appendNewLine(response);
+                    } else if (rb1.isSelected()) {
+
+                    } else if (rb2.isSelected()) {
+
+                    } else if (rb3.isSelected()) {
+
+                    }
+                } else if (comp1.getComboBox().getSelectedIndex() == 0) {
+                    JOptionPane.showMessageDialog(tg, "No service selected - please select a service before continuing",
+                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(tg, "No endpoint selected - please select an endpoint before continuing",
+                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         });
 
         // This is the control for the Clear button
         b1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Button output - " + b1.getButtonText());
+                rb0.doClick();
+                output.clearTextArea();
+                body.clearTextArea();
+                comp1.getComboBox().setSelectedIndex(0);
+                comp2.setText("");
             }
         });
 
