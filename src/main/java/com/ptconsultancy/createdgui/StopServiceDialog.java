@@ -71,9 +71,9 @@ public class StopServiceDialog extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (!comp0.isFirstItemSelected()) {
                     Service service = admin.getServiceByName(comp0.getSelectedItem());
-                    String endpoint = "http://" + service.getUrl() + "/securitytoken";
+                    String endpoint = service.getUrl() + "/securitytoken";
                     String token = restTemplate.getForObject(endpoint, String.class);
-                    endpoint = "http://" + service.getUrl() + "/shutdown/" + service.getCredentials().getUserId() + "/"+
+                    endpoint = service.getUrl() + "/shutdown/" + service.getCredentials().getUserId() + "/"+
                         service.getCredentials().getPassword() + "/" + token;
                     try {
                         restTemplate.postForObject(endpoint, null, String.class);

@@ -7,7 +7,7 @@ public class Service {
     private String name;
     private String absolutePath;
     private boolean running;
-    private String url;
+    private String url = "http://";
     private Credentials credentials;
 
     public Service (String absolutePath, boolean running) {
@@ -41,7 +41,7 @@ public class Service {
     }
 
     public void setUrl(String url) {
-        this.url = url;
+        this.url = this.url + url;
     }
 
     public String getUrl() {

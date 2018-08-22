@@ -102,7 +102,7 @@ public class EndpointTestDialog extends JFrame {
                 if (comp1.getComboBox().getSelectedIndex() > 0 && !StringUtils.isEmpty(comp2.getText())) {
                     RestTemplate restTemplate = new RestTemplate();
                     Service service = admin.getServiceByName(comp1.getSelectedItem());
-                    String url = "http://" + service.getUrl() + "/" + comp2.getText();
+                    String url = service.getUrl() + "/" + comp2.getText();
                     if (rb0.isSelected()) {
                         String response = restTemplate.getForObject(url, String.class);
                         output.clearTextArea();

@@ -70,7 +70,7 @@ public class MonitorServicesDialog extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (!comp0.isFirstItemSelected()) {
                     Service service = admin.getServiceByName(comp0.getSelectedItem());
-                    String endpoint = "http://" + service.getUrl() + "/healthcheck";
+                    String endpoint = service.getUrl() + "/healthcheck";
                     String message;
                     try {
                         message = "Healthcheck response:- " + restTemplate.getForObject(endpoint, String.class);

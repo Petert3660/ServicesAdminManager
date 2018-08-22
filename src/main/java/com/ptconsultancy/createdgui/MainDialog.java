@@ -374,9 +374,9 @@ public class MainDialog extends JFrame {
     private void stopAllServices() {
         for (Service service : admin.getAllServicesByName()) {
             if (service.isRunning()) {
-                String endpoint = "http://" + service.getUrl() + "/securitytoken";
+                String endpoint = service.getUrl() + "/securitytoken";
                 String token = restTemplate.getForObject(endpoint, String.class);
-                endpoint = "http://" + service.getUrl() + "/shutdown/" + service.getCredentials().getUserId() + "/" +
+                endpoint = service.getUrl() + "/shutdown/" + service.getCredentials().getUserId() + "/" +
                     service.getCredentials().getPassword() + "/" + token;
                 try {
                     restTemplate.postForObject(endpoint, null, String.class);
