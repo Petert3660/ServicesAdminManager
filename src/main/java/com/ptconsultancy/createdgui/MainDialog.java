@@ -373,7 +373,7 @@ public class MainDialog extends JFrame {
         } catch (IOException e1) {
             e1.printStackTrace();
         }
-        ScriptRunner sr = new ScriptRunner(filename);
+        ScriptRunner sr = new ScriptRunner(filename, service, admin);
         sr.start();
     }
 
@@ -401,12 +401,6 @@ public class MainDialog extends JFrame {
             for (Service service : admin.getAllServicesByName()) {
                 prepareAndExecuteOutputFile(service, count++);
             }
-
-            for (int i = 0; i < count; i++) {
-                Service service = admin.getAllServicesByName().get(i);
-                admin.setServiceRunningByName(service.getName());
-            }
-            admin.outputServiceStatus();
         } else {
             JOptionPane.showMessageDialog(tg, "There are host/port conflicts between imported services - please resolve before starting all",
                 TITLE, JOptionPane.INFORMATION_MESSAGE);

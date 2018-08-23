@@ -70,8 +70,7 @@ public class StartServiceDialog extends JFrame {
                     mainDialog.prepareAndExecuteOutputFile(admin.getServiceByName(comp0.getSelectedItem()), 0);
                     JOptionPane.showMessageDialog(tg, "Service " + comp0.getSelectedItem() + " has been successfully started",
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
-                    admin.setServiceRunningByName(comp0.getSelectedItem());
-                    admin.outputServiceStatus();
+
                     b1.doClick();
                 } else {
                     JOptionPane.showMessageDialog(tg, "No service selected - please select a service before continuing",
@@ -94,24 +93,4 @@ public class StartServiceDialog extends JFrame {
         p1.add(l0);
         this.add(p1);
     }
-
-//    private void prepareAndExecuteOutputFile(Service service) {
-//        File file = new File("run.bat");
-//        if (file.exists()) {
-//            file.delete();
-//        }
-//        try {
-//            RandomAccessFile fout = new RandomAccessFile("run.bat", "rw");
-//            fout.writeBytes("cd\\\n");
-//            fout.writeBytes("cd " + service.getAbsolutePath() + "\n\n");
-//            fout.writeBytes("start /min java -jar " + service.getName() + ".jar\n");
-//            fout.close();
-//        } catch (FileNotFoundException e1) {
-//            e1.printStackTrace();
-//        } catch (IOException e1) {
-//            e1.printStackTrace();
-//        }
-//        ScriptRunner sr = new ScriptRunner();
-//        sr.start();
-//    }
 }

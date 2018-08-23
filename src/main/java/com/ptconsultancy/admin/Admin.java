@@ -111,6 +111,8 @@ public class Admin {
                 String status = "Not running";
                 if (service.isRunning()) {
                     status = "Running";
+                } else if (service.isUnableToStart()) {
+                    status = "Currently unable to start this service";
                 }
                 freeTextArea.appendNewLine("Service status: " + status);
                 freeTextArea.appendNewLine("Service URL: " + service.getUrl());
@@ -209,6 +211,16 @@ public class Admin {
         for (Service service : allServices) {
             if (name.equals(service.getName())) {
                 service.setRunning(false);
+                break;
+            }
+        }
+    }
+
+    public void setServiceUnableToStartByName(String name) {
+
+        for (Service service : allServices) {
+            if (name.equals(service.getName())) {
+                service.setUnableToStart(true);
                 break;
             }
         }

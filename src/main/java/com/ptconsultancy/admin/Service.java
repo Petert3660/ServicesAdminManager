@@ -7,6 +7,7 @@ public class Service {
     private String name;
     private String absolutePath;
     private boolean running;
+    private boolean unableToStart = false;
     private String url = "http://";
     private Credentials credentials;
 
@@ -54,5 +55,13 @@ public class Service {
 
     public void setCredentials(Credentials credentials) {
         this.credentials = credentials;
+    }
+
+    public boolean isUnableToStart() {
+        return unableToStart;
+    }
+
+    public void setUnableToStart(boolean unableToStart) {
+        this.unableToStart = unableToStart;
     }
 }
