@@ -148,6 +148,9 @@ public class MainDialog extends JFrame {
         menu1.addSeparator();
         JMenuItem menuItem15 = new JMenuItem("Generate Password");
         menu1.add(menuItem15);
+        menu1.addSeparator();
+        JMenuItem menuItem16 = new JMenuItem("List Service Details");
+        menu1.add(menuItem16);
 
         // This is the control for the Services/New REST Service menu item
         menuItem10.addActionListener(new ActionListener() {
@@ -205,6 +208,13 @@ public class MainDialog extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 GeneratePasswordDialog generatePasswordDialog = new GeneratePasswordDialog(tg);
                 GuiHelper.showFrame(generatePasswordDialog);
+            }
+        });
+
+        menuItem16.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ListServiceDetailsDialog listServiceDetailsDialog = new ListServiceDetailsDialog(tg, admin);
+                GuiHelper.showFrame(listServiceDetailsDialog);
             }
         });
 

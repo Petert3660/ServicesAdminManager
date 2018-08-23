@@ -54,7 +54,6 @@ public class MonitorServicesDialog extends JFrame {
 
         FreeButton b1 = new FreeButton("Cancel", 290, 150, 80);
 
-
         ArrayList<String> items0 = new ArrayList<String>();
         items0.add("--Select");
         for (Service service : admin.getAllServicesByName()) {

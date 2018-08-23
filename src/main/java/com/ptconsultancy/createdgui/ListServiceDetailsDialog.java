@@ -9,6 +9,7 @@ import com.ptconsultancy.admin.Service;
 import com.ptconsultancy.guicomponents.FreeButton;
 import com.ptconsultancy.guicomponents.FreeLabel;
 import com.ptconsultancy.guicomponents.FreeLabelComboBoxPair;
+import com.ptconsultancy.guis.GuiHelper;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -19,23 +20,23 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class RemoveServicesDialog extends JFrame {
+public class ListServiceDetailsDialog extends JFrame {
 
     private static final String MAIN_HEADING = "Services Admin Manager";
-    private static final String SUB_HEADING = "Remove Service";
+    private static final String SUB_HEADING = "List Service Details";
     private static final String TITLE = MAIN_HEADING + " - " + SUB_HEADING;
     private static final int FRAME_X_SIZE = 550;
     private static final int FRAME_Y_SIZE = 250;
     private Color col = new Color(230, 255, 255);
 
-    private RemoveServicesDialog tg = this;
+    private ListServiceDetailsDialog tg = this;
 
     private MainDialog mainDialog;
 
     private Admin admin;
 
     @Autowired
-    public RemoveServicesDialog(MainDialog mainDialog, Admin admin) {
+    public ListServiceDetailsDialog(MainDialog mainDialog, Admin admin) {
         this.admin = admin;
         this.mainDialog = mainDialog;
         mainDialog.setEnabled(false);
@@ -56,18 +57,16 @@ public class RemoveServicesDialog extends JFrame {
         ArrayList<String> items0 = new ArrayList<String>();
         items0.add("--Select");
         for (Service service : admin.getAllServicesByName()) {
-            if (!service.isRunning()) {
-                items0.add(service.getName());
-            }
+            items0.add(service.getName());
         }
-        FreeLabelComboBoxPair comp0 = new FreeLabelComboBoxPair(col, "Please select service to remove:", 30, 90, 240, items0);
+        FreeLabelComboBoxPair comp0 = new FreeLabelComboBoxPair(col, "Please select service whose details are required:", 30, 90, 240, items0);
 
         // This is the control for the OK button
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (!comp0.isFirstItemSelected()) {
-                    admin.removeService(comp0.getSelectedItem());
-                    admin.outputServiceStatus();
+                    ListServiceDetailsCard listServiceDetailsCard = new ListServiceDetailsCard(admin.getServiceByName(comp0.getSelectedItem()));
+                    GuiHelper.showFrame(listServiceDetailsCard);
                     b1.doClick();
                 } else {
                     JOptionPane.showMessageDialog(tg, "No service selected - please select a service before continuing",
