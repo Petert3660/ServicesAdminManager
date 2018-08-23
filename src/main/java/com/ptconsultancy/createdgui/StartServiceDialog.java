@@ -68,9 +68,6 @@ public class StartServiceDialog extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (!comp0.isFirstItemSelected()) {
                     mainDialog.prepareAndExecuteOutputFile(admin.getServiceByName(comp0.getSelectedItem()), 0);
-                    JOptionPane.showMessageDialog(tg, "Service " + comp0.getSelectedItem() + " has been successfully started",
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
-
                     b1.doClick();
                 } else {
                     JOptionPane.showMessageDialog(tg, "No service selected - please select a service before continuing",
