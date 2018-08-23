@@ -38,7 +38,7 @@ public class ScriptRunner extends Thread {
                     admin.outputServiceStatus();
                     break;
                 }
-                Thread.sleep(5000);
+                Thread.sleep(3000);
                 if (i == 9) {
                     admin.setServiceUnableToStartByName(service.getName());
                     admin.outputServiceStatus();

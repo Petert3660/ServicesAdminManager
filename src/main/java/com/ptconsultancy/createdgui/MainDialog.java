@@ -42,16 +42,14 @@ public class MainDialog extends JFrame {
     private JMenuBar menuBar = new JMenuBar();
 
     private Admin admin;
-    private RestTemplate restTemplate;
 
     FreeButton b0 = new FreeButton("Exit", 460, 800, 80);
     FreeTextArea comp0 = new FreeTextArea(col, "Output:", 30, 90, 200, 935, 620, false);
 
     @Autowired
-    public MainDialog(Admin admin, RestTemplate restTemplate) {
+    public MainDialog(Admin admin) {
 
         this.admin = admin;
-        this.restTemplate = restTemplate;
         this.admin.setFreeTextArea(comp0);
 
         this.setTitle(TITLE);
@@ -196,7 +194,7 @@ public class MainDialog extends JFrame {
                     JOptionPane.showMessageDialog(tg, "There are no services running yet - there must be services running before they can be monitored",
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    MonitorServicesDialog monitorServicesDialog = new MonitorServicesDialog(tg, admin, restTemplate);
+                    MonitorServicesDialog monitorServicesDialog = new MonitorServicesDialog(tg, admin);
                     GuiHelper.showFrame(monitorServicesDialog);
                 }
             }
@@ -301,7 +299,7 @@ public class MainDialog extends JFrame {
                     JOptionPane.showMessageDialog(tg, "There are no services currently running - there must be services running before they can be stopped",
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    StopServiceDialog stopServiceDialog = new StopServiceDialog(tg, admin, restTemplate);
+                    StopServiceDialog stopServiceDialog = new StopServiceDialog(tg, admin);
                     GuiHelper.showFrame(stopServiceDialog);
                 }
             }
@@ -380,6 +378,7 @@ public class MainDialog extends JFrame {
     private void stopAllServices() {
         for (Service service : admin.getAllServicesByName()) {
             if (service.isRunning()) {
+                RestTemplate restTemplate = new RestTemplate();
                 String endpoint = service.getUrl() + "/securitytoken";
                 String token = restTemplate.getForObject(endpoint, String.class);
                 endpoint = service.getUrl() + "/shutdown/" + service.getCredentials().getUserId() + "/" +

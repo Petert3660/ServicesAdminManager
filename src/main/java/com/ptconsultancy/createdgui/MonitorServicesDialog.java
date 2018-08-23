@@ -34,12 +34,10 @@ public class MonitorServicesDialog extends JFrame {
     private MainDialog mainDialog;
 
     private Admin admin;
-    private RestTemplate restTemplate;
 
     @Autowired
-    public MonitorServicesDialog(MainDialog mainDialog, Admin admin, RestTemplate restTemplate) {
+    public MonitorServicesDialog(MainDialog mainDialog, Admin admin) {
         this.admin = admin;
-        this.restTemplate = restTemplate;
         this.mainDialog = mainDialog;
         mainDialog.setEnabled(false);
 
@@ -70,6 +68,7 @@ public class MonitorServicesDialog extends JFrame {
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (!comp0.isFirstItemSelected()) {
+                    RestTemplate restTemplate = new RestTemplate();
                     Service service = admin.getServiceByName(comp0.getSelectedItem());
                     String endpoint = service.getUrl() + "/healthcheck";
                     String message;

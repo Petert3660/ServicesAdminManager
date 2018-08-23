@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
-import org.springframework.web.client.RestTemplate;
 
 /**
  * Created by Peter Thomson on 13/04/2018.
@@ -40,14 +37,6 @@ public class Application implements CommandLineRunner {
     @Autowired
     Admin admin;
 
-    @Bean
-    public RestTemplate restTemplate(RestTemplateBuilder builder) {
-        return builder.build();
-    }
-
-    @Autowired
-    RestTemplate restTemplate;
-
     public static void main(String[] args) {
         new SpringApplicationBuilder(Application.class)
             .headless(false)
@@ -58,7 +47,7 @@ public class Application implements CommandLineRunner {
     public void run(String... strings) throws Exception {
         outputMessage();
 
-        MainDialog md = new MainDialog(admin, restTemplate);
+        MainDialog md = new MainDialog(admin);
         GuiHelper.showFrame(md);
     }
 
