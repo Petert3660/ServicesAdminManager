@@ -348,7 +348,8 @@ public class MainDialog extends JFrame {
         // This is the control for the Help/About menu item
         menuItem42.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Menu item - About in the Help menu has been clicked");
+                AboutDialog aboutDialog = new AboutDialog(tg);
+                GuiHelper.showFrame(aboutDialog);
             }
         });
 
