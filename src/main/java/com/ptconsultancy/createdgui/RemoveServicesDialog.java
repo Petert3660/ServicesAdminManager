@@ -68,8 +68,6 @@ public class RemoveServicesDialog extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (!comp0.isFirstItemSelected()) {
                     admin.removeService(comp0.getSelectedItem());
-                    JOptionPane.showMessageDialog(tg, "Service " + comp0.getSelectedItem() + " has been successfully removed",
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
                     admin.outputServiceStatus();
                     b1.doClick();
                 } else {

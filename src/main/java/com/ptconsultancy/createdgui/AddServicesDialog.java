@@ -69,9 +69,6 @@ public class AddServicesDialog extends JFrame {
                     if (!admin.addService(servicePath)) {
                         JOptionPane.showMessageDialog(tg, "Service " + serviceName + " has already been added",
                             TITLE, JOptionPane.INFORMATION_MESSAGE);
-                    } else {
-                        JOptionPane.showMessageDialog(tg, "Service " + serviceName + " has been successfully added",
-                            TITLE, JOptionPane.INFORMATION_MESSAGE);
                     }
                     admin.outputServiceStatus();
                     if (runCheck.isSelected()) {
