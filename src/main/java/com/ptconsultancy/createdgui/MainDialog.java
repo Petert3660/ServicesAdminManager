@@ -135,7 +135,7 @@ public class MainDialog extends JFrame {
         menuBar.add(menu0);
 
         JMenu menu1 = new JMenu("Services");
-        JMenuItem menuItem10 = new JMenuItem("New REST Service");
+        JMenuItem menuItem10 = new JMenuItem("New API/REST Service");
         menu1.add(menuItem10);
         JMenuItem menuItem11 = new JMenuItem("New Web Service");
         menu1.add(menuItem11);
