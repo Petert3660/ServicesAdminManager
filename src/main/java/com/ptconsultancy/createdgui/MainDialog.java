@@ -143,7 +143,7 @@ public class MainDialog extends JFrame {
         JMenuItem menuItem13 = new JMenuItem("Remove Service");
         menu1.add(menuItem13);
         menu1.addSeparator();
-        JMenuItem menuItem14 = new JMenuItem("Monitor Service");
+        JMenuItem menuItem14 = new JMenuItem("Monitor Services");
         menu1.add(menuItem14);
         menu1.addSeparator();
         JMenuItem menuItem15 = new JMenuItem("Generate Password");

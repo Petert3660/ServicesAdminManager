@@ -108,13 +108,7 @@ public class Admin {
                 freeTextArea.appendNewLine("Service: " + service.getName());
                 freeTextArea.appendNewLine("----------------------------------------------------------------------------------------------------");
                 freeTextArea.appendNewLine("Service location: " + service.getAbsolutePath());
-                String status = "Not running";
-                if (service.isRunning()) {
-                    status = "Running";
-                } else if (service.isUnableToStart()) {
-                    status = "Currently unable to start this service";
-                }
-                freeTextArea.appendNewLine("Service status: " + status);
+                freeTextArea.appendNewLine("Service status: " + service.getServiceStatus());
                 freeTextArea.appendNewLine("Service URL: " + service.getUrl());
                 freeTextArea.appendNewLine("----------------------------------------------------------------------------------------------------");
             }
@@ -211,16 +205,6 @@ public class Admin {
         for (Service service : allServices) {
             if (name.equals(service.getName())) {
                 service.setRunning(false);
-                break;
-            }
-        }
-    }
-
-    public void setServiceUnableToStartByName(String name) {
-
-        for (Service service : allServices) {
-            if (name.equals(service.getName())) {
-                service.setUnableToStart(true);
                 break;
             }
         }

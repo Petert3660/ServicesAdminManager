@@ -7,9 +7,9 @@ public class Service {
     private String name;
     private String absolutePath;
     private boolean running;
-    private boolean unableToStart = false;
     private String url = "http://";
     private Credentials credentials;
+    private String serviceStatus = "Not Running";
 
     public Service (String absolutePath, boolean running) {
         this.absolutePath = absolutePath;
@@ -31,6 +31,11 @@ public class Service {
 
     public void setRunning(boolean running) {
         this.running = running;
+        if (running) {
+            setServiceStatus("Running");
+        } else {
+            setServiceStatus("Not Running");
+        }
     }
 
     public String getAbsolutePath() {
@@ -57,11 +62,11 @@ public class Service {
         this.credentials = credentials;
     }
 
-    public boolean isUnableToStart() {
-        return unableToStart;
+    public String getServiceStatus() {
+        return serviceStatus;
     }
 
-    public void setUnableToStart(boolean unableToStart) {
-        this.unableToStart = unableToStart;
+    public void setServiceStatus(String serviceStatus) {
+        this.serviceStatus = serviceStatus;
     }
 }

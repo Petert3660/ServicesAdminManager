@@ -24,8 +24,12 @@ public class ScriptRunner extends Thread {
         try {
             buildRun = Runtime.getRuntime().exec(filename);
 
+            final int numTries = 10;
+
             RestTemplate restTemplate = new RestTemplate();
-            for (int i = 0; i < 10; i++) {
+            admin.getServiceByName(service.getName()).setServiceStatus("Starting....Please Wait");
+            admin.outputServiceStatus();
+            for (int i = 0; i < numTries; i++) {
                 String endpoint = service.getUrl() + "/healthcheck";
                 String message;
                 try {
@@ -39,8 +43,8 @@ public class ScriptRunner extends Thread {
                     break;
                 }
                 Thread.sleep(3000);
-                if (i == 9) {
-                    admin.setServiceUnableToStartByName(service.getName());
+                if (i == (numTries - 1)) {
+                    admin.getServiceByName(service.getName()).setServiceStatus("Currently unable to start this service");
                     admin.outputServiceStatus();
                 }
             }

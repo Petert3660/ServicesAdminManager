@@ -77,8 +77,9 @@ public class MonitorServicesDialog extends JFrame {
                     } catch (Exception e1) {
                         message = "Still trying to connect....";
                     }
-                    admin.outputMonitoringStatus(service, message);
-                    b1.doClick();
+                    JOptionPane.showMessageDialog(tg, message,
+                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    b1.setText("Close");
                 } else {
                     JOptionPane.showMessageDialog(tg, "No service selected - please select a service before continuing",
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
