@@ -79,8 +79,6 @@ public class StopServiceDialog extends JFrame {
                     } catch(Exception e1) {
                         System.out.println("Exception during shutdown ignored");
                     }
-                    JOptionPane.showMessageDialog(tg, "Service " + comp0.getSelectedItem() + " has been successfully stopped",
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
                     admin.stopServiceRunningByName(service.getName());
                     admin.outputServiceStatus();
                     b1.doClick();
