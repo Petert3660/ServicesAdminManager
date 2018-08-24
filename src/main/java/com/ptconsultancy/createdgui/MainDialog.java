@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -30,12 +31,20 @@ import org.springframework.web.client.RestTemplate;
 
 public class MainDialog extends JFrame {
 
+    private static final String PROJECT_PATH = "C:/GradleTutorials/ServicesAdminManager/ProjectFiles";
+
     private static final String MAIN_HEADING = "Services Admin Manager";
     private static final String TITLE = MAIN_HEADING;
     private static final int FRAME_X_SIZE = 1000;
     private static final int FRAME_Y_SIZE = 900;
     private Color col = new Color(235, 255, 255);
     private static final int EXIT_STATUS = 0;
+
+    private String projectName = "";
+
+    private JPanel p1 = new JPanel();
+
+    private FreeLabel comp1;
 
     private MainDialog tg = this;
 
@@ -55,7 +64,8 @@ public class MainDialog extends JFrame {
         this.setTitle(TITLE);
         this.setSize(FRAME_X_SIZE, FRAME_Y_SIZE);
 
-        JPanel p1 = new JPanel();
+        comp1 = new FreeLabel("The currently selected project is:- " + projectName,30, 750, 400, 20);
+
         p1.setLayout(null);
         p1.setBackground(col);
 
@@ -75,6 +85,7 @@ public class MainDialog extends JFrame {
         p1.add(b0);
         p1.add(comp0.getPanel());
         p1.add(l0);
+        p1.add(comp1);
 
         setUpMenuBar();
           this.setJMenuBar(menuBar);
@@ -92,34 +103,35 @@ public class MainDialog extends JFrame {
 
     private void setUpMenuBar() {
         JMenu menu0 = new JMenu("Project");
-        JMenuItem menuItem00 = new JMenuItem("New");
+        JMenuItem menuItem00 = new JMenuItem("New Project");
         menu0.add(menuItem00);
-        JMenuItem menuItem01 = new JMenuItem("Open");
+        JMenuItem menuItem01 = new JMenuItem("Open Project");
         menu0.add(menuItem01);
-        JMenuItem menuItem02 = new JMenuItem("Save");
+        JMenuItem menuItem02 = new JMenuItem("Save Project");
         menu0.add(menuItem02);
         menu0.addSeparator();
         JMenuItem menuItem04 = new JMenuItem("Exit");
         menu0.add(menuItem04);
 
-        // This is the control for the Project/New menu item
+        // This is the control for the Project/New Project menu item
         menuItem00.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Menu item - New in the Project menu has been clicked");
+                NewProjectDialog newProjectDialog = new NewProjectDialog(tg);
+                GuiHelper.showFrame(newProjectDialog);
             }
         });
 
-        // This is the control for the Project/Open menu item
+        // This is the control for the Project/Open Project  menu item
         menuItem01.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Menu item - Open in the Project menu has been clicked");
+                openProjectChoice();
             }
         });
 
-        // This is the control for the Project/Save menu item
+        // This is the control for the Project/Save Project menu item
         menuItem02.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Menu item - Save in the Project menu has been clicked");
+                System.out.println("Menu item - Save Project in the Project menu has been clicked");
             }
         });
 
@@ -413,11 +425,31 @@ public class MainDialog extends JFrame {
         if (admin.reportHostPortConflict() == 0) {
             int count = 0;
             for (Service service : admin.getAllServicesByName()) {
-                prepareAndExecuteOutputFile(service, count++);
+                if (!service.isRunning()) {
+                    prepareAndExecuteOutputFile(service, count++);
+                }
             }
         } else {
             JOptionPane.showMessageDialog(tg, "There are host/port conflicts between imported services - please resolve before starting all",
                 TITLE, JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
+    public void updateProjectSelection(String text) {
+        projectName = text;
+        comp1.setLabelText("The currently selected project is:- " + projectName);
+        p1.repaint();
+    }
+
+    private void openProjectChoice() {
+        JFileChooser fc = new JFileChooser();
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        fc.setCurrentDirectory(new File(PROJECT_PATH));
+        int returnVal = fc.showDialog(tg, "Select");
+
+        if (returnVal == 0) {
+            File file = fc.getSelectedFile();
+            updateProjectSelection(file.getName());
         }
     }
 }
