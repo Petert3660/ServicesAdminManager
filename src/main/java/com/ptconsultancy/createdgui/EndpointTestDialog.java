@@ -73,13 +73,25 @@ public class EndpointTestDialog extends JFrame {
         FreeRadioButton rb2 = new FreeRadioButton(col, "Put", 140, 90, 50, 20);
         FreeRadioButton rb3 = new FreeRadioButton(col, "Delete", 190, 90, 90, 20);
 
+        FreeRadioButton rb4 = new FreeRadioButton(col, "Text", 330, 230, 50, 20);
+        rb4.setSelected();
+        FreeRadioButton rb5 = new FreeRadioButton(col, "JSON", 380, 230, 60, 20);
+        FreeRadioButton rb6 = new FreeRadioButton(col, "XML", 440, 230, 50, 20);
+
         FreeRadioButtonGroup comp0 = new FreeRadioButtonGroup();
         ArrayList<FreeRadioButton> items0 = new ArrayList<>();
-        items0.add(rb0);
-        items0.add(rb1);
-        items0.add(rb2);
-        items0.add(rb3);
+        items0.add(rb4);
+        items0.add(rb5);
+        items0.add(rb6);
         comp0.addButtons(items0);
+
+        FreeRadioButtonGroup rbgType = new FreeRadioButtonGroup();
+        ArrayList<FreeRadioButton> rbgTypeButtons = new ArrayList<>();
+        rbgTypeButtons.add(rb0);
+        rbgTypeButtons.add(rb1);
+        rbgTypeButtons.add(rb2);
+        rbgTypeButtons.add(rb3);
+        rbgType.addButtons(rbgTypeButtons);
 
         ArrayList<String> items1 = new ArrayList<String>();
         items1.add("--Select");
@@ -120,6 +132,9 @@ public class EndpointTestDialog extends JFrame {
                         output.clearTextArea();
                         try {
                             response = restTemplate.getForObject(url, String.class);
+//                            if () {
+//
+//                            }
                             output.appendNewLine(response);
                         } catch (Exception e1) {
                             output.appendNewLine("Exception - " + e1.getMessage());
@@ -204,6 +219,9 @@ public class EndpointTestDialog extends JFrame {
         p1.add(rb3);
         p1.add(comp1.getPanel());
         p1.add(comp2.getPanel());
+        p1.add(rb4);
+        p1.add(rb5);
+        p1.add(rb6);
         p1.add(body.getPanel());
         p1.add(output.getPanel());
         p1.add(l0);
