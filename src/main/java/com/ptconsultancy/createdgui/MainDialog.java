@@ -31,7 +31,7 @@ import org.springframework.web.client.RestTemplate;
 
 public class MainDialog extends JFrame {
 
-    private static final String PROJECT_PATH = "C:/GradleTutorials/ServicesAdminManager/ProjectFiles";
+    private static final String PROJECT_PATH = "C:\\GradleTutorials\\ServicesAdminManager\\ProjectFiles";
 
     private static final String MAIN_HEADING = "Services Admin Manager";
     private static final String TITLE = MAIN_HEADING;
@@ -45,6 +45,8 @@ public class MainDialog extends JFrame {
     private JPanel p1 = new JPanel();
 
     private FreeLabel comp1;
+
+    JMenuItem menuItem01;
 
     private MainDialog tg = this;
 
@@ -105,7 +107,7 @@ public class MainDialog extends JFrame {
         JMenu menu0 = new JMenu("Project");
         JMenuItem menuItem00 = new JMenuItem("New Project");
         menu0.add(menuItem00);
-        JMenuItem menuItem01 = new JMenuItem("Open Project");
+        menuItem01 = new JMenuItem("Open Project");
         menu0.add(menuItem01);
         JMenuItem menuItem02 = new JMenuItem("Save Project");
         menu0.add(menuItem02);
@@ -449,7 +451,13 @@ public class MainDialog extends JFrame {
 
         if (returnVal == 0) {
             File file = fc.getSelectedFile();
-            updateProjectSelection(file.getName());
+            if (file.getAbsolutePath().equals(PROJECT_PATH)) {
+                JOptionPane.showMessageDialog(tg, "No project selected - please try again!",
+                    TITLE, JOptionPane.INFORMATION_MESSAGE);
+                menuItem01.doClick();
+            } else {
+                updateProjectSelection(file.getName());
+            }
         }
     }
 }
