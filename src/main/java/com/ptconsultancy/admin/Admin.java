@@ -115,17 +115,6 @@ public class Admin {
         }
     }
 
-    public void outputMonitoringStatus(Service service, String message) {
-        if (freeTextArea != null) {
-            freeTextArea.clearTextArea();
-            freeTextArea.appendNewLine("----------------------------------------------------------------------------------------------------");
-            freeTextArea.appendNewLine("Monitoring for service: " + service.getName());
-            freeTextArea.appendNewLine("----------------------------------------------------------------------------------------------------");
-            freeTextArea.appendNewLine(message);
-            freeTextArea.appendNewLine("----------------------------------------------------------------------------------------------------");
-        }
-    }
-
     private void sortAllServicesByName() {
             allServices.sort(new Comparator<Service>() {
             @Override
