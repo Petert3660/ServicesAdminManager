@@ -213,8 +213,13 @@ public class MainDialog extends JFrame {
 
         menuItem16.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                ListServiceDetailsDialog listServiceDetailsDialog = new ListServiceDetailsDialog(tg, admin);
-                GuiHelper.showFrame(listServiceDetailsDialog);
+                if (admin.noServices()) {
+                    JOptionPane.showMessageDialog(tg, "There are no services added as yet - you must add services before their details can be viewed",
+                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    ListServiceDetailsDialog listServiceDetailsDialog = new ListServiceDetailsDialog(tg, admin);
+                    GuiHelper.showFrame(listServiceDetailsDialog);
+                }
             }
         });
 
