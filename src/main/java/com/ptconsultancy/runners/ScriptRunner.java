@@ -16,7 +16,7 @@ public class ScriptRunner extends Thread {
     @Autowired
     public ScriptRunner(String filename, Service service, Admin admin) {
         this.filename = filename;
-        this.service = service;
+        this.service = admin.getServiceByName(service.getName());
         this.admin = admin;
     }
 

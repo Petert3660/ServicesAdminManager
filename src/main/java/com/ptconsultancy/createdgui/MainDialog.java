@@ -16,8 +16,12 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.RandomAccessFile;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -28,6 +32,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestTemplate;
+import org.thymeleaf.util.StringUtils;
 
 public class MainDialog extends JFrame {
 
@@ -77,9 +82,7 @@ public class MainDialog extends JFrame {
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 removeRunServiceFiles();
-                if (!admin.noServiceRunning()) {
-                    stopAllServices();
-                }
+                stopAllServices();
                 System.exit(EXIT_STATUS);
             }
         });
@@ -133,7 +136,7 @@ public class MainDialog extends JFrame {
         // This is the control for the Project/Save Project menu item
         menuItem02.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Menu item - Save Project in the Project menu has been clicked");
+                saveProjectObject();
             }
         });
 
@@ -440,6 +443,24 @@ public class MainDialog extends JFrame {
     public void updateProjectSelection(String text) {
         projectName = text;
         comp1.setLabelText("The currently selected project is:- " + projectName);
+        File file = new File(PROJECT_PATH + "\\" + projectName + "\\adminSave");
+        if (file.exists()) {
+            try {
+                FileInputStream fileIn = new FileInputStream(file.getAbsolutePath());
+                ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+                admin = (Admin) objectIn.readObject();
+                objectIn.close();
+                admin.setFreeTextArea(comp0);
+                admin.outputServiceStatus();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        } else {
+            JOptionPane.showMessageDialog(tg, "No project configuration was previously saved - cannot load!",
+                TITLE, JOptionPane.INFORMATION_MESSAGE);
+        }
         p1.repaint();
     }
 
@@ -457,6 +478,32 @@ public class MainDialog extends JFrame {
                 menuItem01.doClick();
             } else {
                 updateProjectSelection(file.getName());
+            }
+        }
+    }
+
+    private void saveProjectObject() {
+        if (admin.noServiceRunning()) {
+            if (!StringUtils.isEmpty(projectName)) {
+                try {
+                    FileOutputStream fileOut = new FileOutputStream(PROJECT_PATH + "\\" + projectName + "\\adminSave");
+                    ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+                    objectOut.writeObject(admin);
+                    objectOut.close();
+                    JOptionPane.showMessageDialog(tg, "The project has been successfully saved",
+                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            } else {
+                JOptionPane.showMessageDialog(tg, "No project selected - cannot save configuration!",
+                    TITLE, JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+            int res = JOptionPane.showConfirmDialog(tg, "Services running, would you like to stop these before saving project",
+                TITLE, JOptionPane.YES_NO_OPTION);
+            if (res == 0) {
+                stopAllServices();
             }
         }
     }

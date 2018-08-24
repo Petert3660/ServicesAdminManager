@@ -5,6 +5,7 @@ import com.ptconsultancy.guicomponents.FreeTextArea;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Component;
 import org.thymeleaf.util.StringUtils;
 
 @Component
-public class Admin {
+public class Admin implements Serializable {
 
     private ArrayList<Service> allServices = new ArrayList<>();
     private FreeTextArea freeTextArea;
@@ -23,7 +24,7 @@ public class Admin {
     public Admin() {
     }
 
-    public boolean addService(String servicePath) {
+    public synchronized boolean addService(String servicePath) {
 
         for (Service service : allServices) {
             if (servicePath.equals(service.getAbsolutePath())) {
@@ -97,7 +98,7 @@ public class Admin {
         this.freeTextArea = freeTextArea;
     }
 
-    public void outputServiceStatus() {
+    public synchronized void outputServiceStatus() {
         if (freeTextArea != null) {
             freeTextArea.clearTextArea();
             freeTextArea.appendNewLine("----------------------------------------------------------------------------------------------------");
@@ -113,9 +114,10 @@ public class Admin {
                 freeTextArea.appendNewLine("----------------------------------------------------------------------------------------------------");
             }
         }
+        freeTextArea.getPanel().repaint();
     }
 
-    private void sortAllServicesByName() {
+    private synchronized void sortAllServicesByName() {
             allServices.sort(new Comparator<Service>() {
             @Override
             public int compare(Service o1, Service o2) {
@@ -124,13 +126,13 @@ public class Admin {
         });
     }
 
-    public ArrayList<Service> getAllServicesByName() {
+    public synchronized ArrayList<Service> getAllServicesByName() {
         sortAllServicesByName();
 
         return allServices;
     }
 
-    public boolean noServices() {
+    public synchronized boolean noServices() {
         if (allServices.size() > 0) {
             return false;
         } else {
@@ -138,7 +140,7 @@ public class Admin {
         }
     }
 
-    public boolean allServicesRunning() {
+    public synchronized boolean allServicesRunning() {
         int count = 0;
         for (Service service : allServices) {
             if (service.isRunning()) {
@@ -153,7 +155,7 @@ public class Admin {
         }
     }
 
-    public boolean noServiceRunning() {
+    public synchronized boolean noServiceRunning() {
         int count = 0;
         for (Service service : allServices) {
             if (service.isRunning()) {
@@ -168,7 +170,7 @@ public class Admin {
         }
     }
 
-    public Service getServiceByName(String name) {
+    public synchronized Service getServiceByName(String name) {
 
         for (Service service : allServices) {
             if (name.equals(service.getName())) {
@@ -179,7 +181,7 @@ public class Admin {
         return null;
     }
 
-    public void setServiceRunningByName(String name) {
+    public synchronized void setServiceRunningByName(String name) {
 
         for (Service service : allServices) {
             if (name.equals(service.getName())) {
@@ -189,7 +191,7 @@ public class Admin {
         }
     }
 
-    public void stopServiceRunningByName(String name) {
+    public synchronized void stopServiceRunningByName(String name) {
 
         for (Service service : allServices) {
             if (name.equals(service.getName())) {
@@ -203,7 +205,7 @@ public class Admin {
         getServiceByName(name).setUrl(url);
     }
 
-    public int reportHostPortConflict() {
+    public synchronized int reportHostPortConflict() {
 
         int count = 0;
         for (Service service : allServices) {
@@ -219,7 +221,7 @@ public class Admin {
         return count / 2;
     }
 
-    public int reportHostPortConflict(Service service) {
+    public synchronized int reportHostPortConflict(Service service) {
 
         int count = 0;
         for (Service otherService : allServices) {

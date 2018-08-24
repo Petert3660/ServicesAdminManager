@@ -1,8 +1,9 @@
 package com.ptconsultancy.admin;
 
 import com.ptconsultancy.admin.adminsupport.Credentials;
+import java.io.Serializable;
 
-public class Service {
+public class Service implements Serializable {
 
     private String name;
     private String absolutePath;

@@ -1,12 +1,13 @@
 package com.ptconsultancy.guicomponents;
 
+import java.io.Serializable;
 import javax.swing.*;
 import java.awt.*;
 
 /**
  * Created by thomsonp on 12/01/2017.
  */
-public class FreeTextArea {
+public class FreeTextArea implements Serializable {
 
     Color col;
 

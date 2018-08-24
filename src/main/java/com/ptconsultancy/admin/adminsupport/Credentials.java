@@ -1,6 +1,8 @@
 package com.ptconsultancy.admin.adminsupport;
 
-public class Credentials {
+import java.io.Serializable;
+
+public class Credentials implements Serializable {
 
     private String userId;
     private String password;
