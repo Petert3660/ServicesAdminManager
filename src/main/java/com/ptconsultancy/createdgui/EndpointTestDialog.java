@@ -92,6 +92,12 @@ public class EndpointTestDialog extends JFrame {
 
         FreeLabelTextFieldPair comp2 = new FreeLabelTextFieldPair(col, "Please enter endpoint:", 30, 190, 240);
 
+        comp2.getTextField().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+               b0.doClick();
+            }
+        });
+
         // This is the Body text area and is only used when doing an active pasing of data (such as POST or PUT)
         FreeTextArea body = new FreeTextArea(col, "Body:", 30, 240, 200, 635, 220, false);
         body.getPanel().setVisible(false);
@@ -110,9 +116,14 @@ public class EndpointTestDialog extends JFrame {
                             token = restTemplate.getForObject(secureUrl, String.class);
                             url = url + "/" + token;
                         }
-                        String response = restTemplate.getForObject(url, String.class);
+                        String response;
                         output.clearTextArea();
-                        output.appendNewLine(response);
+                        try {
+                            response = restTemplate.getForObject(url, String.class);
+                            output.appendNewLine(response);
+                        } catch (Exception e1) {
+                            output.appendNewLine("Exception - " + e1.getMessage());
+                        }
                     } else if (rb1.isSelected()) {
 
                     } else if (rb2.isSelected()) {
