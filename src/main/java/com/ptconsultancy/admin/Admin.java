@@ -218,4 +218,18 @@ public class Admin {
 
         return count / 2;
     }
+
+    public int reportHostPortConflict(Service service) {
+
+        int count = 0;
+        for (Service otherService : allServices) {
+            if (!service.getName().equals(otherService.getName())) {
+                if (service.getUrl().equals(otherService.getUrl())) {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
 }

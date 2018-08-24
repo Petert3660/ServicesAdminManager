@@ -66,8 +66,14 @@ public class StartServiceDialog extends JFrame {
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (!comp0.isFirstItemSelected()) {
-                    mainDialog.prepareAndExecuteOutputFile(admin.getServiceByName(comp0.getSelectedItem()), 0);
-                    b1.doClick();
+                    int portConflicts = admin.reportHostPortConflict(admin.getServiceByName(comp0.getSelectedItem()));
+                    if (portConflicts == 0){
+                        mainDialog.prepareAndExecuteOutputFile(admin.getServiceByName(comp0.getSelectedItem()), 0);
+                        b1.doClick();
+                    } else {
+                        JOptionPane.showMessageDialog(tg, "Cannot start service " + comp0.getSelectedItem() + " - there is/are currently " + portConflicts + " port/host conflict(s)",
+                            TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    }
                 } else {
                     JOptionPane.showMessageDialog(tg, "No service selected - please select a service before continuing",
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
