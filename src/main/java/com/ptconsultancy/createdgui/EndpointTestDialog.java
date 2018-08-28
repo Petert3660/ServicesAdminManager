@@ -4,6 +4,8 @@
 
 package com.ptconsultancy.createdgui;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -21,6 +23,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -149,7 +152,19 @@ public class EndpointTestDialog extends JFrame {
                             output.appendNewLine("Exception - " + e1.getMessage());
                         }
                     } else if (rb1.isSelected()) {
-
+                        String token;
+                        String secureUrl = service.getUrl() + "/securitytoken";
+                        token = restTemplate.getForObject(secureUrl, String.class);
+                        url = url + "/" + service.getCredentials().getUserId() + "/" + service.getCredentials().getPassword() + "/" + token;
+                        try {
+                            ObjectMapper mapper = new ObjectMapper();
+                            JsonNode request = mapper.readTree(body.getText());
+                            String response = restTemplate.postForObject(url, request, String.class);
+                            output.clearTextArea();
+                            output.appendNewLine(response);
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
                     } else if (rb2.isSelected()) {
 
                     } else if (rb3.isSelected()) {
