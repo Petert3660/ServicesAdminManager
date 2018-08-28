@@ -4,6 +4,10 @@
 
 package com.ptconsultancy.createdgui;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.ptconsultancy.admin.Admin;
 import com.ptconsultancy.admin.Service;
 import com.ptconsultancy.guicomponents.FreeButton;
@@ -132,10 +136,15 @@ public class EndpointTestDialog extends JFrame {
                         output.clearTextArea();
                         try {
                             response = restTemplate.getForObject(url, String.class);
-//                            if () {
-//
-//                            }
-                            output.appendNewLine(response);
+                            if (rb5.isSelected()) {
+                                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                                JsonParser jp = new JsonParser();
+                                JsonElement je = jp.parse(response);
+                                String prettyJsonString = gson.toJson(je);
+                                output.appendNewLine(prettyJsonString);
+                            } else if (rb4.isSelected()) {
+                                output.appendNewLine(response);
+                            }
                         } catch (Exception e1) {
                             output.appendNewLine("Exception - " + e1.getMessage());
                         }
