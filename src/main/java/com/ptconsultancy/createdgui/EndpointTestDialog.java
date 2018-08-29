@@ -24,6 +24,8 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -134,10 +136,9 @@ public class EndpointTestDialog extends JFrame {
                             token = getSecurityToken(restTemplate, service);
                             url = url + "/" + token;
                         }
-                        String response;
                         output.clearTextArea();
                         try {
-                            response = restTemplate.getForObject(url, String.class);
+                            String response = restTemplate.getForObject(url, String.class);
                             if (rb5.isSelected()) {
                                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
                                 JsonParser jp = new JsonParser();
@@ -151,8 +152,7 @@ public class EndpointTestDialog extends JFrame {
                             output.appendNewLine("Exception - " + e1.getMessage());
                         }
                     } else if (rb1.isSelected()) {
-                        String token;
-                        token = getSecurityToken(restTemplate, service);
+                        String token = getSecurityToken(restTemplate, service);
                         url = url + "/" + service.getCredentials().getUserId() + "/" + service.getCredentials().getPassword() + "/" + token;
                         try {
                             ObjectMapper mapper = new ObjectMapper();
@@ -166,7 +166,14 @@ public class EndpointTestDialog extends JFrame {
                     } else if (rb2.isSelected()) {
 
                     } else if (rb3.isSelected()) {
-
+                        String token = getSecurityToken(restTemplate, service);
+                        url = url + "/" + service.getCredentials().getUserId() + "/" + service.getCredentials().getPassword() + "/" + token;
+                        try {
+                            URI uri = new URI(url);
+                            restTemplate.delete(uri);
+                        } catch (URISyntaxException e1) {
+                            e1.printStackTrace();
+                        }
                     }
                 } else {
                     if (comp1.getComboBox().getSelectedIndex() == 0) {
