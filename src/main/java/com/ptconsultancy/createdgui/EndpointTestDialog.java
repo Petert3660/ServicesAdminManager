@@ -131,8 +131,7 @@ public class EndpointTestDialog extends JFrame {
                     if (rb0.isSelected()) {
                         String token;
                         if (!comp2.getText().equals("healthcheck")) {
-                            String secureUrl = service.getUrl() + "/securitytoken";
-                            token = restTemplate.getForObject(secureUrl, String.class);
+                            token = getSecurityToken(restTemplate, service);
                             url = url + "/" + token;
                         }
                         String response;
@@ -153,8 +152,7 @@ public class EndpointTestDialog extends JFrame {
                         }
                     } else if (rb1.isSelected()) {
                         String token;
-                        String secureUrl = service.getUrl() + "/securitytoken";
-                        token = restTemplate.getForObject(secureUrl, String.class);
+                        token = getSecurityToken(restTemplate, service);
                         url = url + "/" + service.getCredentials().getUserId() + "/" + service.getCredentials().getPassword() + "/" + token;
                         try {
                             ObjectMapper mapper = new ObjectMapper();
@@ -250,6 +248,11 @@ public class EndpointTestDialog extends JFrame {
         p1.add(output.getPanel());
         p1.add(l0);
         this.add(p1);
+    }
+
+    private String getSecurityToken(RestTemplate restTemplate, Service service) {
+        String secureUrl = service.getUrl() + "/securitytoken";
+        return restTemplate.getForObject(secureUrl, String.class);
     }
 
     private void resizeOutputForGet() {
