@@ -131,9 +131,8 @@ public class EndpointTestDialog extends JFrame {
                     Service service = admin.getServiceByName(comp1.getSelectedItem());
                     String url = service.getUrl() + "/" + comp2.getText();
                     if (rb0.isSelected()) {
-                        String token;
                         if (!comp2.getText().equals("healthcheck")) {
-                            token = getSecurityToken(restTemplate, service);
+                            String token = getSecurityToken(restTemplate, service);
                             url = url + "/" + token;
                         }
                         output.clearTextArea();
