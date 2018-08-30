@@ -5,6 +5,7 @@
 package com.ptconsultancy.createdgui;
 
 import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
+import static com.ptconsultancy.constants.ServiceAdminConstants.STANDARD_DROPDOWN_SELECT;
 
 import com.ptconsultancy.admin.Admin;
 import com.ptconsultancy.admin.Service;
@@ -51,12 +52,12 @@ public class MonitorServicesDialog extends JFrame {
 
         FreeLabel l0 = new FreeLabel(MAIN_HEADING, 30, 30, 500, 30, new Font("", Font.BOLD + Font.ITALIC, 20));
 
-        FreeButton b0 = new FreeButton("OK", 180, 150, 80);
+        FreeButton b0 = new FreeButton(FreeButton.OK, 180, 150, 80);
 
-        FreeButton b1 = new FreeButton("Cancel", 290, 150, 80);
+        FreeButton b1 = new FreeButton(FreeButton.CANCEL, 290, 150, 80);
 
         ArrayList<String> items0 = new ArrayList<String>();
-        items0.add("--Select");
+        items0.add(STANDARD_DROPDOWN_SELECT);
         for (Service service : admin.getAllServicesByName()) {
             if (service.isRunning()) {
                 items0.add(service.getName());
@@ -79,7 +80,7 @@ public class MonitorServicesDialog extends JFrame {
                     }
                     JOptionPane.showMessageDialog(tg, message,
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
-                    b1.setText("Close");
+                    b1.setText(FreeButton.CLOSE);
                 } else {
                     JOptionPane.showMessageDialog(tg, "No service selected - please select a service before continuing",
                         TITLE, JOptionPane.INFORMATION_MESSAGE);

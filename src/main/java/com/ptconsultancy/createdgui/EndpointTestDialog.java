@@ -4,10 +4,19 @@
 
 package com.ptconsultancy.createdgui;
 
+import static com.ptconsultancy.constants.ServiceAdminConstants.DELETE_TYPE;
+import static com.ptconsultancy.constants.ServiceAdminConstants.GET_TYPE;
 import static com.ptconsultancy.constants.ServiceAdminConstants.HEALTHCHECK;
-import static com.ptconsultancy.constants.ServiceAdminConstants.STANDARD_SEPARATOR;
-import static com.ptconsultancy.constants.ServiceAdminConstants.SECURITY_TOKEN;
+import static com.ptconsultancy.constants.ServiceAdminConstants.JSON;
 import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
+import static com.ptconsultancy.constants.ServiceAdminConstants.POST_TYPE;
+import static com.ptconsultancy.constants.ServiceAdminConstants.PUT_TYPE;
+import static com.ptconsultancy.constants.ServiceAdminConstants.SECURITY_TOKEN;
+import static com.ptconsultancy.constants.ServiceAdminConstants.STANDARD_DROPDOWN_SELECT;
+import static com.ptconsultancy.constants.ServiceAdminConstants.STANDARD_SEPARATOR;
+import static com.ptconsultancy.constants.ServiceAdminConstants.STANDARD_TEXTAREA_LABEL;
+import static com.ptconsultancy.constants.ServiceAdminConstants.TEXT;
+import static com.ptconsultancy.constants.ServiceAdminConstants.XML;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -49,7 +58,7 @@ public class EndpointTestDialog extends JFrame {
 
     JPanel p1 = new JPanel();
     // This is the output text area and is on screen at all times
-    FreeTextArea output = new FreeTextArea(col, "The output will be shown below:", 30, 240, 200, 635, 480, false);
+    FreeTextArea output = new FreeTextArea(col, STANDARD_TEXTAREA_LABEL, 30, 240, 200, 635, 480, false);
 
     private EndpointTestDialog tg = this;
 
@@ -79,20 +88,20 @@ public class EndpointTestDialog extends JFrame {
 
         FreeButton b0 = new FreeButton("Test", 200, 800, 80);
 
-        FreeButton b1 = new FreeButton("Clear", 310, 800, 80);
+        FreeButton b1 = new FreeButton(FreeButton.CLEAR, 310, 800, 80);
 
-        FreeButton b2 = new FreeButton("Cancel", 420, 800, 80);
+        FreeButton b2 = new FreeButton(FreeButton.CANCEL, 420, 800, 80);
 
-        FreeRadioButton rb0 = new FreeRadioButton(col, "Get", 30, 90, 50, 20);
+        FreeRadioButton rb0 = new FreeRadioButton(col, GET_TYPE, 30, 90, 50, 20);
         rb0.setSelected();
-        FreeRadioButton rb1 = new FreeRadioButton(col, "Post", 80, 90, 60, 20);
-        FreeRadioButton rb2 = new FreeRadioButton(col, "Put", 140, 90, 50, 20);
-        FreeRadioButton rb3 = new FreeRadioButton(col, "Delete", 190, 90, 90, 20);
+        FreeRadioButton rb1 = new FreeRadioButton(col, POST_TYPE, 80, 90, 60, 20);
+        FreeRadioButton rb2 = new FreeRadioButton(col, PUT_TYPE, 140, 90, 50, 20);
+        FreeRadioButton rb3 = new FreeRadioButton(col, DELETE_TYPE, 190, 90, 90, 20);
 
-        FreeRadioButton rb4 = new FreeRadioButton(col, "Text", 330, 230, 50, 20);
+        FreeRadioButton rb4 = new FreeRadioButton(col, TEXT, 330, 230, 50, 20);
         rb4.setSelected();
-        FreeRadioButton rb5 = new FreeRadioButton(col, "JSON", 380, 230, 60, 20);
-        FreeRadioButton rb6 = new FreeRadioButton(col, "XML", 440, 230, 50, 20);
+        FreeRadioButton rb5 = new FreeRadioButton(col, JSON, 380, 230, 60, 20);
+        FreeRadioButton rb6 = new FreeRadioButton(col, XML, 440, 230, 50, 20);
 
         FreeRadioButtonGroup comp0 = new FreeRadioButtonGroup();
         ArrayList<FreeRadioButton> items0 = new ArrayList<>();
@@ -110,7 +119,7 @@ public class EndpointTestDialog extends JFrame {
         rbgType.addButtons(rbgTypeButtons);
 
         ArrayList<String> items1 = new ArrayList<String>();
-        items1.add("--Select");
+        items1.add(STANDARD_DROPDOWN_SELECT);
         for (Service service : admin.getAllServicesByName()) {
             if (service.isRunning()) {
                 items1.add(service.getName());
@@ -277,7 +286,7 @@ public class EndpointTestDialog extends JFrame {
 
     private void resizeOutputForGet() {
         p1.remove(output.getPanel());
-        output = new FreeTextArea(col, "The output will be shown below:", 30, 240, 200, 635, 480, false);
+        output = new FreeTextArea(col, STANDARD_TEXTAREA_LABEL, 30, 240, 200, 635, 480, false);
         p1.add(output.getPanel());
         this.repaint();
     }
@@ -285,7 +294,7 @@ public class EndpointTestDialog extends JFrame {
     private void resizeOutputForPost() {
         if (getLastSelected) {
             p1.remove(output.getPanel());
-            output = new FreeTextArea(col, "The output will be shown below:", 30, 490, 200, 635, 220, false);
+            output = new FreeTextArea(col, STANDARD_TEXTAREA_LABEL, 30, 490, 200, 635, 220, false);
             p1.add(output.getPanel());
             this.repaint();
             getLastSelected = false;

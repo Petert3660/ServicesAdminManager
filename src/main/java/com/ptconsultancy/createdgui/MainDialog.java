@@ -60,7 +60,7 @@ public class MainDialog extends JFrame {
 
     private Admin admin;
 
-    FreeButton b0 = new FreeButton("Exit", 460, 800, 80);
+    FreeButton b0 = new FreeButton(FreeButton.EXIT, 460, 800, 80);
     FreeTextArea comp0 = new FreeTextArea(col, "Output:", 30, 90, 200, 935, 620, false);
 
     @Autowired
@@ -116,7 +116,7 @@ public class MainDialog extends JFrame {
         JMenuItem menuItem02 = new JMenuItem("Save Project");
         menu0.add(menuItem02);
         menu0.addSeparator();
-        JMenuItem menuItem04 = new JMenuItem("Exit");
+        JMenuItem menuItem04 = new JMenuItem(FreeButton.EXIT);
         menu0.add(menuItem04);
 
         // This is the control for the Project/New Project menu item

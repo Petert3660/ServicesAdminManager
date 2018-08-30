@@ -44,9 +44,9 @@ public class GeneratePasswordDialog extends JFrame {
 
         FreeLabel l0 = new FreeLabel(MAIN_HEADING, 30, 30, 500, 30, new Font("", Font.BOLD + Font.ITALIC, 20));
 
-        FreeButton b0 = new FreeButton("OK", 255, 150, 80);
+        FreeButton b0 = new FreeButton(FreeButton.OK, 255, 150, 80);
 
-        FreeButton b1 = new FreeButton("Cancel", 365, 150, 80);
+        FreeButton b1 = new FreeButton(FreeButton.CANCEL, 365, 150, 80);
 
         FreeLabelTextFieldPair comp0 = new FreeLabelTextFieldPair(col, "Generated password:", 30, 90, 200);
 
@@ -54,7 +54,7 @@ public class GeneratePasswordDialog extends JFrame {
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 comp0.setText(GenerateRandomKeys.generateRandomKey(20, 1));
-                b1.setText("Close");
+                b1.setText(FreeButton.CLOSE);
             }
         });
 

@@ -1,5 +1,7 @@
 package com.ptconsultancy.guicomponents;
 
+import static com.ptconsultancy.constants.ServiceAdminConstants.STANDARD_DROPDOWN_SELECT;
+
 import javax.swing.*;
 import java.util.ArrayList;
 
@@ -7,7 +9,7 @@ public class FreeComboBox extends JComboBox {
 
     public FreeComboBox(int x, int y, int xSize, int ySize) {
         this.setBounds(x, y, xSize, ySize);
-        this.addItem("--Select");
+        this.addItem(STANDARD_DROPDOWN_SELECT);
     }
 
     public FreeComboBox(int x, int y, int xSize, int ySize, ArrayList<String> items) {

@@ -39,9 +39,9 @@ public class AboutDialog extends JFrame {
 
         FreeLabel l0 = new FreeLabel(MAIN_HEADING, 30, 30, 500, 30, new Font("", Font.BOLD + Font.ITALIC, 20));
 
-        FreeButton b0 = new FreeButton("OK", 160, 200, 80);
+        FreeButton b0 = new FreeButton(FreeButton.OK, 160, 200, 80);
 
-        FreeLabel comp0 = new FreeLabel("ServicesAdminManager", 30, 90, 200, 20);
+        FreeLabel comp0 = new FreeLabel(BuildVersion.getProjectTitle(), 30, 90, 200, 20);
 
         FreeLabel comp1 = new FreeLabel("Version " + BuildVersion.getBuildVersion(), 30, 140, 200, 20);
 

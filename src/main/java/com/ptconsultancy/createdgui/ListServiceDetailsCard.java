@@ -39,7 +39,7 @@ public class ListServiceDetailsCard extends JFrame {
 
         FreeLabel l0 = new FreeLabel(MAIN_HEADING, 30, 30, 500, 30, new Font("", Font.BOLD + Font.ITALIC, 20));
 
-        FreeButton b0 = new FreeButton("Close", 235, 260, 80);
+        FreeButton b0 = new FreeButton(FreeButton.CLOSE, 235, 260, 80);
 
         FreeLabel comp0 = new FreeLabel("Service name:", 30, 90, 150, 20);
         FreeLabel detail0 = new FreeLabel(service.getName(), 160, 90, 200, 20) ;

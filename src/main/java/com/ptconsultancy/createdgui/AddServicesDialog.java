@@ -54,11 +54,11 @@ public class AddServicesDialog extends JFrame {
 
         FreeLabel l0 = new FreeLabel(MAIN_HEADING, 30, 30, 500, 30, new Font("", Font.BOLD + Font.ITALIC, 20));
 
-        FreeButton b0 = new FreeButton("OK", 255, 190, 80);
+        FreeButton b0 = new FreeButton(FreeButton.OK, 255, 190, 80);
 
-        FreeButton b1 = new FreeButton("Cancel", 365, 190, 80);
+        FreeButton b1 = new FreeButton(FreeButton.CANCEL, 365, 190, 80);
 
-        FreeLabelTextButtonTriple comp0 = new FreeLabelTextButtonTriple(col, "Please enter location of service:", 30, 90, 10, "Browse");
+        FreeLabelTextButtonTriple comp0 = new FreeLabelTextButtonTriple(col, "Please enter location of service:", 30, 90, 10, FreeButton.BROWSE);
 
         FreeCheckBox runCheck = new FreeCheckBox(col, "Run service after add", 30, 150, 200, 20);
 
