@@ -26,6 +26,8 @@ public class ScriptRunner extends Thread {
 
             final int numTries = 10;
 
+            int addTime = admin.getAllServicesByName().size() - 2;
+
             RestTemplate restTemplate = new RestTemplate();
             admin.getServiceByName(service.getName()).setServiceStatus("Starting....Please Wait");
             admin.outputServiceStatus();
@@ -42,7 +44,7 @@ public class ScriptRunner extends Thread {
                     admin.outputServiceStatus();
                     break;
                 }
-                Thread.sleep(3000);
+                Thread.sleep(3000 + (addTime * 2000));
                 if (i == (numTries - 1)) {
                     admin.getServiceByName(service.getName()).setServiceStatus("Currently unable to start this service");
                     admin.outputServiceStatus();

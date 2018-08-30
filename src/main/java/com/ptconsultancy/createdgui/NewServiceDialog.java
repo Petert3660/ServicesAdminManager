@@ -73,7 +73,6 @@ public class NewServiceDialog extends JFrame {
                 if (!comp0.empty()) {
                     File targDir = new File(PROJECT_PATH + "/" + comp0.getText());
                     if (targDir.mkdir()) {
-
                         File srcDir = new File("C:/GradleTutorials/SkeletonSpringBootProject");
                         final String SETTINGS_GRADLE = "/settings.gradle";
                         final String RUN_BAT = "/run.bat";
