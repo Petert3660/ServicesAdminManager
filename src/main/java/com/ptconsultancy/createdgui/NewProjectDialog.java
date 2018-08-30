@@ -68,16 +68,22 @@ public class NewProjectDialog extends JFrame {
         // This is the control for the OK button
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                File file = new File(PROJECT_PATH + "/" + comp0.getText());
-                if (file.mkdir()) {
-                    JOptionPane.showMessageDialog(tg,
-                        "Project: " + comp0.getText() + " has been successfully created",
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
-                    mainDialog.updateProjectSelection(comp0.getText());
-                    b1.doClick();
+                if (!comp0.empty()) {
+                    File targetDir = new File(PROJECT_PATH + "/" + comp0.getText());
+                    if (targetDir.mkdir()) {
+                        JOptionPane.showMessageDialog(tg,
+                            "Project: " + comp0.getText() + " has been successfully created",
+                            TITLE, JOptionPane.INFORMATION_MESSAGE);
+                        mainDialog.updateProjectSelection(comp0.getText());
+                        b1.doClick();
+                    } else {
+                        JOptionPane.showMessageDialog(tg, "Unable to create project: " + comp0.getText()
+                                + " , there may already be a project with this name",
+                            TITLE, JOptionPane.INFORMATION_MESSAGE);
+                        comp0.clearAndFocus();
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(tg, "Unable to create project: " + comp0.getText()
-                            + " , there may already be a project with this name",
+                    JOptionPane.showMessageDialog(tg, "The name of the new project cannot be empty - please choose a name",
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                     comp0.clearAndFocus();
                 }

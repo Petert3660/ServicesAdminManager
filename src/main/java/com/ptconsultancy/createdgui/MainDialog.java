@@ -153,7 +153,7 @@ public class MainDialog extends JFrame {
         JMenu menu1 = new JMenu("Services");
         JMenuItem menuItem10 = new JMenuItem("New API/REST Service");
         menu1.add(menuItem10);
-        JMenuItem menuItem11 = new JMenuItem("New Web Service");
+        JMenuItem menuItem11 = new JMenuItem("New Frontend Web Service");
         menu1.add(menuItem11);
         menu1.addSeparator();
         JMenuItem menuItem12 = new JMenuItem("Add Existing Service");
@@ -173,7 +173,8 @@ public class MainDialog extends JFrame {
         // This is the control for the Services/New REST Service menu item
         menuItem10.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Menu item - New REST Service in the Services menu has been clicked");
+                NewServiceDialog newServiceDialog = new NewServiceDialog(tg);
+                GuiHelper.showFrame(newServiceDialog);
             }
         });
 
