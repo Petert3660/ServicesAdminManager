@@ -6,6 +6,7 @@ package com.ptconsultancy.createdgui;
 
 import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
 import static com.ptconsultancy.constants.ServiceAdminConstants.STANDARD_DROPDOWN_SELECT;
+import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
 
 import com.ptconsultancy.admin.Admin;
 import com.ptconsultancy.admin.Service;
@@ -91,7 +92,7 @@ public class MonitorServicesDialog extends JFrame {
         // This is the control for the Cancel-implement button
         b1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mainDialog.setEnabled(true);
+                mainDialog.setEnabled(TRUE);
                 tg.dispose();
             }
         });

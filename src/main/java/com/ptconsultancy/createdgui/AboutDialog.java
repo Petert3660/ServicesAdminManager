@@ -5,6 +5,7 @@
 package com.ptconsultancy.createdgui;
 
 import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
+import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
 
 import com.ptconsultancy.admin.adminsupport.BuildVersion;
 import com.ptconsultancy.guicomponents.FreeButton;
@@ -48,7 +49,7 @@ public class AboutDialog extends JFrame {
         // This is the control for the OK button
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mainDialog.setEnabled(true);
+                mainDialog.setEnabled(TRUE);
                 tg.dispose();
             }
         });

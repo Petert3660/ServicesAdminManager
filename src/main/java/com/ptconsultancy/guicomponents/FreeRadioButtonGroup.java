@@ -1,5 +1,7 @@
 package com.ptconsultancy.guicomponents;
 
+import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
+
 import javax.swing.*;
 import java.util.ArrayList;
 
@@ -18,7 +20,7 @@ public class FreeRadioButtonGroup extends ButtonGroup {
     }
 
     public void setSelectedButton(int order) {
-        this.setSelected(allButtons.get(order).getModel(), true);
+        this.setSelected(allButtons.get(order).getModel(), TRUE);
     }
 
     public String getSelectedButton() {

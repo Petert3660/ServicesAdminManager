@@ -4,6 +4,7 @@
 package com.ptconsultancy.createdgui;
 
 import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
+import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
 
 import com.ptconsultancy.guicomponents.FreeButton;
 import com.ptconsultancy.guicomponents.FreeLabel;
@@ -86,7 +87,7 @@ public class NewProjectDialog extends JFrame {
         // This is the control for the Cancel-implement button
         b1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mainDialog.setEnabled(true);
+                mainDialog.setEnabled(TRUE);
                 tg.dispose();
             }
         });

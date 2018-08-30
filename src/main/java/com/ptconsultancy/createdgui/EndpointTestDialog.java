@@ -5,6 +5,7 @@
 package com.ptconsultancy.createdgui;
 
 import static com.ptconsultancy.constants.ServiceAdminConstants.DELETE_TYPE;
+import static com.ptconsultancy.constants.ServiceAdminConstants.FALSE;
 import static com.ptconsultancy.constants.ServiceAdminConstants.GET_TYPE;
 import static com.ptconsultancy.constants.ServiceAdminConstants.HEALTHCHECK;
 import static com.ptconsultancy.constants.ServiceAdminConstants.JSON;
@@ -16,6 +17,7 @@ import static com.ptconsultancy.constants.ServiceAdminConstants.STANDARD_DROPDOW
 import static com.ptconsultancy.constants.ServiceAdminConstants.STANDARD_SEPARATOR;
 import static com.ptconsultancy.constants.ServiceAdminConstants.STANDARD_TEXTAREA_LABEL;
 import static com.ptconsultancy.constants.ServiceAdminConstants.TEXT;
+import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
 import static com.ptconsultancy.constants.ServiceAdminConstants.XML;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -56,9 +58,14 @@ public class EndpointTestDialog extends JFrame {
     private static final int FRAME_Y_SIZE = 900;
     private Color col = new Color(230, 255, 255);
 
+    private static final String SERVICE_ERROR = "No service selected - please select a service before continuing";
+    private static final String ENDPOINT_ERROR = "No endpoint selected - please select an endpoint before continuing";
+
+    private static final String BODY_TEXTAREA_LABEL = "Body:";
+
     JPanel p1 = new JPanel();
     // This is the output text area and is on screen at all times
-    FreeTextArea output = new FreeTextArea(col, STANDARD_TEXTAREA_LABEL, 30, 240, 200, 635, 480, false);
+    FreeTextArea output = new FreeTextArea(col, STANDARD_TEXTAREA_LABEL, 30, 240, 200, 635, 480, FALSE);
 
     private EndpointTestDialog tg = this;
 
@@ -136,7 +143,7 @@ public class EndpointTestDialog extends JFrame {
         });
 
         // This is the Body text area and is only used when doing an active pasing of data (such as POST or PUT)
-        FreeTextArea body = new FreeTextArea(col, "Body:", 30, 240, 200, 635, 220, false);
+        FreeTextArea body = new FreeTextArea(col, BODY_TEXTAREA_LABEL, 30, 240, 200, 635, 220, FALSE);
         body.getPanel().setVisible(false);
 
         // This is the control for the Test button
@@ -144,7 +151,7 @@ public class EndpointTestDialog extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (comp1.getComboBox().getSelectedIndex() > 0 && !StringUtils.isEmpty(comp2.getText())) {
                     if (rb0.isSelected()) {
-                        String url = getUrl(comp1.getSelectedItem(), comp2.getText(), true);
+                        String url = getUrl(comp1.getSelectedItem(), comp2.getText(), TRUE);
                         output.clearTextArea();
                         try {
                             String response = restTemplate.getForObject(url, String.class);
@@ -161,7 +168,7 @@ public class EndpointTestDialog extends JFrame {
                             output.appendNewLine("Exception - " + e1.getMessage());
                         }
                     } else if (rb1.isSelected()) {
-                        String url = getUrl(comp1.getSelectedItem(), comp2.getText(), false);
+                        String url = getUrl(comp1.getSelectedItem(), comp2.getText(), FALSE);
                         try {
                             ObjectMapper mapper = new ObjectMapper();
                             JsonNode request = mapper.readTree(body.getText());
@@ -175,7 +182,7 @@ public class EndpointTestDialog extends JFrame {
 
                     } else if (rb3.isSelected()) {
                         try {
-                            URI uri = new URI(getUrl(comp1.getSelectedItem(), comp2.getText(), false));
+                            URI uri = new URI(getUrl(comp1.getSelectedItem(), comp2.getText(), FALSE));
                             restTemplate.delete(uri);
                         } catch (URISyntaxException e1) {
                             e1.printStackTrace();
@@ -183,10 +190,10 @@ public class EndpointTestDialog extends JFrame {
                     }
                 } else {
                     if (comp1.getComboBox().getSelectedIndex() == 0) {
-                        JOptionPane.showMessageDialog(tg, "No service selected - please select a service before continuing",
+                        JOptionPane.showMessageDialog(tg, SERVICE_ERROR,
                             TITLE, JOptionPane.INFORMATION_MESSAGE);
                     } else {
-                        JOptionPane.showMessageDialog(tg, "No endpoint selected - please select an endpoint before continuing",
+                        JOptionPane.showMessageDialog(tg, ENDPOINT_ERROR,
                             TITLE, JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
@@ -207,7 +214,7 @@ public class EndpointTestDialog extends JFrame {
         // This is the control for the Cancel-implement button
         b2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mainDialog.setEnabled(true);
+                mainDialog.setEnabled(TRUE);
                 tg.dispose();
             }
         });
@@ -215,7 +222,7 @@ public class EndpointTestDialog extends JFrame {
         // This is the control for the Get radio button
         rb0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                body.getPanel().setVisible(false);
+                body.getPanel().setVisible(FALSE);
                 resizeOutputForGet();
                 getLastSelected = true;
             }
@@ -224,7 +231,7 @@ public class EndpointTestDialog extends JFrame {
         // This is the control for the Post radio button
         rb1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                body.getPanel().setVisible(true);
+                body.getPanel().setVisible(TRUE);
                 resizeOutputForPost();
             }
         });
@@ -232,7 +239,7 @@ public class EndpointTestDialog extends JFrame {
         // This is the control for the Put radio button
         rb2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                body.getPanel().setVisible(true);
+                body.getPanel().setVisible(TRUE);
                 resizeOutputForPost();
             }
         });
@@ -240,7 +247,7 @@ public class EndpointTestDialog extends JFrame {
         // This is the control for the Delete radio button
         rb3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                body.getPanel().setVisible(true);
+                body.getPanel().setVisible(TRUE);
                 resizeOutputForPost();
             }
         });
@@ -286,7 +293,7 @@ public class EndpointTestDialog extends JFrame {
 
     private void resizeOutputForGet() {
         p1.remove(output.getPanel());
-        output = new FreeTextArea(col, STANDARD_TEXTAREA_LABEL, 30, 240, 200, 635, 480, false);
+        output = new FreeTextArea(col, STANDARD_TEXTAREA_LABEL, 30, 240, 200, 635, 480, FALSE);
         p1.add(output.getPanel());
         this.repaint();
     }
@@ -294,7 +301,7 @@ public class EndpointTestDialog extends JFrame {
     private void resizeOutputForPost() {
         if (getLastSelected) {
             p1.remove(output.getPanel());
-            output = new FreeTextArea(col, STANDARD_TEXTAREA_LABEL, 30, 490, 200, 635, 220, false);
+            output = new FreeTextArea(col, STANDARD_TEXTAREA_LABEL, 30, 490, 200, 635, 220, FALSE);
             p1.add(output.getPanel());
             this.repaint();
             getLastSelected = false;

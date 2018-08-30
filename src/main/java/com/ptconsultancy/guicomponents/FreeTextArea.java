@@ -1,5 +1,7 @@
 package com.ptconsultancy.guicomponents;
 
+import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
+
 import java.io.Serializable;
 import javax.swing.*;
 import java.awt.*;
@@ -23,8 +25,8 @@ public class FreeTextArea implements Serializable {
         this.xSize = xSize;
         label = new FreeLabel(value, 0, 0, xSize, 20);
         jta = new JTextArea();
-        jta.setLineWrap(true);
-        jta.setWrapStyleWord(true);
+        jta.setLineWrap(TRUE);
+        jta.setWrapStyleWord(TRUE);
         jsp = new JScrollPane(jta);
         jsp.setBounds(0, 20, width, height);
         setupContainingPanel(x, y, width, height);

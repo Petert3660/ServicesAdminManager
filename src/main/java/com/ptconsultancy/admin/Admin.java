@@ -1,5 +1,7 @@
 package com.ptconsultancy.admin;
 
+import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
+
 import com.ptconsultancy.admin.adminsupport.Credentials;
 import com.ptconsultancy.guicomponents.FreeTextArea;
 import java.io.BufferedReader;
@@ -185,7 +187,7 @@ public class Admin implements Serializable {
 
         for (Service service : allServices) {
             if (name.equals(service.getName())) {
-                service.setRunning(true);
+                service.setRunning(TRUE);
                 break;
             }
         }
