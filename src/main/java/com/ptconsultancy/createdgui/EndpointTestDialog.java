@@ -4,6 +4,10 @@
 
 package com.ptconsultancy.createdgui;
 
+import static com.ptconsultancy.constants.ServiceAdminConstants.HEALTHCHECK;
+import static com.ptconsultancy.constants.ServiceAdminConstants.STANDARD_SEPARATOR;
+import static com.ptconsultancy.constants.ServiceAdminConstants.SECURITY_TOKEN;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
@@ -55,10 +59,13 @@ public class EndpointTestDialog extends JFrame {
 
     private boolean getLastSelected = true;
 
+    private RestTemplate restTemplate;
+
     @Autowired
     public EndpointTestDialog(MainDialog mainDialog, Admin admin) {
         this.mainDialog = mainDialog;
         this.admin = admin;
+        this.restTemplate = new RestTemplate();
 
         mainDialog.setEnabled(false);
 
@@ -127,14 +134,8 @@ public class EndpointTestDialog extends JFrame {
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (comp1.getComboBox().getSelectedIndex() > 0 && !StringUtils.isEmpty(comp2.getText())) {
-                    RestTemplate restTemplate = new RestTemplate();
-                    Service service = admin.getServiceByName(comp1.getSelectedItem());
-                    String url = service.getUrl() + "/" + comp2.getText();
                     if (rb0.isSelected()) {
-                        if (!comp2.getText().equals("healthcheck")) {
-                            String token = getSecurityToken(restTemplate, service);
-                            url = url + "/" + token;
-                        }
+                        String url = getUrl(comp1.getSelectedItem(), comp2.getText(), true);
                         output.clearTextArea();
                         try {
                             String response = restTemplate.getForObject(url, String.class);
@@ -151,8 +152,7 @@ public class EndpointTestDialog extends JFrame {
                             output.appendNewLine("Exception - " + e1.getMessage());
                         }
                     } else if (rb1.isSelected()) {
-                        String token = getSecurityToken(restTemplate, service);
-                        url = url + "/" + service.getCredentials().getUserId() + "/" + service.getCredentials().getPassword() + "/" + token;
+                        String url = getUrl(comp1.getSelectedItem(), comp2.getText(), false);
                         try {
                             ObjectMapper mapper = new ObjectMapper();
                             JsonNode request = mapper.readTree(body.getText());
@@ -165,10 +165,8 @@ public class EndpointTestDialog extends JFrame {
                     } else if (rb2.isSelected()) {
 
                     } else if (rb3.isSelected()) {
-                        String token = getSecurityToken(restTemplate, service);
-                        url = url + "/" + service.getCredentials().getUserId() + "/" + service.getCredentials().getPassword() + "/" + token;
                         try {
-                            URI uri = new URI(url);
+                            URI uri = new URI(getUrl(comp1.getSelectedItem(), comp2.getText(), false));
                             restTemplate.delete(uri);
                         } catch (URISyntaxException e1) {
                             e1.printStackTrace();
@@ -257,8 +255,24 @@ public class EndpointTestDialog extends JFrame {
     }
 
     private String getSecurityToken(RestTemplate restTemplate, Service service) {
-        String secureUrl = service.getUrl() + "/securitytoken";
+        String secureUrl = service.getUrl() + STANDARD_SEPARATOR  + SECURITY_TOKEN;
         return restTemplate.getForObject(secureUrl, String.class);
+    }
+
+    private String getUrl(String serviceName, String endpoint, boolean radioFlag) {
+
+        Service service = admin.getServiceByName(serviceName);
+        String url = service.getUrl() + STANDARD_SEPARATOR + endpoint;
+        if (radioFlag) {
+            if (!endpoint.equals(HEALTHCHECK)) {
+                url = url + STANDARD_SEPARATOR + getSecurityToken(restTemplate, service);
+            }
+        } else {
+            url = url + STANDARD_SEPARATOR + service.getCredentials().getUserId() + STANDARD_SEPARATOR
+                + service.getCredentials().getPassword() + STANDARD_SEPARATOR + getSecurityToken(restTemplate, service);
+        }
+
+        return url;
     }
 
     private void resizeOutputForGet() {
