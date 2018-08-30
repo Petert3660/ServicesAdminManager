@@ -7,6 +7,7 @@ package com.ptconsultancy.createdgui;
 import static com.ptconsultancy.constants.ServiceAdminConstants.HEALTHCHECK;
 import static com.ptconsultancy.constants.ServiceAdminConstants.STANDARD_SEPARATOR;
 import static com.ptconsultancy.constants.ServiceAdminConstants.SECURITY_TOKEN;
+import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -40,7 +41,6 @@ import org.thymeleaf.util.StringUtils;
 
 public class EndpointTestDialog extends JFrame {
 
-    private static final String MAIN_HEADING = "Services Admin Manager";
     private static final String SUB_HEADING = "Endpoint Test";
     private static final String TITLE = MAIN_HEADING + " - " + SUB_HEADING;
     private static final int FRAME_X_SIZE = 700;

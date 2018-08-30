@@ -4,6 +4,8 @@
 
 package com.ptconsultancy.createdgui;
 
+import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
+
 import com.ptconsultancy.admin.Admin;
 import com.ptconsultancy.admin.Service;
 import com.ptconsultancy.guicomponents.FreeButton;
@@ -22,7 +24,6 @@ import org.springframework.web.client.RestTemplate;
 
 public class MonitorServicesDialog extends JFrame {
 
-    private static final String MAIN_HEADING = "Services Admin Manager";
     private static final String SUB_HEADING = "Monitor Service";
     private static final String TITLE = MAIN_HEADING + " - " + SUB_HEADING;
     private static final int FRAME_X_SIZE = 550;

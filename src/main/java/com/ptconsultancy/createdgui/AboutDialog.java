@@ -4,6 +4,8 @@
 
 package com.ptconsultancy.createdgui;
 
+import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
+
 import com.ptconsultancy.admin.adminsupport.BuildVersion;
 import com.ptconsultancy.guicomponents.FreeButton;
 import com.ptconsultancy.guicomponents.FreeLabel;
@@ -16,7 +18,6 @@ import javax.swing.JPanel;
 
 public class AboutDialog extends JFrame {
 
-    private static final String MAIN_HEADING = "Services Admin Manager";
     private static final String TITLE = "About";
     private static final int FRAME_X_SIZE = 400;
     private static final int FRAME_Y_SIZE = 300;
