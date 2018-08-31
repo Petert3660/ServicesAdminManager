@@ -10,6 +10,7 @@ import com.ptconsultancy.guicomponents.FreeButton;
 import com.ptconsultancy.guicomponents.FreeLabel;
 import com.ptconsultancy.guicomponents.FreeLabelTextFieldPair;
 import com.ptconsultancy.utilities.FileUtilities;
+import com.ptconsultancy.utilities.GenerateRandomKeys;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -28,7 +29,7 @@ public class NewServiceDialog extends JFrame {
     private static final String TITLE = MAIN_HEADING + SUB_HEADING;
 
     private static final int FRAME_X_SIZE = 550;
-    private static final int FRAME_Y_SIZE = 250;
+    private static final int FRAME_Y_SIZE = 310;
     private Color col = new Color(230, 255, 255);
 
     private NewServiceDialog tg = this;
@@ -55,11 +56,13 @@ public class NewServiceDialog extends JFrame {
 
         FreeLabel l0 = new FreeLabel(MAIN_HEADING, 30, 30, 500, 20, new Font("", Font.BOLD + Font.ITALIC, 20));
 
-        FreeButton b0 = new FreeButton(FreeButton.OK, 180, 150, 80);
+        FreeButton b0 = new FreeButton(FreeButton.OK, 180, 210, 80);
 
-        FreeButton b1 = new FreeButton(FreeButton.CANCEL, 290, 150, 80);
+        FreeButton b1 = new FreeButton(FreeButton.CANCEL, 290, 210, 80);
 
         FreeLabelTextFieldPair comp0 = new FreeLabelTextFieldPair(col, "Please enter the new service name:", 30, 90, 240);
+
+        FreeLabelTextFieldPair comp1 = new FreeLabelTextFieldPair(col, "Please select a port for the new service:", 30, 150, 240);
 
         comp0.getTextField().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -70,7 +73,18 @@ public class NewServiceDialog extends JFrame {
         // This is the control for the OK button
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (!comp0.empty()) {
+
+                boolean isPortInteger = true;
+                // Check that port number is an integer
+                try {
+                    if (!comp1.empty()) {
+                        int portNum = Integer.parseInt(comp1.getText());
+                    }
+                } catch (NumberFormatException nfe) {
+                    isPortInteger = false;
+                }
+
+                if (!comp0.empty() && isPortInteger) {
                     File targDir = new File(PROJECT_PATH + "/" + comp0.getText());
                     if (targDir.mkdir()) {
                         File srcDir = new File("C:/GradleTutorials/SkeletonSpringBootProject");
@@ -95,7 +109,7 @@ public class NewServiceDialog extends JFrame {
                         }
 
                         // Remove .git directory to break link to remote origin
-                        final String NEW_TARGET = "C:/GradleTutorials/" + comp0.getText();
+                        final String NEW_TARGET = PROJECT_PATH + "/" + comp0.getText();
                         srcDir = new File(NEW_TARGET);
                         File[] files = srcDir.listFiles();
 
@@ -113,6 +127,57 @@ public class NewServiceDialog extends JFrame {
                             }
                         }
 
+                        // Update authentication file with new credentials
+                        final String AUTH_FILE = PROJECT_PATH + "/" + comp0.getText() + "/src/main/resources/auth.properties";
+                        File authFile = new File(AUTH_FILE);
+                        if (authFile.exists()) {
+                            authFile.delete();
+                        }
+                        try {
+                            FileUtilities.writeStringToFile(
+                                AUTH_FILE, "auth.admin.id=" + comp0.getText() + "\n");
+                            FileUtilities.appendStringToFile(
+                                AUTH_FILE, "auth.admin.password=" + GenerateRandomKeys.generateRandomKey(20, 1) + "\n");
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+
+                        // Update build.gradle file with new details
+                        final String BUILD_GRADLE_FILE = PROJECT_PATH + "/" + comp0.getText() + "/build.gradle";
+                        File buildFile = new File(BUILD_GRADLE_FILE);
+
+                        try {
+                            String allGradleContents = FileUtilities.writeFileToString(BUILD_GRADLE_FILE);
+                            if (buildFile.exists()) {
+                                buildFile.delete();
+                            }
+                            allGradleContents = allGradleContents.replace("projectName = \"SkeletonSpringBootProject\"",
+                                "projectName = \"" + comp0.getText() + "\"");
+                            allGradleContents = allGradleContents.replace("projectTitle = \"Skeleton Spring Boot Project\"",
+                                "projectTitle = \"" + comp0.getText() + "\"");
+                            FileUtilities.writeStringToFile(BUILD_GRADLE_FILE, allGradleContents);
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+
+                        // Update application.properties to hold chosen server port
+                        if (!comp1.empty()) {
+                            final String APP_PROPS_FILE = PROJECT_PATH + "/" + comp0.getText() + "/src/main/resources/application.properties";
+                            File appPropFile = new File(APP_PROPS_FILE);
+
+                            try {
+                                String allAppPropContents = FileUtilities.writeFileToString(APP_PROPS_FILE);
+                                if (appPropFile.exists()) {
+                                    appPropFile.delete();
+                                }
+                                allAppPropContents = allAppPropContents.replace("server.port=8200",
+                                    "server.port=" + comp1.getText());
+                                FileUtilities.writeStringToFile(APP_PROPS_FILE, allAppPropContents);
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+                        }
+
                         JOptionPane.showMessageDialog(tg,
                             "Service: " + comp0.getText() + " has been successfully created",
                             TITLE, JOptionPane.INFORMATION_MESSAGE);
@@ -125,9 +190,16 @@ public class NewServiceDialog extends JFrame {
                         comp0.clearAndFocus();
                     }
                 } else {
-                    JOptionPane.showMessageDialog(tg, "The name of the new service cannot be empty - please choose a name",
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
-                    comp0.clearAndFocus();
+                    if (comp0.empty()) {
+                        JOptionPane.showMessageDialog(tg, "The name of the new service cannot be empty - please choose a name",
+                            TITLE, JOptionPane.INFORMATION_MESSAGE);
+                        comp0.clearAndFocus();
+                    }
+                    if (!isPortInteger) {
+                        JOptionPane.showMessageDialog(tg, "The new service port must be an integer - please re-enter or leav empty for default value",
+                            TITLE, JOptionPane.INFORMATION_MESSAGE);
+                        comp1.clearAndFocus();
+                    }
                 }
             }
         });
@@ -143,6 +215,7 @@ public class NewServiceDialog extends JFrame {
         p1.add(b0);
         p1.add(b1);
         p1.add(comp0.getPanel());
+        p1.add(comp1.getPanel());
         p1.add(l0);
         this.add(p1);
     }
