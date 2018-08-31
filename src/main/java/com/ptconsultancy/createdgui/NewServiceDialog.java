@@ -70,6 +70,12 @@ public class NewServiceDialog extends JFrame {
             }
         });
 
+        comp1.getTextField().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                b0.doClick();
+            }
+        });
+
         // This is the control for the OK button
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
