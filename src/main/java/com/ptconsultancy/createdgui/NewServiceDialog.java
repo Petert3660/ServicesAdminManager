@@ -169,6 +169,8 @@ public class NewServiceDialog extends JFrame {
             FileUtilities.appendStringToFile(targDir.getAbsolutePath() + RUN_BAT,
                 "java -jar " + targDir.getName() + ".jar\n");
             FileUtilities.writeStringToFile(targDir.getAbsolutePath() + SETUP_BAT,
+                "echo off\n\n");
+            FileUtilities.appendStringToFile(targDir.getAbsolutePath() + SETUP_BAT,
                 "set myDirName = \".\\build\\libs\"\n\n");
             FileUtilities.appendStringToFile(targDir.getAbsolutePath() + SETUP_BAT,
                 "if exist myDirName (\n");
