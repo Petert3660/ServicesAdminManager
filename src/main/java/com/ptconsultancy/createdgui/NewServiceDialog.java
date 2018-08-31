@@ -149,6 +149,7 @@ public class NewServiceDialog extends JFrame {
         File srcDir = new File("C:/GradleTutorials/SkeletonSpringBootProject");
         final String SETTINGS_GRADLE = "/settings.gradle";
         final String RUN_BAT = "/run.bat";
+        final String SETUP_BAT = "/setup.bat";
         try {
             FileUtilities.copyAllFilesFromSrcDirToTargetDir(srcDir.getAbsolutePath(),
                 targDir.getAbsolutePath());
@@ -158,11 +159,27 @@ public class NewServiceDialog extends JFrame {
                 "rootProject.name = '" + targDir.getName() + "'\n");
             FileUtilities.deleteFile(targDir.getAbsolutePath() + RUN_BAT);
             FileUtilities.writeStringToFile(targDir.getAbsolutePath() + RUN_BAT,
-                "cd build/libs\n");
-            FileUtilities.appendStringToFile(targDir.getAbsolutePath() + RUN_BAT,
-                "\n");
+                "cd build/libs\n\n");
             FileUtilities.appendStringToFile(targDir.getAbsolutePath() + RUN_BAT,
                 "java -jar " + targDir.getName() + ".jar\n");
+            FileUtilities.writeStringToFile(targDir.getAbsolutePath() + SETUP_BAT,
+                "set myDirName = \".\\build\\libs\"\n\n");
+            FileUtilities.appendStringToFile(targDir.getAbsolutePath() + SETUP_BAT,
+                "if exist myDirName (\n");
+            FileUtilities.appendStringToFile(targDir.getAbsolutePath() + SETUP_BAT,
+                "    cd build\\libs\n");
+            FileUtilities.appendStringToFile(targDir.getAbsolutePath() + SETUP_BAT,
+                "    del *.*\n");
+            FileUtilities.appendStringToFile(targDir.getAbsolutePath() + SETUP_BAT,
+                "    cd ..\\..\n");
+            FileUtilities.appendStringToFile(targDir.getAbsolutePath() + SETUP_BAT,
+                ")\n\n");
+            FileUtilities.appendStringToFile(targDir.getAbsolutePath() + SETUP_BAT,
+                "call gradlew clean build\n");
+            FileUtilities.appendStringToFile(targDir.getAbsolutePath() + SETUP_BAT,
+                "call run\n");
+            FileUtilities.appendStringToFile(targDir.getAbsolutePath() + SETUP_BAT,
+                "cd ..\\..\n");
         } catch (IOException e1) {
             e1.printStackTrace();
         }
