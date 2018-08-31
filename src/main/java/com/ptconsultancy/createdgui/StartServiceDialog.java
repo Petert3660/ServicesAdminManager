@@ -71,6 +71,7 @@ public class StartServiceDialog extends JFrame {
                 if (!comp0.isFirstItemSelected()) {
                     int portConflicts = admin.reportHostPortConflict(admin.getServiceByName(comp0.getSelectedItem()));
                     if (portConflicts == 0){
+                        mainDialog.updateServiceInfo();
                         mainDialog.prepareAndExecuteOutputFile(admin.getServiceByName(comp0.getSelectedItem()), 0);
                         b1.doClick();
                     } else {

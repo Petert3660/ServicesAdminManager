@@ -390,7 +390,7 @@ public class MainDialog extends JFrame {
         menuBar.add(menu4);
     }
 
-    private void updateServiceInfo() {
+    public void updateServiceInfo() {
         ArrayList<String> tempServices = new ArrayList<>();
         for (Service service : admin.getAllServicesByName()) {
             tempServices.add(service.getName());
