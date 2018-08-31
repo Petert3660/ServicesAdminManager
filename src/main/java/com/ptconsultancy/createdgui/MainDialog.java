@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.RandomAccessFile;
+import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -265,6 +266,7 @@ public class MainDialog extends JFrame {
                     JOptionPane.showMessageDialog(tg, "All available services are already running - you cannot run any further services",
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
+                    updateServiceInfo();
                     startAllServices();
                 }
             }
@@ -386,6 +388,17 @@ public class MainDialog extends JFrame {
         });
 
         menuBar.add(menu4);
+    }
+
+    private void updateServiceInfo() {
+        ArrayList<String> tempServices = new ArrayList<>();
+        for (Service service : admin.getAllServicesByName()) {
+            tempServices.add(service.getName());
+        }
+        for (String serviceName : tempServices) {
+            admin.removeService(serviceName);
+            admin.addService("C:\\PTConsultancy\\LocalTestEnvironment\\" + serviceName);
+        }
     }
 
     public void prepareAndExecuteOutputFile(Service service, int count) {
