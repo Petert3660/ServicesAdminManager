@@ -283,7 +283,7 @@ public class MainDialog extends JFrame {
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     StartServiceDialog startServiceDialog = new StartServiceDialog(tg, admin);
-                    GuiHelper.showFrame((startServiceDialog));
+                    GuiHelper.showFrame(startServiceDialog);
                 }
             }
         });
@@ -291,14 +291,21 @@ public class MainDialog extends JFrame {
         // This is the control for the Start Services/Restart All Services menu item
         menuItem23.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Menu item - Restart All Services in the Start Services menu has been clicked");
+                stopAllServices();
+                startAllServices();
             }
         });
 
         // This is the control for the Start Services/Restart Services menu item
         menuItem24.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Menu item - Restart Services in the Start Services menu has been clicked");
+                if (admin.noServices()) {
+                    JOptionPane.showMessageDialog(tg, "There are no services added as yet - you must add services before they can be restarted",
+                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    RestartServiceDialog restartServiceDialog = new RestartServiceDialog(tg, admin);
+                    GuiHelper.showFrame(restartServiceDialog);
+                }
             }
         });
 
