@@ -75,10 +75,8 @@ public class RestartServiceDialog extends JFrame {
                         if (admin.getServiceByName(comp0.getSelectedItem()).isRunning()) {
                             RestTemplate restTemplate = new RestTemplate();
                             Service service = admin.getServiceByName(comp0.getSelectedItem());
-                            String endpoint = service.getUrl() + "/securitytoken";
-                            String token = restTemplate.getForObject(endpoint, String.class);
-                            endpoint = service.getUrl() + "/shutdown/" + service.getCredentials().getUserId() + "/"+
-                                service.getCredentials().getPassword() + "/" + token;
+                            String endpoint = service.getUrl() + "/shutdown/" + service.getCredentials().getUserId() + "/"+
+                                service.getCredentials().getPassword();
                             try {
                                 restTemplate.postForObject(endpoint, null, String.class);
                             } catch(Exception e1) {

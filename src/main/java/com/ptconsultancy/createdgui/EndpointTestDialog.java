@@ -99,6 +99,9 @@ public class EndpointTestDialog extends JFrame {
 
         FreeButton b2 = new FreeButton(FreeButton.CANCEL, 420, 800, 80);
 
+        FreeButton b3 = new FreeButton("Restart", 500, 140, 80);
+        b3.setVisible(false);
+
         FreeRadioButton rb0 = new FreeRadioButton(col, GET_TYPE, 30, 90, 50, 20);
         rb0.setSelected();
         FreeRadioButton rb1 = new FreeRadioButton(col, POST_TYPE, 80, 90, 60, 20);
@@ -188,6 +191,11 @@ public class EndpointTestDialog extends JFrame {
                             e1.printStackTrace();
                         }
                     }
+
+                    if (output.getText().contains("Cannot issue a new token")) {
+                        b3.setVisible(true);
+                        p1.repaint();
+                    }
                 } else {
                     if (comp1.getComboBox().getSelectedIndex() == 0) {
                         JOptionPane.showMessageDialog(tg, SERVICE_ERROR,
@@ -216,6 +224,27 @@ public class EndpointTestDialog extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 mainDialog.setEnabled(TRUE);
                 tg.dispose();
+            }
+        });
+
+        // This is the control for the Restart button
+        b3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (admin.getServiceByName(comp1.getSelectedItem()).isRunning()) {
+                    RestTemplate restTemplate = new RestTemplate();
+                    Service service = admin.getServiceByName(comp1.getSelectedItem());
+                    String endpoint = service.getUrl() + "/shutdown/" + service.getCredentials().getUserId() + "/"+
+                        service.getCredentials().getPassword();
+                    try {
+                        restTemplate.postForObject(endpoint, null, String.class);
+                    } catch(Exception e1) {
+                        System.out.println("Exception during shutdown ignored");
+                    }
+                    admin.stopServiceRunningByName(service.getName());
+                    admin.outputServiceStatus();
+                }
+                mainDialog.prepareAndExecuteOutputFile(admin.getServiceByName(comp1.getSelectedItem()), 0);
+                b2.doClick();
             }
         });
 
@@ -255,6 +284,7 @@ public class EndpointTestDialog extends JFrame {
         p1.add(b0);
         p1.add(b1);
         p1.add(b2);
+        p1.add(b3);
         p1.add(rb0);
         p1.add(rb1);
         p1.add(rb2);
