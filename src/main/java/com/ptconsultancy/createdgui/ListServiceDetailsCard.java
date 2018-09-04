@@ -7,8 +7,8 @@ package com.ptconsultancy.createdgui;
 import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
 
 import com.ptconsultancy.admin.Service;
-import com.ptconsultancy.guicomponents.FreeButton;
-import com.ptconsultancy.guicomponents.FreeLabel;
+import com.ptconsultancy.domain.guicomponents.FreeButton;
+import com.ptconsultancy.domain.guicomponents.FreeLabel;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;

@@ -10,9 +10,9 @@ import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
 
 import com.ptconsultancy.admin.Admin;
 import com.ptconsultancy.admin.Service;
-import com.ptconsultancy.guicomponents.FreeButton;
-import com.ptconsultancy.guicomponents.FreeLabel;
-import com.ptconsultancy.guicomponents.FreeLabelComboBoxPair;
+import com.ptconsultancy.domain.guicomponents.FreeButton;
+import com.ptconsultancy.domain.guicomponents.FreeLabel;
+import com.ptconsultancy.domain.guicomponents.FreeLabelComboBoxPair;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -72,10 +72,8 @@ public class StopServiceDialog extends JFrame {
                 if (!comp0.isFirstItemSelected()) {
                     RestTemplate restTemplate = new RestTemplate();
                     Service service = admin.getServiceByName(comp0.getSelectedItem());
-                    String endpoint = service.getUrl() + "/securitytoken";
-                    String token = restTemplate.getForObject(endpoint, String.class);
-                    endpoint = service.getUrl() + "/shutdown/" + service.getCredentials().getUserId() + "/"+
-                        service.getCredentials().getPassword() + "/" + token;
+                    String endpoint = service.getUrl() + "/shutdown/" + service.getCredentials().getUserId() + "/"+
+                        service.getCredentials().getPassword();
                     try {
                         restTemplate.postForObject(endpoint, null, String.class);
                     } catch(Exception e1) {

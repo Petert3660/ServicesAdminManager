@@ -41,8 +41,7 @@ dependencies {
     compile("com.h2database:h2")
     compile("com.querydsl:querydsl-apt:4.1.2:jpa")
     compile('com.google.code.gson:gson:2.7')
-    compile('commons-lang:commons-lang:2.6')
-    compile('commons-io:commons-io:2.6')
+    compile files("C:/Users/thomsonp/.m2/repository/ptconsultancy/Domain/Domain.jar")
 
     compile("mysql:mysql-connector-java:8.0.11")
 

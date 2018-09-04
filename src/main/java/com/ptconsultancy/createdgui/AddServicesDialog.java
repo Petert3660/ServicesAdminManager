@@ -8,10 +8,10 @@ import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
 import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
 
 import com.ptconsultancy.admin.Admin;
-import com.ptconsultancy.guicomponents.FreeButton;
-import com.ptconsultancy.guicomponents.FreeCheckBox;
-import com.ptconsultancy.guicomponents.FreeLabel;
-import com.ptconsultancy.guicomponents.FreeLabelTextButtonTriple;
+import com.ptconsultancy.domain.guicomponents.FreeButton;
+import com.ptconsultancy.domain.guicomponents.FreeCheckBox;
+import com.ptconsultancy.domain.guicomponents.FreeLabel;
+import com.ptconsultancy.domain.guicomponents.FreeLabelTextButtonTriple;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;

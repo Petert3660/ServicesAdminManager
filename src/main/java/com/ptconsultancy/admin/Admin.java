@@ -4,7 +4,7 @@ import static com.ptconsultancy.constants.ServiceAdminConstants.FALSE;
 import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
 
 import com.ptconsultancy.admin.adminsupport.Credentials;
-import com.ptconsultancy.guicomponents.FreeTextArea;
+import com.ptconsultancy.domain.guicomponents.FreeTextArea;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

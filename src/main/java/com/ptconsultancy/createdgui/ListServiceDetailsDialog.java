@@ -10,10 +10,10 @@ import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
 
 import com.ptconsultancy.admin.Admin;
 import com.ptconsultancy.admin.Service;
-import com.ptconsultancy.guicomponents.FreeButton;
-import com.ptconsultancy.guicomponents.FreeLabel;
-import com.ptconsultancy.guicomponents.FreeLabelComboBoxPair;
-import com.ptconsultancy.guis.GuiHelper;
+import com.ptconsultancy.domain.guicomponents.FreeButton;
+import com.ptconsultancy.domain.guicomponents.FreeLabel;
+import com.ptconsultancy.domain.guicomponents.FreeLabelComboBoxPair;
+import com.ptconsultancy.domain.guis.GuiHelper;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;

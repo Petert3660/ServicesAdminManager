@@ -8,8 +8,8 @@ import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
 import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
 
 import com.ptconsultancy.admin.adminsupport.BuildVersion;
-import com.ptconsultancy.guicomponents.FreeButton;
-import com.ptconsultancy.guicomponents.FreeLabel;
+import com.ptconsultancy.domain.guicomponents.FreeButton;
+import com.ptconsultancy.domain.guicomponents.FreeLabel;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;

@@ -7,10 +7,10 @@ package com.ptconsultancy.createdgui;
 import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
 import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
 
-import com.ptconsultancy.guicomponents.FreeButton;
-import com.ptconsultancy.guicomponents.FreeLabel;
-import com.ptconsultancy.guicomponents.FreeLabelTextFieldPair;
-import com.ptconsultancy.utilities.GenerateRandomKeys;
+import com.ptconsultancy.domain.guicomponents.FreeButton;
+import com.ptconsultancy.domain.guicomponents.FreeLabel;
+import com.ptconsultancy.domain.guicomponents.FreeLabelTextFieldPair;
+import com.ptconsultancy.domain.utilities.GenerateRandomKeys;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;

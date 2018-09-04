@@ -3,7 +3,7 @@ package com.ptconsultancy;
 import com.ptconsultancy.admin.Admin;
 import com.ptconsultancy.admin.adminsupport.BuildVersion;
 import com.ptconsultancy.createdgui.MainDialog;
-import com.ptconsultancy.guis.GuiHelper;
+import com.ptconsultancy.domain.guis.GuiHelper;
 import com.ptconsultancy.messages.MessageHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
