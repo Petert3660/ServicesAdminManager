@@ -102,6 +102,8 @@ public class EndpointTestDialog extends JFrame {
         FreeButton b3 = new FreeButton("Restart", 500, 140, 80);
         b3.setVisible(false);
 
+        FreeButton b4 = new FreeButton("Healthcheck", 500, 190, 120);
+
         FreeRadioButton rb0 = new FreeRadioButton(col, GET_TYPE, 30, 90, 50, 20);
         rb0.setSelected();
         FreeRadioButton rb1 = new FreeRadioButton(col, POST_TYPE, 80, 90, 60, 20);
@@ -248,6 +250,19 @@ public class EndpointTestDialog extends JFrame {
             }
         });
 
+        // This is the control for the Healthcheck button
+        b4.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (comp1.getComboBox().getSelectedIndex() > 0) {
+                    comp2.setText(HEALTHCHECK);
+                    b0.doClick();
+                } else {
+                    JOptionPane.showMessageDialog(tg, SERVICE_ERROR,
+                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        });
+
         // This is the control for the Get radio button
         rb0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -285,6 +300,7 @@ public class EndpointTestDialog extends JFrame {
         p1.add(b1);
         p1.add(b2);
         p1.add(b3);
+        p1.add(b4);
         p1.add(rb0);
         p1.add(rb1);
         p1.add(rb2);
