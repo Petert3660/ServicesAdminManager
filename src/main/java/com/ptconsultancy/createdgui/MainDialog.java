@@ -403,9 +403,13 @@ public class MainDialog extends JFrame {
             tempServices.add(service.getName());
         }
         for (String serviceName : tempServices) {
-            admin.removeService(serviceName);
-            admin.addService("C:\\PTConsultancy\\LocalTestEnvironment\\" + serviceName);
+            updateServiceInfo(serviceName);
         }
+    }
+
+    public void updateServiceInfo(String serviceName) {
+        admin.removeService(serviceName);
+        admin.addService("C:\\PTConsultancy\\LocalTestEnvironment\\" + serviceName);
     }
 
     public void prepareAndExecuteOutputFile(Service service, int count) {
