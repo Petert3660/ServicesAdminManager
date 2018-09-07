@@ -182,7 +182,8 @@ public class MainDialog extends JFrame {
         // This is the control for the Services/New Web Service menu item
         menuItem11.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Menu item - New Web Service in the Services menu has been clicked");
+                NewWebServiceDialog newWebServiceDialog = new NewWebServiceDialog(tg);
+                GuiHelper.showFrame(newWebServiceDialog);
             }
         });
 

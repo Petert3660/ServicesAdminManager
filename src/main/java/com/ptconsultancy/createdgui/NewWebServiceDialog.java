@@ -10,7 +10,6 @@ import com.ptconsultancy.domain.guicomponents.FreeButton;
 import com.ptconsultancy.domain.guicomponents.FreeLabel;
 import com.ptconsultancy.domain.guicomponents.FreeLabelTextFieldPair;
 import com.ptconsultancy.domain.utilities.FileUtilities;
-import com.ptconsultancy.domain.utilities.GenerateRandomKeys;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -21,23 +20,23 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class NewServiceDialog extends JFrame {
+public class NewWebServiceDialog extends JFrame {
 
     private static final String PROJECT_PATH = "C:/GradleTutorials";
 
-    private static final String SUB_HEADING = " - Create New REST/API Service";
+    private static final String SUB_HEADING = " - Create New Frontend Web Service";
     private static final String TITLE = MAIN_HEADING + SUB_HEADING;
 
     private static final int FRAME_X_SIZE = 550;
     private static final int FRAME_Y_SIZE = 300;
     private Color col = new Color(230, 255, 255);
 
-    private NewServiceDialog tg = this;
+    private NewWebServiceDialog tg = this;
     private MainDialog mainDialog;
 
     private String mode;
 
-    public NewServiceDialog(MainDialog mainDialog) {
+    public NewWebServiceDialog(MainDialog mainDialog) {
 
         this.mainDialog = mainDialog;
         this.mainDialog.setEnabled(false);
@@ -60,7 +59,7 @@ public class NewServiceDialog extends JFrame {
 
         FreeButton b1 = new FreeButton(FreeButton.CANCEL, 290, 200, 80);
 
-        FreeLabelTextFieldPair comp0 = new FreeLabelTextFieldPair(col, "Please enter the new service name:", 30, 90, 240);
+        FreeLabelTextFieldPair comp0 = new FreeLabelTextFieldPair(col, "Please enter the new frontend service name:", 30, 90, 240);
 
         FreeLabelTextFieldPair comp1 = new FreeLabelTextFieldPair(col, "Please select a port for the new service:", 30, 140, 240);
 
@@ -97,9 +96,6 @@ public class NewServiceDialog extends JFrame {
 
                         // Remove .git directory to break link to remote origin
                         removeGitDependency(comp0);
-
-                        // Update authentication file with new credentials
-                        updateAuthPropsFile(comp0);
 
                         // Update build.gradle file with new details
                         updateBuildGradleFile(comp0);
@@ -152,7 +148,7 @@ public class NewServiceDialog extends JFrame {
     }
 
     private void createNewServiceFiles(File targDir) {
-        File srcDir = new File("C:/GradleTutorials/SkeletonSpringBootProject");
+        File srcDir = new File("C:/GradleTutorials/SkeletonSpringBootWebProject");
         final String SETTINGS_GRADLE = "/settings.gradle";
         final String RUN_BAT = "/run.bat";
         final String SETUP_BAT = "/setup.bat";
@@ -214,22 +210,6 @@ public class NewServiceDialog extends JFrame {
         }
     }
 
-    private void updateAuthPropsFile(FreeLabelTextFieldPair comp0) {
-        final String AUTH_FILE = PROJECT_PATH + "/" + comp0.getText() + "/src/main/resources/auth.properties";
-        File authFile = new File(AUTH_FILE);
-        if (authFile.exists()) {
-            authFile.delete();
-        }
-        try {
-            FileUtilities.writeStringToFile(
-                AUTH_FILE, "auth.admin.id=" + comp0.getText() + "\n");
-            FileUtilities.appendStringToFile(
-                AUTH_FILE, "auth.admin.password=" + GenerateRandomKeys.generateRandomKey(20, 1) + "\n");
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
-    }
-
     private void updateBuildGradleFile(FreeLabelTextFieldPair comp0) {
         final String BUILD_GRADLE_FILE = PROJECT_PATH + "/" + comp0.getText() + "/build.gradle";
         File buildFile = new File(BUILD_GRADLE_FILE);
@@ -239,9 +219,9 @@ public class NewServiceDialog extends JFrame {
             if (buildFile.exists()) {
                 buildFile.delete();
             }
-            allGradleContents = allGradleContents.replace("projectName = \"SkeletonSpringBootProject\"",
+            allGradleContents = allGradleContents.replace("projectName = \"SkeletonSpringBootWebProject\"",
                 "projectName = \"" + comp0.getText() + "\"");
-            allGradleContents = allGradleContents.replace("projectTitle = \"Skeleton Spring Boot Project\"",
+            allGradleContents = allGradleContents.replace("projectTitle = \"Skeleton Spring Boot Web Project\"",
                 "projectTitle = \"" + comp0.getText() + "\"");
             FileUtilities.writeStringToFile(BUILD_GRADLE_FILE, allGradleContents);
         } catch (IOException e1) {
@@ -258,7 +238,7 @@ public class NewServiceDialog extends JFrame {
             if (appPropFile.exists()) {
                 appPropFile.delete();
             }
-            allAppPropContents = allAppPropContents.replace("server.port=8200",
+            allAppPropContents = allAppPropContents.replace("server.port=8180",
                 "server.port=" + comp1.getText());
             FileUtilities.writeStringToFile(APP_PROPS_FILE, allAppPropContents);
         } catch (IOException e1) {
