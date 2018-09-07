@@ -105,6 +105,9 @@ public class NewWebServiceDialog extends JFrame {
                             updateApplicationPropsFile(comp0, comp1);
                         }
 
+                        // Update banner.txt file
+                        updateBannerFile(comp0);
+
                         JOptionPane.showMessageDialog(tg,
                             "Service: " + comp0.getText() + " has been successfully created",
                             TITLE, JOptionPane.INFORMATION_MESSAGE);
@@ -241,6 +244,23 @@ public class NewWebServiceDialog extends JFrame {
             allAppPropContents = allAppPropContents.replace("server.port=8180",
                 "server.port=" + comp1.getText());
             FileUtilities.writeStringToFile(APP_PROPS_FILE, allAppPropContents);
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    private void updateBannerFile(FreeLabelTextFieldPair comp0) {
+        final String BANNER_FILE = PROJECT_PATH + "/" + comp0.getText() + "/src/main/resources/banner.txt";
+        File bannerFile = new File(BANNER_FILE);
+
+        try {
+            String allBannerContents = FileUtilities.writeFileToString(BANNER_FILE);
+            if (bannerFile.exists()) {
+                bannerFile.delete();
+            }
+            allBannerContents = allBannerContents.replace("Skeleton Spring Boot Web Project",
+                comp0.getText());
+            FileUtilities.writeStringToFile(BANNER_FILE, allBannerContents);
         } catch (IOException e1) {
             e1.printStackTrace();
         }
