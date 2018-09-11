@@ -59,7 +59,7 @@ public class NewWebServiceDialog extends JFrame {
 
         FreeButton b1 = new FreeButton(FreeButton.CANCEL, 290, 200, 80);
 
-        FreeLabelTextFieldPair comp0 = new FreeLabelTextFieldPair(col, "Please enter the new frontend service name:", 30, 90, 240);
+        FreeLabelTextFieldPair comp0 = new FreeLabelTextFieldPair(col, "Please enter the new service name:", 30, 90, 240);
 
         FreeLabelTextFieldPair comp1 = new FreeLabelTextFieldPair(col, "Please select a port for the new service:", 30, 140, 240);
 

@@ -8,6 +8,7 @@ import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
 
 import com.ptconsultancy.admin.Admin;
 import com.ptconsultancy.admin.Service;
+import com.ptconsultancy.constants.MenuConstants;
 import com.ptconsultancy.domain.guicomponents.FreeButton;
 import com.ptconsultancy.domain.guicomponents.FreeLabel;
 import com.ptconsultancy.domain.guicomponents.FreeTextArea;
@@ -109,12 +110,12 @@ public class MainDialog extends JFrame {
     }
 
     private void setUpMenuBar() {
-        JMenu menu0 = new JMenu("Project");
-        JMenuItem menuItem00 = new JMenuItem("New Project");
+        JMenu menu0 = new JMenu(MenuConstants.PROJECT_MENU);
+        JMenuItem menuItem00 = new JMenuItem(MenuConstants.PROJECT_MENU_NEW);
         menu0.add(menuItem00);
-        menuItem01 = new JMenuItem("Open Project");
+        menuItem01 = new JMenuItem(MenuConstants.PROJECT_MENU_OPEN);
         menu0.add(menuItem01);
-        JMenuItem menuItem02 = new JMenuItem("Save Project");
+        JMenuItem menuItem02 = new JMenuItem(MenuConstants.PROJECT_MENU_SAVE);
         menu0.add(menuItem02);
         menu0.addSeparator();
         JMenuItem menuItem04 = new JMenuItem(FreeButton.EXIT);
@@ -151,24 +152,24 @@ public class MainDialog extends JFrame {
 
         menuBar.add(menu0);
 
-        JMenu menu1 = new JMenu("Services");
-        JMenuItem menuItem10 = new JMenuItem("New API/REST Service");
+        JMenu menu1 = new JMenu(MenuConstants.SERVICES_MENU);
+        JMenuItem menuItem10 = new JMenuItem(MenuConstants.SERVICES_MENU_NEW_API);
         menu1.add(menuItem10);
-        JMenuItem menuItem11 = new JMenuItem("New Frontend Web Service");
+        JMenuItem menuItem11 = new JMenuItem(MenuConstants.SERVICES_MENU_NEW_FRONTEND);
         menu1.add(menuItem11);
         menu1.addSeparator();
-        JMenuItem menuItem12 = new JMenuItem("Add Existing Service");
+        JMenuItem menuItem12 = new JMenuItem(MenuConstants.SERVICES_MENU_ADD);
         menu1.add(menuItem12);
-        JMenuItem menuItem13 = new JMenuItem("Remove Service");
+        JMenuItem menuItem13 = new JMenuItem(MenuConstants.SERVICES_MENU_REMOVE);
         menu1.add(menuItem13);
         menu1.addSeparator();
-        JMenuItem menuItem14 = new JMenuItem("Monitor Services");
+        JMenuItem menuItem14 = new JMenuItem(MenuConstants.SERVICES_MENU_MONITOR);
         menu1.add(menuItem14);
         menu1.addSeparator();
-        JMenuItem menuItem15 = new JMenuItem("Generate Password");
+        JMenuItem menuItem15 = new JMenuItem(MenuConstants.SERVICES_MENU_PASSWORD);
         menu1.add(menuItem15);
         menu1.addSeparator();
-        JMenuItem menuItem16 = new JMenuItem("List Service Details");
+        JMenuItem menuItem16 = new JMenuItem(MenuConstants.SERVICES_MENU_LIST);
         menu1.add(menuItem16);
 
         // This is the control for the Services/New REST Service menu item
@@ -246,15 +247,15 @@ public class MainDialog extends JFrame {
 
         menuBar.add(menu1);
 
-        JMenu menu2 = new JMenu("Start Services");
-        JMenuItem menuItem20 = new JMenuItem("Start All Services");
+        JMenu menu2 = new JMenu(MenuConstants.START_SERVICES_MENU);
+        JMenuItem menuItem20 = new JMenuItem(MenuConstants.START_SERVICES_MENU_ALL);
         menu2.add(menuItem20);
-        JMenuItem menuItem21 = new JMenuItem("Start Services");
+        JMenuItem menuItem21 = new JMenuItem(MenuConstants.START_SERVICES_MENU);
         menu2.add(menuItem21);
         menu2.addSeparator();
-        JMenuItem menuItem23 = new JMenuItem("Restart All Services");
+        JMenuItem menuItem23 = new JMenuItem(MenuConstants.RESTART_SERVICES_MENU_ALL);
         menu2.add(menuItem23);
-        JMenuItem menuItem24 = new JMenuItem("Restart Services");
+        JMenuItem menuItem24 = new JMenuItem(MenuConstants.RESTART_SERVICES_MENU);
         menu2.add(menuItem24);
 
         // This is the control for the Start Services/Start All Services menu item
