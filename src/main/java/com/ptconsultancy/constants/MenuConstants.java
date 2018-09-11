@@ -8,7 +8,7 @@ public class MenuConstants {
     public static final String PROJECT_MENU_SAVE = "Save Project";
 
     public static final String SERVICES_MENU = "Services";
-    public static final String SERVICES_MENU_NEW_API = "New API/REST Servi";
+    public static final String SERVICES_MENU_NEW_API = "New API/REST Service";
     public static final String SERVICES_MENU_NEW_FRONTEND = "New Frontend Web Service";
     public static final String SERVICES_MENU_ADD = "Add Existing Service";
     public static final String SERVICES_MENU_REMOVE = "Remove Service";

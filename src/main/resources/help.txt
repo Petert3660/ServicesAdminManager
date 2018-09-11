@@ -1,0 +1,15 @@
+The following is intended as a guide to using this application:
+
+The application is designed to allow a user to quickly build and test various services constructed in Spring Boot.
+
+The various menu items listed across the top of the opening dialog allows the user to create new services, to group and save these in project files, and to run and test these services as required.
+
+Therefore, a typical workflow may run as follows:
+
+(1) Create a new REST/API service by selecting the Services menu, and then selecting the "New REST/API Service" option.
+(2) Next, give the new service a name in the dialog that opens, and optionally select a port on which the Tomcat embedded inside Spring Boot will run. It is a good idea to select a different port for each service that you intend to group under a single project as these will then not conflict with one another when they run.
+(3) Press OK and the new service will be created as a project.
+
+At this point you may import the new service in to the workspace by once again selecting the Services menu, and then selecting the "Add Existing Service" option.
+
+Select from the file chooser, the name of the service that you have just created, and this will appear in the worspace text window on the main dialog summary.
