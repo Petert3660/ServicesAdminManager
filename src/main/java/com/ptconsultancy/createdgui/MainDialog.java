@@ -293,8 +293,18 @@ public class MainDialog extends JFrame {
         // This is the control for the Start Services/Restart All Services menu item
         menuItem23.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                stopAllServices();
-                startAllServices();
+                if (!admin.noServices() && admin.allServicesRunning()) {
+                    stopAllServices();
+                    startAllServices();
+                } else {
+                    if (admin.noServices()) {
+                        JOptionPane.showMessageDialog(tg, "There are no services added as yet - you must add services before they can be restarted",
+                            TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    } else if (!admin.allServicesRunning()) {
+                        JOptionPane.showMessageDialog(tg, "Not all services are running - all services must be running before they can all be restarted",
+                            TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }
             }
         });
 
@@ -313,10 +323,10 @@ public class MainDialog extends JFrame {
 
         menuBar.add(menu2);
 
-        JMenu menu3 = new JMenu("Stop Services");
-        JMenuItem menuItem30 = new JMenuItem("Stop All Services");
+        JMenu menu3 = new JMenu(MenuConstants.STOP_SERVICES_MENU);
+        JMenuItem menuItem30 = new JMenuItem(MenuConstants.STOP_SERVICES_MENU_ALL);
         menu3.add(menuItem30);
-        JMenuItem menuItem31 = new JMenuItem("Stop Services");
+        JMenuItem menuItem31 = new JMenuItem(MenuConstants.STOP_SERVICES_MENU);
         menu3.add(menuItem31);
 
         // This is the control for the Stop Services/Stop All Services menu item
@@ -352,8 +362,8 @@ public class MainDialog extends JFrame {
 
         menuBar.add(menu3);
 
-        JMenu menu5 = new JMenu("Endpoint Test");
-        JMenuItem menuItem50 = new JMenuItem("Endpoint Test");
+        JMenu menu5 = new JMenu(MenuConstants.ENDPOINT_TEST_MENU);
+        JMenuItem menuItem50 = new JMenuItem(MenuConstants.ENDPOINT_TEST_MENU);
         menu5.add(menuItem50);
 
         // This is the control for the Endpoint Test/Endpoint Test menu item
@@ -374,11 +384,11 @@ public class MainDialog extends JFrame {
 
         menuBar.add(menu5);
 
-        JMenu menu4 = new JMenu("Help");
-        JMenuItem menuItem40 = new JMenuItem("Help");
+        JMenu menu4 = new JMenu(MenuConstants.HELP_MENU);
+        JMenuItem menuItem40 = new JMenuItem(MenuConstants.HELP_MENU);
         menu4.add(menuItem40);
         menu4.addSeparator();
-        JMenuItem menuItem42 = new JMenuItem("About");
+        JMenuItem menuItem42 = new JMenuItem(MenuConstants.HELP_MENU_ABOUT);
         menu4.add(menuItem42);
 
         // This is the control for the Help/Help menu item

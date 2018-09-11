@@ -20,4 +20,12 @@ public class MenuConstants {
     public static final String START_SERVICES_MENU_ALL = "Start All Services";
     public static final String RESTART_SERVICES_MENU_ALL = "Restart All Services";
     public static final String RESTART_SERVICES_MENU = "Restart Services";
+
+    public static final String STOP_SERVICES_MENU = "Stop Services";
+    public static final String STOP_SERVICES_MENU_ALL = "Stop All Services";
+
+    public static final String ENDPOINT_TEST_MENU = "Endpoint Test";
+
+    public static final String HELP_MENU = "Help";
+    public static final String HELP_MENU_ABOUT = "About";
 }
