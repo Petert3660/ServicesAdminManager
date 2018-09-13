@@ -12,4 +12,4 @@ Therefore, a typical workflow may run as follows:
 
 At this point you may import the new service in to the workspace by once again selecting the Services menu, and then selecting the "Add Existing Service" option.
 
-Select from the file chooser, the name of the service that you have just created, and this will appear in the worspace text window on the main dialog summary.
+Select from the file chooser, the name of the service that you have just created, and this will appear in the workspace text window on the main dialog summary.
