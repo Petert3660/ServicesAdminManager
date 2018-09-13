@@ -6,10 +6,22 @@ The various menu items listed across the top of the opening dialog allows the us
 
 Therefore, a typical workflow may run as follows:
 
-(1) Create a new REST/API service by selecting the Services menu, and then selecting the "New REST/API Service" option.
-(2) Next, give the new service a name in the dialog that opens, and optionally select a port on which the Tomcat embedded inside Spring Boot will run. It is a good idea to select a different port for each service that you intend to group under a single project as these will then not conflict with one another when they run.
+(1) Create a new REST/API service by selecting the "Services" menu, and then selecting the "New REST/API Service" option.
+
+(2) Next, give the new service a name in the dialog that opens, and optionally select a port on which the Tomcat embedded inside Spring Boot will run (if you do not select a port, the default setting is 8180). It is a good idea to select a different port for each service that you intend to group under a single project as these will then not conflict with one another when they run.
+
 (3) Press OK and the new service will be created as a project.
 
-At this point you may import the new service in to the workspace by once again selecting the Services menu, and then selecting the "Add Existing Service" option.
+At this point you may import the new service in to the workspace by once again selecting the "Services" menu, and then selecting the "Add Existing Service" option.
 
 Select from the file chooser, the name of the service that you have just created, and this will appear in the workspace text window on the main dialog summary.
+
+To begin testing the service, you should select the "Start Services" menu, and then select the "Start Services" option. At this point, a new dialog will open with a drop-down list of all available detected services (i.e. those that have been added thus far either by opening an existing project, or by adding the services individually as described previously).
+
+Select the service you require, and then click OK at which point the service status shown in the summary text area should change from "Not Running" to "Staring....Please Wait." When the selected service has successfully started, then ths status will change once again to "Running." If, for some reason, the service is unable to start, then the status will eventually change - after a timeout period - to "Currently Unable to Start this Service."
+
+If this happens, then you will need to investigate why this might be by examining the logged output from the command window (open the location of the service, drill down to the "build\libs" directory, and enter the command:
+
+                                                                  "java -jar <name of service>.jar."
+
+This will run the generated Spring Boot JAR and the ensuing output will inform you as to why the service did not successfully start.
