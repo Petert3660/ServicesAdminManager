@@ -7,6 +7,7 @@ import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
 import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
 
 import com.ptconsultancy.domain.guicomponents.FreeButton;
+import com.ptconsultancy.domain.guicomponents.FreeCheckBox;
 import com.ptconsultancy.domain.guicomponents.FreeLabel;
 import com.ptconsultancy.domain.guicomponents.FreeLabelTextFieldPair;
 import com.ptconsultancy.domain.utilities.FileUtilities;
@@ -29,7 +30,7 @@ public class NewServiceDialog extends JFrame {
     private static final String TITLE = MAIN_HEADING + SUB_HEADING;
 
     private static final int FRAME_X_SIZE = 550;
-    private static final int FRAME_Y_SIZE = 300;
+    private static final int FRAME_Y_SIZE = 350;
     private Color col = new Color(230, 255, 255);
 
     private NewServiceDialog tg = this;
@@ -56,13 +57,15 @@ public class NewServiceDialog extends JFrame {
 
         FreeLabel l0 = new FreeLabel(MAIN_HEADING, 30, 30, 500, 30, new Font("", Font.BOLD + Font.ITALIC, 20));
 
-        FreeButton b0 = new FreeButton(FreeButton.OK, 180, 200, 80);
+        FreeButton b0 = new FreeButton(FreeButton.OK, 180, 250, 80);
 
-        FreeButton b1 = new FreeButton(FreeButton.CANCEL, 290, 200, 80);
+        FreeButton b1 = new FreeButton(FreeButton.CANCEL, 290, 250, 80);
 
         FreeLabelTextFieldPair comp0 = new FreeLabelTextFieldPair(col, "Please enter the new service name:", 30, 90, 240);
 
         FreeLabelTextFieldPair comp1 = new FreeLabelTextFieldPair(col, "Please select a port for the new service:", 30, 140, 240);
+
+        FreeCheckBox cb1 = new FreeCheckBox(col, "Check if this new service will be built in Jenkins", 30, 190, 300, 20);
 
         comp0.getTextField().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -90,13 +93,29 @@ public class NewServiceDialog extends JFrame {
                     isPortInteger = false;
                 }
 
+                String filename = "C:/GradleTutorials/ServicesAdminManager/gitinit.bat";
                 if (!comp0.empty() && isPortInteger) {
                     File targDir = new File(PROJECT_PATH + "/" + comp0.getText());
                     if (targDir.mkdir()) {
                         createNewServiceFiles(targDir);
 
+
                         // Remove .git directory to break link to remote origin
                         removeGitDependency(comp0);
+
+                        // Create new Git initialisation
+                        if (cb1.isSelected()) {
+                            try {
+                                FileUtilities.writeStringToFile(filename, "cd\\\n");
+                                FileUtilities.appendStringToFile(filename, "cd C:\\GradleTutorials\\" + comp0.getText() + "\n\n");
+                                FileUtilities.appendStringToFile(filename,"git init\n");
+                                FileUtilities.appendStringToFile(filename,"git add *\n");
+                                FileUtilities.appendStringToFile(filename,"git commit -m \"First Commit\"");
+                                Process process = Runtime.getRuntime().exec("C:\\GradleTutorials\\ServicesAdminManager\\gitinit.bat");
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+                        }
 
                         // Update authentication file with new credentials
                         updateAuthPropsFile(comp0);
@@ -112,6 +131,11 @@ public class NewServiceDialog extends JFrame {
                         JOptionPane.showMessageDialog(tg,
                             "Service: " + comp0.getText() + " has been successfully created",
                             TITLE, JOptionPane.INFORMATION_MESSAGE);
+
+                        File file = new File(filename);
+                        if (file.exists()) {
+                            file.delete();
+                        }
 
                         b1.doClick();
                     } else {
@@ -147,6 +171,7 @@ public class NewServiceDialog extends JFrame {
         p1.add(b1);
         p1.add(comp0.getPanel());
         p1.add(comp1.getPanel());
+        p1.add(cb1);
         p1.add(l0);
         this.add(p1);
     }
