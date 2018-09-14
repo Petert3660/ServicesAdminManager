@@ -99,7 +99,6 @@ public class NewServiceDialog extends JFrame {
                     if (targDir.mkdir()) {
                         createNewServiceFiles(targDir);
 
-
                         // Remove .git directory to break link to remote origin
                         removeGitDependency(comp0);
 

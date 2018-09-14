@@ -98,7 +98,6 @@ public class NewWebServiceDialog extends JFrame {
                     if (targDir.mkdir()) {
                         createNewServiceFiles(targDir);
 
-
                         // Remove .git directory to break link to remote origin
                         removeGitDependency(comp0);
                         // Create new Git initialisation
@@ -114,7 +113,6 @@ public class NewWebServiceDialog extends JFrame {
                                 e1.printStackTrace();
                             }
                         }
-
 
                         // Update build.gradle file with new details
                         updateBuildGradleFile(comp0);

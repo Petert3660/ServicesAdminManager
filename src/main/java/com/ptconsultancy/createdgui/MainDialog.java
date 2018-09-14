@@ -171,9 +171,6 @@ public class MainDialog extends JFrame {
         menu1.addSeparator();
         JMenuItem menuItem16 = new JMenuItem(MenuConstants.SERVICES_MENU_LIST);
         menu1.add(menuItem16);
-        menu1.addSeparator();
-        JMenuItem menuItem17 = new JMenuItem(MenuConstants.SERVICES_MENU_EXPORT_JENKINS);
-        menu1.add(menuItem17);
 
         // This is the control for the Services/New REST Service menu item
         menuItem10.addActionListener(new ActionListener() {
@@ -245,14 +242,6 @@ public class MainDialog extends JFrame {
                     ListServiceDetailsDialog listServiceDetailsDialog = new ListServiceDetailsDialog(tg, admin);
                     GuiHelper.showFrame(listServiceDetailsDialog);
                 }
-            }
-        });
-
-        // This is the control for the Export Project to Jenkins menu item
-        menuItem17.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                ExportToJenkinsDialog exportToJenkinsDialog = new ExportToJenkinsDialog(tg, admin);
-                GuiHelper.showFrame(exportToJenkinsDialog);
             }
         });
 

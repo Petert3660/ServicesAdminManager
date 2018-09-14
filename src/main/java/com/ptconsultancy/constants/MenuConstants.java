@@ -15,7 +15,6 @@ public class MenuConstants {
     public static final String SERVICES_MENU_MONITOR = "Monitor Services";
     public static final String SERVICES_MENU_PASSWORD = "Generate Password";
     public static final String SERVICES_MENU_LIST = "List Service Details";
-    public static final String SERVICES_MENU_EXPORT_JENKINS = "Export Service to Jenkins";
 
     public static final String START_SERVICES_MENU = "Start Services";
     public static final String START_SERVICES_MENU_ALL = "Start All Services";
