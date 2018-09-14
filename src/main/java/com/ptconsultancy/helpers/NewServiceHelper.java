@@ -143,4 +143,20 @@ abstract public class NewServiceHelper extends JFrame {
             e1.printStackTrace();
         }
     }
+
+    protected void deleteServiceFromJenkinsTarget(String serviceName) throws IOException {
+        String source = "C:/PTConsultancy/LocalTestEnvironment/";
+        source = source + serviceName;
+        if (!source.equals("C:/PTConsultancy/LocalTestEnvironment/")) {
+            FileUtilities.deleteDirectory(new File(source));
+        }
+    }
+
+    protected void deleteServiceFromSource(String serviceName) throws IOException {
+        String source = "C:/GradleTutorials/";
+        source = source + serviceName;
+        if (!source.equals("C:/GradleTutorials/")) {
+            FileUtilities.deleteDirectory(new File(source));
+        }
+    }
 }

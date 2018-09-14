@@ -17,6 +17,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -69,6 +70,12 @@ public class DeleteServicesDialog extends NewServiceHelper {
                         TITLE, JOptionPane.YES_NO_CANCEL_OPTION);
                     if (res == 0) {
                         System.out.println("The service will be deleted here");
+                        try {
+                            deleteServiceFromSource(comp0.getSelectedItem());
+                            deleteServiceFromJenkinsTarget(comp0.getSelectedItem());
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
                     }
                     b1.doClick();
                 } else {
