@@ -17,9 +17,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.support.BasicAuthorizationInterceptor;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 
 public class NewWebServiceDialog extends JFrame {
 
@@ -131,7 +140,26 @@ public class NewWebServiceDialog extends JFrame {
                                         + comp0.getText() + ".git is published to the remoe origin. Do this NOW before proceeding",
                                     TITLE, JOptionPane.INFORMATION_MESSAGE);
 
+                                String jenkinsFile = "C://GradleTutorials/ServicesAdminManager/JenkinsModelConfig.xml";
+                                String xml = FileUtilities.writeFileToString(jenkinsFile);
+                                xml = xml.replace("<Project Name Here>", comp0.getText());
+
+                                HttpHeaders httpHeaders = new HttpHeaders();
+                                httpHeaders.setContentType(MediaType.APPLICATION_XML);
+                                HttpEntity<String> request = new HttpEntity<>(xml, httpHeaders);
+                                RestTemplate restTemplate = new RestTemplate();
+                                restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor("petert3660", "2905e6a2fd0251f555bd90c055e0ff18"));
+                                String endpoint = "http://localhost:8080/createItem?name=" + comp0.getText();
+                                URI uri = new URI(endpoint);
+                                try {
+                                    ResponseEntity<String> responseEntity = restTemplate.postForEntity(uri, request, String.class);
+                                } catch (RestClientException rce) {
+                                    System.out.println("In REST exception catch");
+                                    rce.printStackTrace();
+                                }
                             } catch (IOException e1) {
+                                e1.printStackTrace();
+                            } catch (URISyntaxException e1) {
                                 e1.printStackTrace();
                             }
                         }
