@@ -8,8 +8,6 @@ import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
 import static com.ptconsultancy.constants.ServiceAdminConstants.STANDARD_DROPDOWN_SELECT;
 import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
 
-import com.ptconsultancy.admin.Admin;
-import com.ptconsultancy.admin.Service;
 import com.ptconsultancy.domain.guicomponents.FreeButton;
 import com.ptconsultancy.domain.guicomponents.FreeLabel;
 import com.ptconsultancy.domain.guicomponents.FreeLabelComboBoxPair;
@@ -18,10 +16,10 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class DeleteServicesDialog extends NewServiceHelper {
 
@@ -35,9 +33,6 @@ public class DeleteServicesDialog extends NewServiceHelper {
 
     private MainDialog mainDialog;
 
-    private Admin admin;
-
-    @Autowired
     public DeleteServicesDialog(MainDialog mainDialog) {
         this.mainDialog = mainDialog;
         mainDialog.setEnabled(false);
@@ -57,8 +52,10 @@ public class DeleteServicesDialog extends NewServiceHelper {
 
         ArrayList<String> items0 = new ArrayList<String>();
         items0.add(STANDARD_DROPDOWN_SELECT);
-        for (Service service : admin.getAllServicesByName()) {
-            if (!service.isRunning()) {
+        File targetDir = new File("C:/PTConsultancy/LocalTestEnvironment");
+        File[] allFiles = targetDir.listFiles();
+        for (File service : allFiles) {
+            if (service.isDirectory()) {
                 items0.add(service.getName());
             }
         }
@@ -68,8 +65,11 @@ public class DeleteServicesDialog extends NewServiceHelper {
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (!comp0.isFirstItemSelected()) {
-                    admin.removeService(comp0.getSelectedItem());
-                    admin.outputServiceStatus();
+                    int res = JOptionPane.showConfirmDialog(tg, "Are you sure you wish to delete the service " + comp0.getSelectedItem(),
+                        TITLE, JOptionPane.YES_NO_CANCEL_OPTION);
+                    if (res == 0) {
+                        System.out.println("The service will be deleted here");
+                    }
                     b1.doClick();
                 } else {
                     JOptionPane.showMessageDialog(tg, "No service selected - please select a service before continuing",
