@@ -158,6 +158,9 @@ public class MainDialog extends JFrame {
         JMenuItem menuItem11 = new JMenuItem(MenuConstants.SERVICES_MENU_NEW_FRONTEND);
         menu1.add(menuItem11);
         menu1.addSeparator();
+        JMenuItem menuItem17 = new JMenuItem(MenuConstants.SERVICES_MENU_DELETE);
+        menu1.add(menuItem17);
+        menu1.addSeparator();
         JMenuItem menuItem12 = new JMenuItem(MenuConstants.SERVICES_MENU_ADD);
         menu1.add(menuItem12);
         JMenuItem menuItem13 = new JMenuItem(MenuConstants.SERVICES_MENU_REMOVE);
@@ -242,6 +245,13 @@ public class MainDialog extends JFrame {
                     ListServiceDetailsDialog listServiceDetailsDialog = new ListServiceDetailsDialog(tg, admin);
                     GuiHelper.showFrame(listServiceDetailsDialog);
                 }
+            }
+        });
+
+        menuItem17.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                DeleteServicesDialog deleteServicesDialog = new DeleteServicesDialog(tg);
+                GuiHelper.showFrame(deleteServicesDialog);
             }
         });
 
