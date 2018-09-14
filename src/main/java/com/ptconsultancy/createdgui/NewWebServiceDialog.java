@@ -98,22 +98,6 @@ public class NewWebServiceDialog extends JFrame {
                     if (targDir.mkdir()) {
                         createNewServiceFiles(targDir);
 
-                        // Remove .git directory to break link to remote origin
-                        removeGitDependency(comp0);
-                        // Create new Git initialisation
-                        if (cb1.isSelected()) {
-                            try {
-                                FileUtilities.writeStringToFile(filename, "cd\\\n");
-                                FileUtilities.appendStringToFile(filename, "cd C:\\GradleTutorials\\" + comp0.getText() + "\n\n");
-                                FileUtilities.appendStringToFile(filename,"git init\n");
-                                FileUtilities.appendStringToFile(filename,"git add *\n");
-                                FileUtilities.appendStringToFile(filename,"git commit -m \"First Commit\"");
-                                Process process = Runtime.getRuntime().exec("C:\\GradleTutorials\\ServicesAdminManager\\gitinit.bat");
-                            } catch (IOException e1) {
-                                e1.printStackTrace();
-                            }
-                        }
-
                         // Update build.gradle file with new details
                         updateBuildGradleFile(comp0);
 
@@ -127,6 +111,30 @@ public class NewWebServiceDialog extends JFrame {
 
                         // Update messages file
                         updateMessagesFile(comp0);
+
+                        // Remove .git directory to break link to remote origin
+                        removeGitDependency(comp0);
+                        // Create new Git initialisation
+                        if (cb1.isSelected()) {
+                            try {
+                                FileUtilities.writeStringToFile(filename, "cd\\\n");
+                                FileUtilities.appendStringToFile(filename, "cd C:\\GradleTutorials\\" + comp0.getText() + "\n\n");
+                                FileUtilities.appendStringToFile(filename,"git init\n");
+                                FileUtilities.appendStringToFile(filename,"git add *\n");
+                                FileUtilities.appendStringToFile(filename,"git commit -m \"First Commit\"\n");
+//                                FileUtilities.appendStringToFile(filename, "git remote add origin https://github.com/Petert3660/" + comp0.getText() + ".git\n");
+//                                FileUtilities.appendStringToFile(filename, "git push -u origin master");
+                                Process process = Runtime.getRuntime().exec("C:\\GradleTutorials\\ServicesAdminManager\\gitinit.bat");
+
+                                JOptionPane.showMessageDialog(tg,
+                                    "IMPORTANT! About to set up new Jenkins Project - First you should make sure the new repository, "
+                                        + comp0.getText() + ".git is published to the remoe origin. Do this NOW before proceeding",
+                                    TITLE, JOptionPane.INFORMATION_MESSAGE);
+
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+                        }
 
                         JOptionPane.showMessageDialog(tg,
                             "Service: " + comp0.getText() + " has been successfully created",
