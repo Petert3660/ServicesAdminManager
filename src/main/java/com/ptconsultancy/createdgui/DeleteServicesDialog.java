@@ -11,6 +11,7 @@ import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
 import com.ptconsultancy.domain.guicomponents.FreeButton;
 import com.ptconsultancy.domain.guicomponents.FreeLabel;
 import com.ptconsultancy.domain.guicomponents.FreeLabelComboBoxPair;
+import com.ptconsultancy.domain.utilities.FileUtilities;
 import com.ptconsultancy.helpers.NewServiceHelper;
 import java.awt.Color;
 import java.awt.Font;
@@ -51,12 +52,20 @@ public class DeleteServicesDialog extends NewServiceHelper {
 
         FreeButton b1 = new FreeButton(FreeButton.CANCEL, 290, 150, 80);
 
+        String exclusionFile = "C:/GradleTutorials/ServicesAdminManager/src/main/resources/exclusion.properties";
+        String exclusions = "";
+        try {
+            exclusions = FileUtilities.writeFileToString(exclusionFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         ArrayList<String> items0 = new ArrayList<String>();
         items0.add(STANDARD_DROPDOWN_SELECT);
         File targetDir = new File("C:/PTConsultancy/LocalTestEnvironment");
         File[] allFiles = targetDir.listFiles();
         for (File service : allFiles) {
-            if (service.isDirectory()) {
+            if (service.isDirectory() && !exclusions.contains(service.getName())) {
                 items0.add(service.getName());
             }
         }
