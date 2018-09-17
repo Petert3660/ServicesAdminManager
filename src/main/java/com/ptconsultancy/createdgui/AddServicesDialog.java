@@ -12,11 +12,13 @@ import com.ptconsultancy.domain.guicomponents.FreeButton;
 import com.ptconsultancy.domain.guicomponents.FreeCheckBox;
 import com.ptconsultancy.domain.guicomponents.FreeLabel;
 import com.ptconsultancy.domain.guicomponents.FreeLabelTextButtonTriple;
+import com.ptconsultancy.domain.utilities.FileUtilities;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -63,6 +65,8 @@ public class AddServicesDialog extends JFrame {
 
         FreeCheckBox runCheck = new FreeCheckBox(col, "Run service after add", 30, 150, 200, 20);
 
+        FreeCheckBox addToExclusion = new FreeCheckBox(col, "Add service to delete exclusion list", 260, 150, 300, 20);
+
         // This is the control for the OK button
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -73,6 +77,11 @@ public class AddServicesDialog extends JFrame {
                             TITLE, JOptionPane.INFORMATION_MESSAGE);
                     }
                     admin.outputServiceStatus();
+
+                    if (addToExclusion.isSelected()) {
+                        addServiceToExclusionFile(serviceName);
+                    }
+
                     if (runCheck.isSelected()) {
                         mainDialog.prepareAndExecuteOutputFile(admin.getServiceByName(serviceName), 0);
                     }
@@ -111,6 +120,23 @@ public class AddServicesDialog extends JFrame {
         p1.add(comp0.getPanel());
         p1.add(l0);
         p1.add(runCheck);
+        p1.add(addToExclusion);
         this.add(p1);
+    }
+
+    private void addServiceToExclusionFile(String serviceName) {
+
+        String exclusions = "";
+        String exclusionFile = "C:/GradleTutorials/ServicesAdminManager/src/main/resources/exclusion.properties";
+        try {
+            exclusions = FileUtilities.writeFileToString(exclusionFile);
+            if (!exclusions.contains(serviceName)) {
+                FileUtilities.deleteFile(exclusionFile);
+                exclusions = exclusions + serviceName + "\n";
+                FileUtilities.writeStringToFile(exclusionFile, exclusions);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
