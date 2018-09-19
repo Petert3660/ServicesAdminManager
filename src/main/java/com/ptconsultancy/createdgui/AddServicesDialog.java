@@ -132,7 +132,8 @@ public class AddServicesDialog extends JFrame {
             exclusions = FileUtilities.writeFileToString(exclusionFile);
             if (!exclusions.contains(serviceName)) {
                 FileUtilities.deleteFile(exclusionFile);
-                exclusions = exclusions + serviceName + "\n";
+                exclusions = exclusions.substring(0, exclusions.lastIndexOf("\r\n"));
+                exclusions = exclusions + serviceName + "\r\n";
                 FileUtilities.writeStringToFile(exclusionFile, exclusions);
             }
         } catch (IOException e) {
