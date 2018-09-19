@@ -160,6 +160,8 @@ public class MainDialog extends JFrame {
         menu1.addSeparator();
         JMenuItem menuItem17 = new JMenuItem(MenuConstants.SERVICES_MENU_DELETE);
         menu1.add(menuItem17);
+        JMenuItem menuItem18 = new JMenuItem(MenuConstants.SERVICES_REVIEW_DELETE_EXCLUSION);
+        menu1.add(menuItem18);
         menu1.addSeparator();
         JMenuItem menuItem12 = new JMenuItem(MenuConstants.SERVICES_MENU_ADD);
         menu1.add(menuItem12);
@@ -252,6 +254,13 @@ public class MainDialog extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 DeleteServicesDialog deleteServicesDialog = new DeleteServicesDialog(tg);
                 GuiHelper.showFrame(deleteServicesDialog);
+            }
+        });
+
+        menuItem18.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                UpdateDeleteExclusionsDialog updateDeleteExclusionsDialog = new UpdateDeleteExclusionsDialog(tg);
+                GuiHelper.showFrame(updateDeleteExclusionsDialog);
             }
         });
 

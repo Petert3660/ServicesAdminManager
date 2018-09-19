@@ -17,25 +17,27 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import org.thymeleaf.util.StringUtils;
 
-public class DeleteServicesDialog extends NewServiceHelper {
+public class UpdateDeleteExclusionsDialog extends NewServiceHelper {
 
-    private static final String SUB_HEADING = "Delete Service";
+    private static final String SUB_HEADING = "Update Delete Exclusions";
     private static final String TITLE = MAIN_HEADING + " - " + SUB_HEADING;
     private static final int FRAME_X_SIZE = 550;
     private static final int FRAME_Y_SIZE = 250;
     private Color col = new Color(230, 255, 255);
 
-    private DeleteServicesDialog tg = this;
+    private UpdateDeleteExclusionsDialog tg = this;
 
     private MainDialog mainDialog;
 
-    public DeleteServicesDialog(MainDialog mainDialog) {
+    private String exclusions = "";
+
+    public UpdateDeleteExclusionsDialog(MainDialog mainDialog) {
         this.mainDialog = mainDialog;
         mainDialog.setEnabled(false);
 
@@ -53,42 +55,39 @@ public class DeleteServicesDialog extends NewServiceHelper {
         FreeButton b1 = new FreeButton(FreeButton.CANCEL, 290, 150, 80);
 
         String exclusionFile = "C:/GradleTutorials/ServicesAdminManager/src/main/resources/exclusion.properties";
-        String exclusions = "";
         try {
             exclusions = FileUtilities.writeFileToString(exclusionFile);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        String[] prepareItems = exclusions.split("\r\n");
         ArrayList<String> items0 = new ArrayList<String>();
         items0.add(STANDARD_DROPDOWN_SELECT);
-        File targetDir = new File("C:/PTConsultancy/LocalTestEnvironment");
-        File[] allFiles = targetDir.listFiles();
-        for (File service : allFiles) {
-            if (service.isDirectory() && !exclusions.contains(service.getName())) {
-                items0.add(service.getName());
+        for (String item: prepareItems) {
+            if (!StringUtils.isEmpty(item) && !item.contains("#")) {
+                items0.add(item);
             }
         }
-        FreeLabelComboBoxPair comp0 = new FreeLabelComboBoxPair(col, "Please select service to delete:", 30, 90, 240, items0);
+        FreeLabelComboBoxPair comp0 = new FreeLabelComboBoxPair(col, "Select project to remove from the list:", 30, 90, 240, items0);
 
         // This is the control for the OK button
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (!comp0.isFirstItemSelected()) {
-                    int res = JOptionPane.showConfirmDialog(tg, "Are you sure you wish to delete the service " + comp0.getSelectedItem() + "?",
+                    int res = JOptionPane.showConfirmDialog(tg, "Are you sure you wish to remove the project " + comp0.getSelectedItem() + " from delete exclusions?",
                         TITLE, JOptionPane.YES_NO_CANCEL_OPTION);
                     if (res == 0) {
-                        System.out.println("The service will be deleted here");
+                        exclusions = exclusions.replace(comp0.getSelectedItem(), "");
                         try {
-                            deleteServiceFromSource(comp0.getSelectedItem());
-                            deleteServiceFromJenkinsTarget(comp0.getSelectedItem());
+                            FileUtilities.writeStringToFile(exclusionFile, exclusions);
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         }
                     }
                     b1.doClick();
                 } else {
-                    JOptionPane.showMessageDialog(tg, "No service selected - please select a service before continuing",
+                    JOptionPane.showMessageDialog(tg, "No project selected - please select a project before continuing",
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 }
             }
