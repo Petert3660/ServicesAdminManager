@@ -116,8 +116,8 @@ abstract public class NewServiceHelper extends JFrame {
             Process process = Runtime.getRuntime().exec("C:\\GradleTutorials\\ServicesAdminManager\\gitinit.bat");
 
             JOptionPane.showMessageDialog(tg,
-                "IMPORTANT! About to set up new Jenkins Project - First you should make sure the new repository, "
-                    + comp0.getText() + ".git is published to the remoe origin. Do this NOW before proceeding",
+                "IMPORTANT! About to set up new Jenkins Project.\n\n First you should make sure the new repository, "
+                    + comp0.getText() + ".git is published to the remote origin.\n\nDo this NOW before proceeding.",
                 TITLE, JOptionPane.INFORMATION_MESSAGE);
 
             String jenkinsFile = "C://GradleTutorials/ServicesAdminManager/JenkinsModelConfig.xml";

@@ -137,7 +137,7 @@ public class NewServiceDialog extends NewServiceHelper {
                         comp0.clearAndFocus();
                     }
                     if (!isPortInteger) {
-                        JOptionPane.showMessageDialog(tg, "The new service port must be an integer - please re-enter or leav empty for default value",
+                        JOptionPane.showMessageDialog(tg, "The new service port must be an integer - please re-enter or leave empty for default value",
                             TITLE, JOptionPane.INFORMATION_MESSAGE);
                         comp1.clearAndFocus();
                     }
