@@ -78,7 +78,7 @@ public class UpdateDeleteExclusionsDialog extends NewServiceHelper {
                     int res = JOptionPane.showConfirmDialog(tg, "Are you sure you wish to remove the project " + comp0.getSelectedItem() + " from delete exclusions?",
                         TITLE, JOptionPane.YES_NO_CANCEL_OPTION);
                     if (res == 0) {
-                        exclusions = exclusions.replace(comp0.getSelectedItem(), "");
+                        exclusions = exclusions.replace(comp0.getSelectedItem() + "\r\n", "");
                         try {
                             FileUtilities.writeStringToFile(exclusionFile, exclusions);
                         } catch (IOException e1) {
