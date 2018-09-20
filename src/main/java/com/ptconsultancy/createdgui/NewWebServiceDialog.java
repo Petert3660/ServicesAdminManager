@@ -23,6 +23,8 @@ import javax.swing.JPanel;
 
 public class NewWebServiceDialog extends NewServiceHelper {
 
+    private static final String PROJECT_TITLE = "Skeleton Spring Boot Web Project";
+
     private static final String SUB_HEADING = " - Create New Frontend Web Service";
     private static final String TITLE = MAIN_HEADING + SUB_HEADING;
 
@@ -97,7 +99,7 @@ public class NewWebServiceDialog extends NewServiceHelper {
                         createNewServiceFiles(targDir, "C:/GradleTutorials/SkeletonSpringBootWebProject");
 
                         // Update build.gradle file with new details
-                        updateBuildGradleFile(comp0, "Skeleton Spring Boot Web Project");
+                        updateBuildGradleFile(comp0, PROJECT_TITLE);
 
                         // Update application.properties to hold chosen server port
                         if (!comp1.empty()) {
@@ -191,7 +193,7 @@ public class NewWebServiceDialog extends NewServiceHelper {
             if (bannerFile.exists()) {
                 bannerFile.delete();
             }
-            allBannerContents = allBannerContents.replace("Skeleton Spring Boot Web Project",
+            allBannerContents = allBannerContents.replace(PROJECT_TITLE,
                 comp0.getText());
             FileUtilities.writeStringToFile(BANNER_FILE, allBannerContents);
         } catch (IOException e1) {
@@ -208,7 +210,7 @@ public class NewWebServiceDialog extends NewServiceHelper {
             if (bannerFile.exists()) {
                 bannerFile.delete();
             }
-            allMessagesContents = allMessagesContents.replace("Skeleton Spring Boot Web Project",
+            allMessagesContents = allMessagesContents.replace(PROJECT_TITLE,
                 comp0.getText());
             FileUtilities.writeStringToFile(MESSAGES_FILE, allMessagesContents);
         } catch (IOException e1) {

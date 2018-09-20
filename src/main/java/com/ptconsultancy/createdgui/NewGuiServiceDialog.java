@@ -11,7 +11,6 @@ import com.ptconsultancy.domain.guicomponents.FreeCheckBox;
 import com.ptconsultancy.domain.guicomponents.FreeLabel;
 import com.ptconsultancy.domain.guicomponents.FreeLabelTextFieldPair;
 import com.ptconsultancy.domain.utilities.FileUtilities;
-import com.ptconsultancy.domain.utilities.GenerateRandomKeys;
 import com.ptconsultancy.helpers.NewServiceHelper;
 import java.awt.Color;
 import java.awt.Font;
@@ -22,23 +21,23 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class NewServiceDialog extends NewServiceHelper {
+public class NewGuiServiceDialog extends NewServiceHelper {
 
-    private static final String PROJECT_TITLE = "Skeleton Spring Boot Project";
+    private static final String PROJECT_TITLE = "Template Spring Boot Project";
 
-    private static final String SUB_HEADING = " - Create New REST/API Service";
+    private static final String SUB_HEADING = " - Create New Desktop GUI Service";
     private static final String TITLE = MAIN_HEADING + SUB_HEADING;
 
     private static final int FRAME_X_SIZE = 550;
     private static final int FRAME_Y_SIZE = 350;
     private Color col = new Color(230, 255, 255);
 
-    private NewServiceDialog tg = this;
+    private NewGuiServiceDialog tg = this;
     private MainDialog mainDialog;
 
     private String mode;
 
-    public NewServiceDialog(MainDialog mainDialog) {
+    public NewGuiServiceDialog(MainDialog mainDialog) {
 
         this.mainDialog = mainDialog;
         this.mainDialog.setEnabled(false);
@@ -93,13 +92,11 @@ public class NewServiceDialog extends NewServiceHelper {
                     isPortInteger = false;
                 }
 
+                String filename = "C:/GradleTutorials/ServicesAdminManager/gitinit.bat";
                 if (!comp0.empty() && isPortInteger) {
                     File targDir = new File(PROJECT_PATH + "/" + comp0.getText());
                     if (targDir.mkdir()) {
-                        createNewServiceFiles(targDir, "C:/GradleTutorials/SkeletonSpringBootProject");
-
-                        // Update authentication file with new credentials
-                        updateAuthPropsFile(comp0);
+                        createNewServiceFiles(targDir, "C:/GradleTutorials/TemplateSpringBootProject");
 
                         // Update build.gradle file with new details
                         updateBuildGradleFile(comp0, PROJECT_TITLE);
@@ -108,6 +105,12 @@ public class NewServiceDialog extends NewServiceHelper {
                         if (!comp1.empty()) {
                             updateApplicationPropsFile(comp0, comp1);
                         }
+
+                        // Update banner.txt file
+                        updateBannerFile(comp0);
+
+                        // Update messages file
+                        updateMessagesFile(comp0);
 
                         // Remove .git directory to break link to remote origin
                         removeGitDependency(comp0);
@@ -164,22 +167,6 @@ public class NewServiceDialog extends NewServiceHelper {
         this.add(p1);
     }
 
-    private void updateAuthPropsFile(FreeLabelTextFieldPair comp0) {
-        final String AUTH_FILE = PROJECT_PATH + "/" + comp0.getText() + "/src/main/resources/auth.properties";
-        File authFile = new File(AUTH_FILE);
-        if (authFile.exists()) {
-            authFile.delete();
-        }
-        try {
-            FileUtilities.writeStringToFile(
-                AUTH_FILE, "auth.admin.id=" + comp0.getText() + "\n");
-            FileUtilities.appendStringToFile(
-                AUTH_FILE, "auth.admin.password=" + GenerateRandomKeys.generateRandomKey(20, 1) + "\n");
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
-    }
-
     private void updateApplicationPropsFile(FreeLabelTextFieldPair comp0, FreeLabelTextFieldPair comp1) {
         final String APP_PROPS_FILE = PROJECT_PATH + "/" + comp0.getText() + "/src/main/resources/application.properties";
         File appPropFile = new File(APP_PROPS_FILE);
@@ -189,9 +176,43 @@ public class NewServiceDialog extends NewServiceHelper {
             if (appPropFile.exists()) {
                 appPropFile.delete();
             }
-            allAppPropContents = allAppPropContents.replace("server.port=8200",
+            allAppPropContents = allAppPropContents.replace("server.port=8180",
                 "server.port=" + comp1.getText());
             FileUtilities.writeStringToFile(APP_PROPS_FILE, allAppPropContents);
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    private void updateBannerFile(FreeLabelTextFieldPair comp0) {
+        final String BANNER_FILE = PROJECT_PATH + "/" + comp0.getText() + "/src/main/resources/banner.txt";
+        File bannerFile = new File(BANNER_FILE);
+
+        try {
+            String allBannerContents = FileUtilities.writeFileToString(BANNER_FILE);
+            if (bannerFile.exists()) {
+                bannerFile.delete();
+            }
+            allBannerContents = allBannerContents.replace(PROJECT_TITLE,
+                comp0.getText());
+            FileUtilities.writeStringToFile(BANNER_FILE, allBannerContents);
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    private void updateMessagesFile(FreeLabelTextFieldPair comp0) {
+        final String MESSAGES_FILE = PROJECT_PATH + "/" + comp0.getText() + "/src/main/resources/messages.properties";
+        File bannerFile = new File(MESSAGES_FILE);
+
+        try {
+            String allMessagesContents = FileUtilities.writeFileToString(MESSAGES_FILE);
+            if (bannerFile.exists()) {
+                bannerFile.delete();
+            }
+            allMessagesContents = allMessagesContents.replace(PROJECT_TITLE,
+                comp0.getText());
+            FileUtilities.writeStringToFile(MESSAGES_FILE, allMessagesContents);
         } catch (IOException e1) {
             e1.printStackTrace();
         }
