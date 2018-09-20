@@ -8,7 +8,7 @@ public class MenuConstants {
     public static final String PROJECT_MENU_SAVE = "Save Project";
 
     public static final String SERVICES_MENU = "Services";
-    public static final String SERVICES_MENU_NEW_API = "New API/REST Service";
+    public static final String SERVICES_MENU_NEW_API = "New API/REST/GUI Service";
     public static final String SERVICES_MENU_NEW_FRONTEND = "New Frontend Web Service";
     public static final String SERVICES_MENU_ADD = "Add Existing Service";
     public static final String SERVICES_MENU_REMOVE = "Remove Service";
@@ -17,7 +17,6 @@ public class MenuConstants {
     public static final String SERVICES_MENU_LIST = "List Service Details";
     public static final String SERVICES_MENU_DELETE = "Delete Service";
     public static final String SERVICES_REVIEW_DELETE_EXCLUSION = "Update Delete Exclusions";
-    public static final String SERVICES_MENU_NEW_DESKTOP = "New Desktop GUI Service";
 
     public static final String START_SERVICES_MENU = "Start Services";
     public static final String START_SERVICES_MENU_ALL = "Start All Services";
