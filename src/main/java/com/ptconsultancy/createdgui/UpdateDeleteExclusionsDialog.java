@@ -63,7 +63,7 @@ public class UpdateDeleteExclusionsDialog extends NewServiceHelper {
 
         FreeButton b2 = new FreeButton("Remove", 235, 150, 80);
 
-        comp0 = readFileAndPopulateList();
+        comp0 = new FreeLabelComboBoxPair(col, "Select project to remove from the list:", 30, 90, 260, readFileAndPopulateList());
 
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -87,10 +87,9 @@ public class UpdateDeleteExclusionsDialog extends NewServiceHelper {
                         e1.printStackTrace();
                     }
 
-                    p1.remove(comp0.getPanel());
-                    comp0 = readFileAndPopulateList();
-                    p1.add(comp0.getPanel());
-                    p1.repaint();
+
+                    comp0.repopulateComboBox(readFileAndPopulateList());
+                    comp0.getPanel().repaint();
                 }
             }
         });
@@ -109,10 +108,8 @@ public class UpdateDeleteExclusionsDialog extends NewServiceHelper {
                             e1.printStackTrace();
                         }
 
-                        p1.remove(comp0.getPanel());
-                        comp0 = readFileAndPopulateList();
-                        p1.add(comp0.getPanel());
-                        p1.repaint();
+                        comp0.repopulateComboBox(readFileAndPopulateList());
+                        comp0.getPanel().repaint();
                     }
                 } else {
                     JOptionPane.showMessageDialog(tg, "No project selected - please select a project before continuing",
@@ -137,7 +134,7 @@ public class UpdateDeleteExclusionsDialog extends NewServiceHelper {
         this.add(p1);
     }
 
-    private FreeLabelComboBoxPair readFileAndPopulateList() {
+    private ArrayList<String> readFileAndPopulateList() {
         try {
             exclusions = FileUtilities.writeFileToString(exclusionFile);
         } catch (IOException e) {
@@ -153,6 +150,6 @@ public class UpdateDeleteExclusionsDialog extends NewServiceHelper {
             }
         }
 
-        return new FreeLabelComboBoxPair(col, "Select project to remove from the list:", 30, 90, 260, items0);
+        return items0;
     }
 }
