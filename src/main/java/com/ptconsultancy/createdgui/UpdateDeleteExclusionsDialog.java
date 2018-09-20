@@ -17,8 +17,10 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.thymeleaf.util.StringUtils;
@@ -37,6 +39,11 @@ public class UpdateDeleteExclusionsDialog extends NewServiceHelper {
 
     private String exclusions = "";
 
+    private String exclusionFile = "C:/GradleTutorials/ServicesAdminManager/src/main/resources/exclusion.properties";
+
+    FreeLabelComboBoxPair comp0;
+    JPanel p1;
+
     public UpdateDeleteExclusionsDialog(MainDialog mainDialog) {
         this.mainDialog = mainDialog;
         mainDialog.setEnabled(false);
@@ -44,35 +51,52 @@ public class UpdateDeleteExclusionsDialog extends NewServiceHelper {
         this.setTitle(TITLE);
         this.setSize(FRAME_X_SIZE, FRAME_Y_SIZE);
 
-        JPanel p1 = new JPanel();
+        p1 = new JPanel();
         p1.setLayout(null);
         p1.setBackground(col);
 
         FreeLabel l0 = new FreeLabel(MAIN_HEADING, 30, 30, 500, 30, new Font("", Font.BOLD + Font.ITALIC, 20));
 
-        FreeButton b0 = new FreeButton(FreeButton.OK, 180, 150, 80);
+        FreeButton b0 = new FreeButton("Add", 125, 150, 80);
 
-        FreeButton b1 = new FreeButton(FreeButton.CANCEL, 290, 150, 80);
+        FreeButton b1 = new FreeButton(FreeButton.CANCEL, 345, 150, 80);
 
-        String exclusionFile = "C:/GradleTutorials/ServicesAdminManager/src/main/resources/exclusion.properties";
-        try {
-            exclusions = FileUtilities.writeFileToString(exclusionFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        FreeButton b2 = new FreeButton("Remove", 235, 150, 80);
 
-        String[] prepareItems = exclusions.split("\r\n");
-        ArrayList<String> items0 = new ArrayList<String>();
-        items0.add(STANDARD_DROPDOWN_SELECT);
-        for (String item: prepareItems) {
-            if (!StringUtils.isEmpty(item) && !item.contains("#")) {
-                items0.add(item);
+        comp0 = readFileAndPopulateList();
+
+        b0.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fc = new JFileChooser();
+                fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                fc.setCurrentDirectory(new File("C:/PTConsultancy/LocalTestEnvironment"));
+                int returnVal = fc.showDialog(tg, "Select");
+                if (returnVal == 0) {
+                    String serviceName = fc.getSelectedFile().getName();
+                    String exclusions = "";
+                    String exclusionFile = "C:/GradleTutorials/ServicesAdminManager/src/main/resources/exclusion.properties";
+                    try {
+                        exclusions = FileUtilities.writeFileToString(exclusionFile);
+                        if (!exclusions.contains(serviceName)) {
+                            FileUtilities.deleteFile(exclusionFile);
+                            exclusions = exclusions.substring(0, exclusions.lastIndexOf("\r\n"));
+                            exclusions = exclusions + "\r\n" + serviceName + "\r\n";
+                            FileUtilities.writeStringToFile(exclusionFile, exclusions);
+                        }
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+
+                    p1.remove(comp0.getPanel());
+                    comp0 = readFileAndPopulateList();
+                    p1.add(comp0.getPanel());
+                    p1.repaint();
+                }
             }
-        }
-        FreeLabelComboBoxPair comp0 = new FreeLabelComboBoxPair(col, "Select project to remove from the list:", 30, 90, 240, items0);
+        });
 
         // This is the control for the OK button
-        b0.addActionListener(new ActionListener() {
+        b2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (!comp0.isFirstItemSelected()) {
                     int res = JOptionPane.showConfirmDialog(tg, "Are you sure you wish to remove the project " + comp0.getSelectedItem() + " from delete exclusions?",
@@ -84,8 +108,12 @@ public class UpdateDeleteExclusionsDialog extends NewServiceHelper {
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         }
+
+                        p1.remove(comp0.getPanel());
+                        comp0 = readFileAndPopulateList();
+                        p1.add(comp0.getPanel());
+                        p1.repaint();
                     }
-                    b1.doClick();
                 } else {
                     JOptionPane.showMessageDialog(tg, "No project selected - please select a project before continuing",
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
@@ -103,8 +131,28 @@ public class UpdateDeleteExclusionsDialog extends NewServiceHelper {
 
         p1.add(b0);
         p1.add(b1);
+        p1.add(b2);
         p1.add(comp0.getPanel());
         p1.add(l0);
         this.add(p1);
+    }
+
+    private FreeLabelComboBoxPair readFileAndPopulateList() {
+        try {
+            exclusions = FileUtilities.writeFileToString(exclusionFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String[] prepareItems = exclusions.split("\r\n");
+        ArrayList<String> items0 = new ArrayList<String>();
+        items0.add(STANDARD_DROPDOWN_SELECT);
+        for (String item: prepareItems) {
+            if (!StringUtils.isEmpty(item) && !item.startsWith("#")) {
+                items0.add(item);
+            }
+        }
+
+        return new FreeLabelComboBoxPair(col, "Select project to remove from the list:", 30, 90, 260, items0);
     }
 }
