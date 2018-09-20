@@ -111,12 +111,12 @@ abstract public class NewServiceHelper extends JFrame {
             FileUtilities.appendStringToFile(filename,"git init\n");
             FileUtilities.appendStringToFile(filename,"git add *\n");
             FileUtilities.appendStringToFile(filename,"git commit -m \"First Commit\"\n");
-//                                FileUtilities.appendStringToFile(filename, "git remote add origin https://github.com/Petert3660/" + comp0.getText() + ".git\n");
-//                                FileUtilities.appendStringToFile(filename, "git push -u origin master");
+//            FileUtilities.appendStringToFile(filename, "git remote add origin https://github.com/Petert3660/" + comp0.getText() + ".git\n");
+//            FileUtilities.appendStringToFile(filename, "git push -u origin master");
             Process process = Runtime.getRuntime().exec("C:\\GradleTutorials\\ServicesAdminManager\\gitinit.bat");
 
             JOptionPane.showMessageDialog(tg,
-                "IMPORTANT! About to set up new Jenkins Project.\n\n First you should make sure the new repository, "
+                "IMPORTANT! About to set up new Jenkins Project.\n\nFirst you should make sure the new repository, "
                     + comp0.getText() + ".git is published to the remote origin.\n\nDo this NOW before proceeding.",
                 TITLE, JOptionPane.INFORMATION_MESSAGE);
 
