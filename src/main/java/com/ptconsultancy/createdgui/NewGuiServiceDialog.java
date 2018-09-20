@@ -23,7 +23,7 @@ import javax.swing.JPanel;
 
 public class NewGuiServiceDialog extends NewServiceHelper {
 
-    private static final String PROJECT_TITLE = "Template Spring Boot Project";
+    private static final String PROJECT_TITLE = "Template Spring Boot";
 
     private static final String SUB_HEADING = " - Create New Desktop GUI Service";
     private static final String TITLE = MAIN_HEADING + SUB_HEADING;
@@ -96,7 +96,7 @@ public class NewGuiServiceDialog extends NewServiceHelper {
                 if (!comp0.empty() && isPortInteger) {
                     File targDir = new File(PROJECT_PATH + "/" + comp0.getText());
                     if (targDir.mkdir()) {
-                        createNewServiceFiles(targDir, "C:/GradleTutorials/TemplateSpringBootProject");
+                        createNewServiceFiles(targDir, "C:/GradleTutorials/TemplateSpringBoot");
 
                         // Update build.gradle file with new details
                         updateBuildGradleFile(comp0, PROJECT_TITLE);
