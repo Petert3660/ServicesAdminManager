@@ -1,5 +1,6 @@
 package com.ptconsultancy.admin;
 
+import static com.ptconsultancy.constants.FileSystemConstants.LOCAL_SRC;
 import static com.ptconsultancy.constants.ServiceAdminConstants.FALSE;
 import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
 
@@ -45,7 +46,7 @@ public class Admin implements Serializable {
 
     private String findTheServiceUrl(String name) {
 
-        String filename = "c:/GradleTutorials/" + name + "/src/main/resources/application.properties";
+        String filename = LOCAL_SRC + "/" + name + "/src/main/resources/application.properties";
         HashMap<String, String> filePairs = (HashMap) getKeyValuePairsFromFile(filename);
         String url = filePairs.get("spring.data.rest.base-path") + ":" + filePairs.get("server.port");
 
@@ -54,7 +55,7 @@ public class Admin implements Serializable {
 
     private Credentials findTheServiceCredentials(String name) {
 
-        String filename = "c:/GradleTutorials/" + name + "/src/main/resources/auth.properties";
+        String filename = LOCAL_SRC + "/" + name + "/src/main/resources/auth.properties";
         HashMap<String, String> filePairs = (HashMap) getKeyValuePairsFromFile(filename);
         Credentials creds = new Credentials();
         creds.setUserId(filePairs.get("auth.admin.id"));

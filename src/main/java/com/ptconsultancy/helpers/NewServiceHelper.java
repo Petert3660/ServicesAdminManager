@@ -1,6 +1,9 @@
 package com.ptconsultancy.helpers;
 
 import static com.ptconsultancy.constants.FileSystemConstants.GIT_INIT;
+import static com.ptconsultancy.constants.FileSystemConstants.JENKINS_CONFIG;
+import static com.ptconsultancy.constants.FileSystemConstants.LOCAL_SRC;
+import static com.ptconsultancy.constants.FileSystemConstants.LOCAL_TEST_ENV;
 
 import com.ptconsultancy.domain.guicomponents.FreeLabelTextFieldPair;
 import com.ptconsultancy.domain.utilities.FileUtilities;
@@ -20,11 +23,9 @@ import org.springframework.web.client.RestTemplate;
 
 abstract public class NewServiceHelper extends JFrame {
 
-    protected static final String PROJECT_PATH = "C:/GradleTutorials";
-
     protected void removeGitDependency(FreeLabelTextFieldPair comp0) {
         File srcDir;
-        final String NEW_TARGET = PROJECT_PATH + "/" + comp0.getText();
+        final String NEW_TARGET = LOCAL_SRC + "/" + comp0.getText();
         srcDir = new File(NEW_TARGET);
         File[] files = srcDir.listFiles();
 
@@ -86,7 +87,7 @@ abstract public class NewServiceHelper extends JFrame {
     }
 
     protected void updateBuildGradleFile(FreeLabelTextFieldPair comp0, String projectTitle) {
-        final String BUILD_GRADLE_FILE = PROJECT_PATH + "/" + comp0.getText() + "/build.gradle";
+        final String BUILD_GRADLE_FILE = LOCAL_SRC + "/" + comp0.getText() + "/build.gradle";
         File buildFile = new File(BUILD_GRADLE_FILE);
 
         try {
@@ -120,8 +121,7 @@ abstract public class NewServiceHelper extends JFrame {
                     + comp0.getText() + ".git is published to the remote origin.\n\nDo this NOW before proceeding.",
                 TITLE, JOptionPane.INFORMATION_MESSAGE);
 
-            String jenkinsFile = "C://GradleTutorials/ServicesAdminManager/JenkinsModelConfig.xml";
-            String xml = FileUtilities.writeFileToString(jenkinsFile);
+            String xml = FileUtilities.writeFileToString(JENKINS_CONFIG);
             xml = xml.replace("<Project Name Here>", comp0.getText());
 
             HttpHeaders httpHeaders = new HttpHeaders();
@@ -145,9 +145,9 @@ abstract public class NewServiceHelper extends JFrame {
     }
 
     protected void deleteServiceFromJenkinsTarget(String serviceName) throws IOException {
-        String source = "C:/PTConsultancy/LocalTestEnvironment/";
+        String source = LOCAL_TEST_ENV + "/";
         source = source + serviceName;
-        if (!source.equals("C:/PTConsultancy/LocalTestEnvironment/")) {
+        if (!source.equals(LOCAL_TEST_ENV + "/")) {
             FileUtilities.deleteDirectory(new File(source));
         }
     }

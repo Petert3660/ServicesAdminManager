@@ -3,6 +3,8 @@
 
 package com.ptconsultancy.createdgui;
 
+import static com.ptconsultancy.constants.FileSystemConstants.GIT_INIT;
+import static com.ptconsultancy.constants.FileSystemConstants.LOCAL_SRC;
 import static com.ptconsultancy.constants.FileSystemConstants.SKELETON_SB_PROJECT;
 import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
 import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
@@ -51,7 +53,7 @@ public class NewServiceDialog extends NewServiceHelper {
         p1.setLayout(null);
         p1.setBackground(col);
 
-        File file = new File(PROJECT_PATH);
+        File file = new File(LOCAL_SRC);
         if (!file.exists()) {
             file.mkdir();
         }
@@ -95,7 +97,7 @@ public class NewServiceDialog extends NewServiceHelper {
                 }
 
                 if (!comp0.empty() && isPortInteger) {
-                    File targDir = new File(PROJECT_PATH + "/" + comp0.getText());
+                    File targDir = new File(LOCAL_SRC + "/" + comp0.getText());
                     if (targDir.mkdir()) {
                         createNewServiceFiles(targDir, SKELETON_SB_PROJECT);
 
@@ -121,7 +123,7 @@ public class NewServiceDialog extends NewServiceHelper {
                             "Service: " + comp0.getText() + " has been successfully created",
                             TITLE, JOptionPane.INFORMATION_MESSAGE);
 
-                        File file = new File(filename);
+                        File file = new File(GIT_INIT);
                         if (file.exists()) {
                             file.delete();
                         }
@@ -166,7 +168,7 @@ public class NewServiceDialog extends NewServiceHelper {
     }
 
     private void updateAuthPropsFile(FreeLabelTextFieldPair comp0) {
-        final String AUTH_FILE = PROJECT_PATH + "/" + comp0.getText() + "/src/main/resources/auth.properties";
+        final String AUTH_FILE = LOCAL_SRC + "/" + comp0.getText() + "/src/main/resources/auth.properties";
         File authFile = new File(AUTH_FILE);
         if (authFile.exists()) {
             authFile.delete();
@@ -182,7 +184,7 @@ public class NewServiceDialog extends NewServiceHelper {
     }
 
     private void updateApplicationPropsFile(FreeLabelTextFieldPair comp0, FreeLabelTextFieldPair comp1) {
-        final String APP_PROPS_FILE = PROJECT_PATH + "/" + comp0.getText() + "/src/main/resources/application.properties";
+        final String APP_PROPS_FILE = LOCAL_SRC + "/" + comp0.getText() + "/src/main/resources/application.properties";
         File appPropFile = new File(APP_PROPS_FILE);
 
         try {
