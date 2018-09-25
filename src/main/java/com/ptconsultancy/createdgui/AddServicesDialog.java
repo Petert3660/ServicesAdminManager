@@ -4,6 +4,7 @@
 
 package com.ptconsultancy.createdgui;
 
+import static com.ptconsultancy.constants.FileSystemConstants.EXCLUSION_FILE;
 import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
 import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
 
@@ -127,14 +128,13 @@ public class AddServicesDialog extends JFrame {
     private void addServiceToExclusionFile(String serviceName) {
 
         String exclusions = "";
-        String exclusionFile = "C:/GradleTutorials/ServicesAdminManager/src/main/resources/exclusion.properties";
         try {
-            exclusions = FileUtilities.writeFileToString(exclusionFile);
+            exclusions = FileUtilities.writeFileToString(EXCLUSION_FILE);
             if (!exclusions.contains(serviceName)) {
-                FileUtilities.deleteFile(exclusionFile);
+                FileUtilities.deleteFile(EXCLUSION_FILE);
                 exclusions = exclusions.substring(0, exclusions.lastIndexOf("\r\n"));
                 exclusions = exclusions + "\r\n" + serviceName + "\r\n";
-                FileUtilities.writeStringToFile(exclusionFile, exclusions);
+                FileUtilities.writeStringToFile(EXCLUSION_FILE, exclusions);
             }
         } catch (IOException e) {
             e.printStackTrace();

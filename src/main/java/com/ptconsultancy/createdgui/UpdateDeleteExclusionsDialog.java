@@ -4,6 +4,7 @@
 
 package com.ptconsultancy.createdgui;
 
+import static com.ptconsultancy.constants.FileSystemConstants.EXCLUSION_FILE;
 import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
 import static com.ptconsultancy.constants.ServiceAdminConstants.STANDARD_DROPDOWN_SELECT;
 import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
@@ -39,8 +40,6 @@ public class UpdateDeleteExclusionsDialog extends NewServiceHelper {
 
     private String exclusions = "";
 
-    private String exclusionFile = "C:/GradleTutorials/ServicesAdminManager/src/main/resources/exclusion.properties";
-
     FreeLabelComboBoxPair comp0;
     JPanel p1;
 
@@ -74,14 +73,13 @@ public class UpdateDeleteExclusionsDialog extends NewServiceHelper {
                 if (returnVal == 0) {
                     String serviceName = fc.getSelectedFile().getName();
                     String exclusions = "";
-                    String exclusionFile = "C:/GradleTutorials/ServicesAdminManager/src/main/resources/exclusion.properties";
                     try {
-                        exclusions = FileUtilities.writeFileToString(exclusionFile);
+                        exclusions = FileUtilities.writeFileToString(EXCLUSION_FILE);
                         if (!exclusions.contains(serviceName)) {
-                            FileUtilities.deleteFile(exclusionFile);
+                            FileUtilities.deleteFile(EXCLUSION_FILE);
                             exclusions = exclusions.substring(0, exclusions.lastIndexOf("\r\n"));
                             exclusions = exclusions + "\r\n" + serviceName + "\r\n";
-                            FileUtilities.writeStringToFile(exclusionFile, exclusions);
+                            FileUtilities.writeStringToFile(EXCLUSION_FILE, exclusions);
                         }
                     } catch (IOException e1) {
                         e1.printStackTrace();
@@ -103,7 +101,7 @@ public class UpdateDeleteExclusionsDialog extends NewServiceHelper {
                     if (res == 0) {
                         exclusions = exclusions.replace(comp0.getSelectedItem() + "\r\n", "");
                         try {
-                            FileUtilities.writeStringToFile(exclusionFile, exclusions);
+                            FileUtilities.writeStringToFile(EXCLUSION_FILE, exclusions);
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         }
@@ -136,7 +134,7 @@ public class UpdateDeleteExclusionsDialog extends NewServiceHelper {
 
     private ArrayList<String> readFileAndPopulateList() {
         try {
-            exclusions = FileUtilities.writeFileToString(exclusionFile);
+            exclusions = FileUtilities.writeFileToString(EXCLUSION_FILE);
         } catch (IOException e) {
             e.printStackTrace();
         }

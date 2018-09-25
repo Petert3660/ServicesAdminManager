@@ -4,6 +4,7 @@
 
 package com.ptconsultancy.createdgui;
 
+import static com.ptconsultancy.constants.FileSystemConstants.EXCLUSION_FILE;
 import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
 import static com.ptconsultancy.constants.ServiceAdminConstants.STANDARD_DROPDOWN_SELECT;
 import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
@@ -52,10 +53,9 @@ public class DeleteServicesDialog extends NewServiceHelper {
 
         FreeButton b1 = new FreeButton(FreeButton.CANCEL, 290, 150, 80);
 
-        String exclusionFile = "C:/GradleTutorials/ServicesAdminManager/src/main/resources/exclusion.properties";
         String exclusions = "";
         try {
-            exclusions = FileUtilities.writeFileToString(exclusionFile);
+            exclusions = FileUtilities.writeFileToString(EXCLUSION_FILE);
         } catch (IOException e) {
             e.printStackTrace();
         }
