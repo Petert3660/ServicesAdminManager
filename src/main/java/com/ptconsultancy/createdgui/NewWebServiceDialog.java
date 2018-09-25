@@ -92,7 +92,6 @@ public class NewWebServiceDialog extends NewServiceHelper {
                     isPortInteger = false;
                 }
 
-                String filename = "C:/GradleTutorials/ServicesAdminManager/gitinit.bat";
                 if (!comp0.empty() && isPortInteger) {
                     File targDir = new File(PROJECT_PATH + "/" + comp0.getText());
                     if (targDir.mkdir()) {

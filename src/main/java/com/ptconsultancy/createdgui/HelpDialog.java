@@ -4,6 +4,7 @@
 
 package com.ptconsultancy.createdgui;
 
+import static com.ptconsultancy.constants.FileSystemConstants.ROOT_PATH;
 import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
 
 import com.ptconsultancy.domain.guicomponents.FreeButton;
@@ -20,7 +21,7 @@ import javax.swing.JPanel;
 
 public class HelpDialog extends JFrame {
 
-    private static final String ROOT_PATH = "C:/GradleTutorials/ServicesAdminManager/src/main/resources/";
+
 
     private static final String TITLE = MAIN_HEADING;
     private static final int FRAME_X_SIZE = 1000;

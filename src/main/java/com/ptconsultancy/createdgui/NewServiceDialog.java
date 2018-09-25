@@ -3,6 +3,7 @@
 
 package com.ptconsultancy.createdgui;
 
+import static com.ptconsultancy.constants.FileSystemConstants.SKELETON_SB_PROJECT;
 import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
 import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
 
@@ -96,7 +97,7 @@ public class NewServiceDialog extends NewServiceHelper {
                 if (!comp0.empty() && isPortInteger) {
                     File targDir = new File(PROJECT_PATH + "/" + comp0.getText());
                     if (targDir.mkdir()) {
-                        createNewServiceFiles(targDir, "C:/GradleTutorials/SkeletonSpringBootProject");
+                        createNewServiceFiles(targDir, SKELETON_SB_PROJECT);
 
                         // Update authentication file with new credentials
                         updateAuthPropsFile(comp0);

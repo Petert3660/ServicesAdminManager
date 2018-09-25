@@ -1,5 +1,7 @@
 package com.ptconsultancy.helpers;
 
+import static com.ptconsultancy.constants.FileSystemConstants.GIT_INIT;
+
 import com.ptconsultancy.domain.guicomponents.FreeLabelTextFieldPair;
 import com.ptconsultancy.domain.utilities.FileUtilities;
 import java.io.File;
@@ -19,8 +21,6 @@ import org.springframework.web.client.RestTemplate;
 abstract public class NewServiceHelper extends JFrame {
 
     protected static final String PROJECT_PATH = "C:/GradleTutorials";
-
-    protected String filename = "C:/GradleTutorials/ServicesAdminManager/gitinit.bat";
 
     protected void removeGitDependency(FreeLabelTextFieldPair comp0) {
         File srcDir;
@@ -106,13 +106,13 @@ abstract public class NewServiceHelper extends JFrame {
 
     protected void updateGitAndJenkins(FreeLabelTextFieldPair comp0, JFrame tg, String TITLE) {
         try {
-            FileUtilities.writeStringToFile(filename, "cd\\\n");
-            FileUtilities.appendStringToFile(filename, "cd C:\\GradleTutorials\\" + comp0.getText() + "\n\n");
-            FileUtilities.appendStringToFile(filename,"git init\n");
-            FileUtilities.appendStringToFile(filename,"git add *\n");
-            FileUtilities.appendStringToFile(filename,"git commit -m \"First Commit\"\n");
-//            FileUtilities.appendStringToFile(filename, "git remote add origin https://github.com/Petert3660/" + comp0.getText() + ".git\n");
-//            FileUtilities.appendStringToFile(filename, "git push -u origin master");
+            FileUtilities.writeStringToFile(GIT_INIT, "cd\\\n");
+            FileUtilities.appendStringToFile(GIT_INIT, "cd C:\\GradleTutorials\\" + comp0.getText() + "\n\n");
+            FileUtilities.appendStringToFile(GIT_INIT,"git init\n");
+            FileUtilities.appendStringToFile(GIT_INIT,"git add *\n");
+            FileUtilities.appendStringToFile(GIT_INIT,"git commit -m \"First Commit\"\n");
+//            FileUtilities.appendStringToFile(GIT_INIT, "git remote add origin https://github.com/Petert3660/" + comp0.getText() + ".git\n");
+//            FileUtilities.appendStringToFile(GIT_INIT, "git push -u origin master");
             Process process = Runtime.getRuntime().exec("C:\\GradleTutorials\\ServicesAdminManager\\gitinit.bat");
 
             JOptionPane.showMessageDialog(tg,
