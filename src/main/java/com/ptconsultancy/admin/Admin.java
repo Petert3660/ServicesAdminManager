@@ -105,9 +105,11 @@ public class Admin implements Serializable {
     public synchronized void outputServiceStatus() {
         if (freeTextArea != null) {
             freeTextArea.clearTextArea();
-            freeTextArea.appendNewLine("----------------------------------------------------------------------------------------------------");
-            freeTextArea.appendNewLine("Services Added");
-            freeTextArea.appendNewLine("----------------------------------------------------------------------------------------------------");
+            if (allServices.size() > 0) {
+                freeTextArea.appendNewLine("----------------------------------------------------------------------------------------------------");
+                freeTextArea.appendNewLine("Services Added");
+                freeTextArea.appendNewLine("----------------------------------------------------------------------------------------------------");
+            }
             for (Service service : getAllServicesByName()) {
                 freeTextArea.appendNewLine("----------------------------------------------------------------------------------------------------");
                 freeTextArea.appendNewLine("Service: " + service.getName());

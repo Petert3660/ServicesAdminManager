@@ -4,6 +4,7 @@
 
 package com.ptconsultancy.createdgui;
 
+import static com.ptconsultancy.constants.FileSystemConstants.LOCAL_TEST_ENV;
 import static com.ptconsultancy.constants.FileSystemConstants.PROJECT_PATH;
 import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
 
@@ -440,7 +441,7 @@ public class MainDialog extends JFrame {
 
     public void updateServiceInfo(String serviceName) {
         admin.removeService(serviceName);
-        admin.addService("C:\\PTConsultancy\\LocalTestEnvironment\\" + serviceName);
+        admin.addService(LOCAL_TEST_ENV + "/" + serviceName);
     }
 
     public void prepareAndExecuteOutputFile(Service service, int count) {
