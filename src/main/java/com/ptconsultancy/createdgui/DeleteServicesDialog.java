@@ -5,6 +5,7 @@
 package com.ptconsultancy.createdgui;
 
 import static com.ptconsultancy.constants.FileSystemConstants.EXCLUSION_FILE;
+import static com.ptconsultancy.constants.FileSystemConstants.LOCAL_TEST_ENV;
 import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
 import static com.ptconsultancy.constants.ServiceAdminConstants.STANDARD_DROPDOWN_SELECT;
 import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
@@ -62,7 +63,7 @@ public class DeleteServicesDialog extends NewServiceHelper {
 
         ArrayList<String> items0 = new ArrayList<String>();
         items0.add(STANDARD_DROPDOWN_SELECT);
-        File targetDir = new File("C:/PTConsultancy/LocalTestEnvironment");
+        File targetDir = new File(LOCAL_TEST_ENV);
         File[] allFiles = targetDir.listFiles();
         for (File service : allFiles) {
             if (service.isDirectory() && !exclusions.contains(service.getName())) {

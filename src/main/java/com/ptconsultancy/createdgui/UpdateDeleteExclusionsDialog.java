@@ -5,6 +5,7 @@
 package com.ptconsultancy.createdgui;
 
 import static com.ptconsultancy.constants.FileSystemConstants.EXCLUSION_FILE;
+import static com.ptconsultancy.constants.FileSystemConstants.LOCAL_TEST_ENV;
 import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
 import static com.ptconsultancy.constants.ServiceAdminConstants.STANDARD_DROPDOWN_SELECT;
 import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
@@ -68,7 +69,7 @@ public class UpdateDeleteExclusionsDialog extends NewServiceHelper {
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fc = new JFileChooser();
                 fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                fc.setCurrentDirectory(new File("C:/PTConsultancy/LocalTestEnvironment"));
+                fc.setCurrentDirectory(new File(LOCAL_TEST_ENV));
                 int returnVal = fc.showDialog(tg, "Select");
                 if (returnVal == 0) {
                     String serviceName = fc.getSelectedFile().getName();
