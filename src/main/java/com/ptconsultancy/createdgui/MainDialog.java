@@ -4,6 +4,7 @@
 
 package com.ptconsultancy.createdgui;
 
+import static com.ptconsultancy.constants.FileSystemConstants.PROJECT_PATH;
 import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
 
 import com.ptconsultancy.admin.Admin;
@@ -39,8 +40,6 @@ import org.springframework.web.client.RestTemplate;
 import org.thymeleaf.util.StringUtils;
 
 public class MainDialog extends JFrame {
-
-    private static final String PROJECT_PATH = "C:\\GradleTutorials\\ServicesAdminManager\\ProjectFiles";
 
     private static final String TITLE = MAIN_HEADING;
     private static final int FRAME_X_SIZE = 1000;

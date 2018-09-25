@@ -3,6 +3,7 @@
 
 package com.ptconsultancy.createdgui;
 
+import static com.ptconsultancy.constants.FileSystemConstants.PROJECT_PATH;
 import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
 import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
 
@@ -19,8 +20,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class NewProjectDialog extends JFrame {
-
-    private static final String PROJECT_PATH = "C:/GradleTutorials/ServicesAdminManager/ProjectFiles";
 
     private static final String SUB_HEADING = " - Create New Project";
     private static final String TITLE = MAIN_HEADING + SUB_HEADING;
