@@ -153,9 +153,9 @@ abstract public class NewServiceHelper extends JFrame {
     }
 
     protected void deleteServiceFromSource(String serviceName) throws IOException {
-        String source = "C:/GradleTutorials/";
+        String source = LOCAL_SRC + "/";
         source = source + serviceName;
-        if (!source.equals("C:/GradleTutorials/")) {
+        if (!source.equals(LOCAL_SRC + "/")) {
             FileUtilities.deleteDirectory(new File(source));
         }
     }
