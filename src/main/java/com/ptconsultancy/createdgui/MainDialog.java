@@ -442,7 +442,7 @@ public class MainDialog extends JFrame {
 
     public void updateServiceInfo(String serviceName) {
         admin.removeService(serviceName);
-        admin.addService(LOCAL_TEST_ENV + "/" + serviceName);
+        admin.addService(LOCAL_TEST_ENV + "\\" + serviceName);
     }
 
     public void prepareAndExecuteOutputFile(Service service, int count) {
