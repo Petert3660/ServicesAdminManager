@@ -13,4 +13,7 @@ public class FileSystemConstants {
     public static final String SKELETON_SB_PROJECT = "C:/GradleTutorials/SkeletonSpringBootProject";
     public static final String GIT_INIT = "C:/GradleTutorials/ServicesAdminManager/gitinit.bat";
     public static final String JENKINS_CONFIG = "C:/GradleTutorials/ServicesAdminManager/JenkinsModelConfig.xml";
+
+    public static final String BANNER_FILE = "/src/main/resources/banner.txt";
+    public static final String MESSAGE_FILE = "/src/main/resources/messages.properties";
 }

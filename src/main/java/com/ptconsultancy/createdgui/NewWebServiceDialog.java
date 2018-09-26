@@ -3,8 +3,10 @@
 
 package com.ptconsultancy.createdgui;
 
+import static com.ptconsultancy.constants.FileSystemConstants.BANNER_FILE;
 import static com.ptconsultancy.constants.FileSystemConstants.GIT_INIT;
 import static com.ptconsultancy.constants.FileSystemConstants.LOCAL_SRC;
+import static com.ptconsultancy.constants.FileSystemConstants.MESSAGE_FILE;
 import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
 import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
 
@@ -108,10 +110,10 @@ public class NewWebServiceDialog extends NewServiceHelper {
                         }
 
                         // Update banner.txt file
-                        updateBannerFile(comp0);
+                        updateFile(comp0, BANNER_FILE);
 
                         // Update messages file
-                        updateMessagesFile(comp0);
+                        updateFile(comp0, MESSAGE_FILE);
 
                         // Remove .git directory to break link to remote origin
                         removeGitDependency(comp0);
@@ -185,35 +187,18 @@ public class NewWebServiceDialog extends NewServiceHelper {
         }
     }
 
-    private void updateBannerFile(FreeLabelTextFieldPair comp0) {
-        final String BANNER_FILE = LOCAL_SRC + "/" + comp0.getText() + "/src/main/resources/banner.txt";
-        File bannerFile = new File(BANNER_FILE);
+    private void updateFile(FreeLabelTextFieldPair comp0, String fileToUpdate) {
+        final String FILE = LOCAL_SRC + "/" + comp0.getText() + fileToUpdate;
+        File file = new File(FILE);
 
         try {
-            String allBannerContents = FileUtilities.writeFileToString(BANNER_FILE);
-            if (bannerFile.exists()) {
-                bannerFile.delete();
+            String allContents = FileUtilities.writeFileToString(FILE);
+            if (file.exists()) {
+                file.delete();
             }
-            allBannerContents = allBannerContents.replace(PROJECT_TITLE,
+            allContents = allContents.replace(PROJECT_TITLE,
                 comp0.getText());
-            FileUtilities.writeStringToFile(BANNER_FILE, allBannerContents);
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
-    }
-
-    private void updateMessagesFile(FreeLabelTextFieldPair comp0) {
-        final String MESSAGES_FILE = LOCAL_SRC + "/" + comp0.getText() + "/src/main/resources/messages.properties";
-        File bannerFile = new File(MESSAGES_FILE);
-
-        try {
-            String allMessagesContents = FileUtilities.writeFileToString(MESSAGES_FILE);
-            if (bannerFile.exists()) {
-                bannerFile.delete();
-            }
-            allMessagesContents = allMessagesContents.replace(PROJECT_TITLE,
-                comp0.getText());
-            FileUtilities.writeStringToFile(MESSAGES_FILE, allMessagesContents);
+            FileUtilities.writeStringToFile(FILE, allContents);
         } catch (IOException e1) {
             e1.printStackTrace();
         }
