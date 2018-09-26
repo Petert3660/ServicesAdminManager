@@ -52,8 +52,7 @@ import org.thymeleaf.util.StringUtils;
 
 public class EndpointTestDialog extends JFrame {
 
-    private static final String SUB_HEADING = "Endpoint Test";
-    private static final String TITLE = MAIN_HEADING + " - " + SUB_HEADING;
+    private static final String TITLE = "Endpoint Test";
     private static final int FRAME_X_SIZE = 700;
     private static final int FRAME_Y_SIZE = 900;
     private Color col = new Color(230, 255, 255);

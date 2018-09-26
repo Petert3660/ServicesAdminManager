@@ -18,8 +18,7 @@ import javax.swing.JPanel;
 
 public class ListServiceDetailsCard extends JFrame {
 
-    private static final String SUB_HEADING = "List Service Details";
-    private static final String TITLE = MAIN_HEADING + " - " + SUB_HEADING;
+    private static final String TITLE = "List Service Details";
     private static final int FRAME_X_SIZE = 550;
     private static final int FRAME_Y_SIZE = 350;
     private Color col = new Color(235, 255, 255);

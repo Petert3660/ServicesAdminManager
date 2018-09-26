@@ -30,8 +30,7 @@ import org.thymeleaf.util.StringUtils;
 
 public class AddServicesDialog extends JFrame {
 
-    private static final String SUB_HEADING = "Add Service";
-    private static final String TITLE = MAIN_HEADING + " - " + SUB_HEADING;
+    private static final String TITLE = "Add Service";
     private static final int FRAME_X_SIZE = 700;
     private static final int FRAME_Y_SIZE = 300;
     private Color col = new Color(230, 255, 255);

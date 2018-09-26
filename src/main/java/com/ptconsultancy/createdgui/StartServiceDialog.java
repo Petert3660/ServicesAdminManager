@@ -25,8 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class StartServiceDialog extends JFrame {
 
-    private static final String SUB_HEADING = "Start Service";
-    private static final String TITLE = MAIN_HEADING + " - " + SUB_HEADING;
+    private static final String TITLE = "Start Service";
     private static final int FRAME_X_SIZE = 550;
     private static final int FRAME_Y_SIZE = 250;
     private Color col = new Color(230, 255, 255);

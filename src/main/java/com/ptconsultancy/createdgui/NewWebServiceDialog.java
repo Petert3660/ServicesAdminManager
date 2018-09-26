@@ -29,9 +29,7 @@ public class NewWebServiceDialog extends NewServiceHelper {
 
     private static final String PROJECT_TITLE = "Skeleton Spring Boot Web Project";
 
-    private static final String SUB_HEADING = " - Create New Frontend Web Service";
-    private static final String TITLE = MAIN_HEADING + SUB_HEADING;
-
+    private static final String TITLE = "Create New Frontend Web Service";
     private static final int FRAME_X_SIZE = 550;
     private static final int FRAME_Y_SIZE = 350;
     private Color col = new Color(230, 255, 255);

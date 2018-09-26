@@ -21,8 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class GeneratePasswordDialog extends JFrame {
 
-    private static final String SUB_HEADING = "Generate Password";
-    private static final String TITLE = MAIN_HEADING + " - " + SUB_HEADING;
+    private static final String TITLE = "Generate Password";
     private static final int FRAME_X_SIZE = 700;
     private static final int FRAME_Y_SIZE = 250;
     private Color col = new Color(230, 255, 255);
