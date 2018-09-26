@@ -1,5 +1,6 @@
 package com.ptconsultancy.admin;
 
+import static com.ptconsultancy.constants.FileSystemConstants.TEST_ADMIN_FILEPATH;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
@@ -12,11 +13,11 @@ import org.junit.Test;
 public class TestAdmin {
 
     private static final String TEST_SERVICE_NAME_1 = "service1";
-    private static final String TEST_PATH_1 = "c:\\test\\" + TEST_SERVICE_NAME_1;
+    private static final String TEST_PATH_1 = TEST_ADMIN_FILEPATH + TEST_SERVICE_NAME_1;
     private static final String TEST_SERVICE_NAME_2 = "anotherService";
-    private static final String TEST_PATH_2 = "c:\\test\\" + TEST_SERVICE_NAME_2;
+    private static final String TEST_PATH_2 = TEST_ADMIN_FILEPATH + TEST_SERVICE_NAME_2;
     private static final String TEST_SERVICE_NAME_3 = "yetAnotherService";
-    private static final String TEST_PATH_3 = "c:\\test\\" + TEST_SERVICE_NAME_3;
+    private static final String TEST_PATH_3 = TEST_ADMIN_FILEPATH + TEST_SERVICE_NAME_3;
     private static final String TEST_URL_1 = "localhost:8080";
     private static final String TEST_URL_2 = "localhost:8200";
 

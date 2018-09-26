@@ -16,4 +16,8 @@ public class FileSystemConstants {
 
     public static final String BANNER_FILE = "/src/main/resources/banner.txt";
     public static final String MESSAGE_FILE = "/src/main/resources/messages.properties";
+
+    public static final String ADMIN_SAVE = "\\adminSave";
+
+    public static final String TEST_ADMIN_FILEPATH = "c:\\test\\";
 }

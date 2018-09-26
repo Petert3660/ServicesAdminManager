@@ -84,7 +84,8 @@ public class DeleteServicesDialog extends NewServiceHelper {
                             deleteServiceFromSource(comp0.getSelectedItem());
                             deleteServiceFromJenkinsTarget(comp0.getSelectedItem());
                         } catch (IOException e1) {
-                            e1.printStackTrace();
+                            JOptionPane.showMessageDialog(tg, "Unable to delete all directories at this time - please close open files/directroies and try again!",
+                                TITLE, JOptionPane.INFORMATION_MESSAGE);
                         }
                     }
                     b1.doClick();

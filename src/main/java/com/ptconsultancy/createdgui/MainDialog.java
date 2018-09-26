@@ -4,6 +4,7 @@
 
 package com.ptconsultancy.createdgui;
 
+import static com.ptconsultancy.constants.FileSystemConstants.ADMIN_SAVE;
 import static com.ptconsultancy.constants.FileSystemConstants.LOCAL_TEST_ENV;
 import static com.ptconsultancy.constants.FileSystemConstants.PROJECT_PATH;
 import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
@@ -499,7 +500,7 @@ public class MainDialog extends JFrame {
     public void updateProjectSelection(String text) {
         projectName = text;
         comp1.setLabelText("The currently selected project is:- " + projectName);
-        File file = new File(PROJECT_PATH + "\\" + projectName + "\\adminSave");
+        File file = new File(PROJECT_PATH + "\\" + projectName + ADMIN_SAVE);
         if (file.exists()) {
             try {
                 FileInputStream fileIn = new FileInputStream(file.getAbsolutePath());
@@ -542,7 +543,7 @@ public class MainDialog extends JFrame {
         if (admin.noServiceRunning()) {
             if (!StringUtils.isEmpty(projectName)) {
                 try {
-                    FileOutputStream fileOut = new FileOutputStream(PROJECT_PATH + "\\" + projectName + "\\adminSave");
+                    FileOutputStream fileOut = new FileOutputStream(PROJECT_PATH + "\\" + projectName + ADMIN_SAVE);
                     ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
                     objectOut.writeObject(admin);
                     objectOut.close();
