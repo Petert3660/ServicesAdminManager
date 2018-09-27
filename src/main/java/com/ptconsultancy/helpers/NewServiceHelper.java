@@ -13,15 +13,24 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.support.BasicAuthorizationInterceptor;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+@Component
 abstract public class NewServiceHelper extends JFrame {
+
+    private static final String JENKINS_ID = "jenkins.id";
+    private static final String JENKINS_PASS = "jenkins.password";
+    private static final String JENKINS_ENDPOINT = "jenkins.url";
+
+    private Environment env;
 
     protected void removeGitDependency(FreeLabelTextFieldPair comp0) {
         File srcDir;
@@ -106,6 +115,11 @@ abstract public class NewServiceHelper extends JFrame {
     }
 
     protected void updateGitAndJenkins(FreeLabelTextFieldPair comp0, JFrame tg, String TITLE) {
+
+        String jenkinsId = env.getProperty(JENKINS_ID);
+        String jenkinsPass = env.getProperty(JENKINS_PASS);
+        String jenkinsEndpoint = env.getProperty(JENKINS_ENDPOINT);
+
         try {
             FileUtilities.writeStringToFile(GIT_INIT, "cd\\\n");
             FileUtilities.appendStringToFile(GIT_INIT, "cd C:\\GradleTutorials\\" + comp0.getText() + "\n\n");
@@ -137,8 +151,8 @@ abstract public class NewServiceHelper extends JFrame {
             httpHeaders.setContentType(MediaType.APPLICATION_XML);
             HttpEntity<String> request = new HttpEntity<>(xml, httpHeaders);
             RestTemplate restTemplate = new RestTemplate();
-            restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor("petert3660", "2905e6a2fd0251f555bd90c055e0ff18"));
-            String endpoint = "http://localhost:8080/createItem?name=" + comp0.getText();
+            restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(jenkinsId, jenkinsPass));
+            String endpoint = jenkinsEndpoint + comp0.getText();
             URI uri = new URI(endpoint);
             try {
                 ResponseEntity<String> responseEntity = restTemplate.postForEntity(uri, request, String.class);
@@ -167,5 +181,9 @@ abstract public class NewServiceHelper extends JFrame {
         if (!source.equals(LOCAL_SRC + "/")) {
             FileUtilities.deleteDirectory(new File(source));
         }
+    }
+
+    public void setEnv(Environment env) {
+        this.env = env;
     }
 }

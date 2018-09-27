@@ -47,7 +47,7 @@ public class Application implements CommandLineRunner {
     public void run(String... strings) throws Exception {
         outputMessage();
 
-        MainDialog md = new MainDialog(admin);
+        MainDialog md = new MainDialog(admin, env);
         GuiHelper.showFrame(md);
     }
 

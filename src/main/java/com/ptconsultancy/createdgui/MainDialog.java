@@ -38,6 +38,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.web.client.RestTemplate;
 import org.thymeleaf.util.StringUtils;
 
@@ -62,14 +63,16 @@ public class MainDialog extends JFrame {
     private JMenuBar menuBar = new JMenuBar();
 
     private Admin admin;
+    private Environment env;
 
     FreeButton b0 = new FreeButton(FreeButton.EXIT, 460, 800, 80);
     FreeTextArea comp0 = new FreeTextArea(col, "Output:", 30, 90, 200, 935, 620, false);
 
     @Autowired
-    public MainDialog(Admin admin) {
+    public MainDialog(Admin admin, Environment env) {
 
         this.admin = admin;
+        this.env = env;
         this.admin.setFreeTextArea(comp0);
 
         this.setTitle(TITLE);
@@ -184,7 +187,7 @@ public class MainDialog extends JFrame {
         // This is the control for the Services/New REST Service menu item
         menuItem10.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                NewServiceDialog newServiceDialog = new NewServiceDialog(tg);
+                NewServiceDialog newServiceDialog = new NewServiceDialog(tg, env);
                 GuiHelper.showFrame(newServiceDialog);
             }
         });
@@ -192,7 +195,7 @@ public class MainDialog extends JFrame {
         // This is the control for the Services/New Web Service menu item
         menuItem11.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                NewWebServiceDialog newWebServiceDialog = new NewWebServiceDialog(tg);
+                NewWebServiceDialog newWebServiceDialog = new NewWebServiceDialog(tg, env);
                 GuiHelper.showFrame(newWebServiceDialog);
             }
         });

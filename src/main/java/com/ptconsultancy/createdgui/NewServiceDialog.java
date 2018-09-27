@@ -23,6 +23,8 @@ import java.io.File;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 
 public class NewServiceDialog extends NewServiceHelper {
 
@@ -36,11 +38,15 @@ public class NewServiceDialog extends NewServiceHelper {
     private NewServiceDialog tg = this;
     private MainDialog mainDialog;
 
+    private Environment env;
     private String mode;
 
-    public NewServiceDialog(MainDialog mainDialog) {
+    @Autowired
+    public NewServiceDialog(MainDialog mainDialog, Environment env) {
 
         this.mainDialog = mainDialog;
+        this.env = env;
+        setEnv(this.env);
         this.mainDialog.setEnabled(false);
 
         this.setTitle(TITLE);
