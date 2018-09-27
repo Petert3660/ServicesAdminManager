@@ -116,6 +116,15 @@ abstract public class NewServiceHelper extends JFrame {
 //            FileUtilities.appendStringToFile(GIT_INIT, "git push -u origin master");
             Process process = Runtime.getRuntime().exec(GIT_INIT);
 
+            while (process.isAlive()) {
+                int x = 0;
+            }
+
+            File file = new File(GIT_INIT);
+            if (file.exists()) {
+                file.delete();
+            }
+
             JOptionPane.showMessageDialog(tg,
                 "IMPORTANT! About to set up new Jenkins Project.\n\nFirst you should make sure the new repository, "
                     + comp0.getText() + ".git is published to the remote origin.\n\nDo this NOW before proceeding.",

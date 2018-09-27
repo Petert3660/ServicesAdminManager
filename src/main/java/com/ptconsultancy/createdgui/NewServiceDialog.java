@@ -3,7 +3,6 @@
 
 package com.ptconsultancy.createdgui;
 
-import static com.ptconsultancy.constants.FileSystemConstants.GIT_INIT;
 import static com.ptconsultancy.constants.FileSystemConstants.LOCAL_SRC;
 import static com.ptconsultancy.constants.FileSystemConstants.SKELETON_SB_PROJECT;
 import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
@@ -120,11 +119,6 @@ public class NewServiceDialog extends NewServiceHelper {
                         JOptionPane.showMessageDialog(tg,
                             "Service: " + comp0.getText() + " has been successfully created",
                             TITLE, JOptionPane.INFORMATION_MESSAGE);
-
-                        File file = new File(GIT_INIT);
-                        if (file.exists()) {
-                            file.delete();
-                        }
 
                         b1.doClick();
                     } else {

@@ -4,7 +4,6 @@
 package com.ptconsultancy.createdgui;
 
 import static com.ptconsultancy.constants.FileSystemConstants.BANNER_FILE;
-import static com.ptconsultancy.constants.FileSystemConstants.GIT_INIT;
 import static com.ptconsultancy.constants.FileSystemConstants.LOCAL_SRC;
 import static com.ptconsultancy.constants.FileSystemConstants.MESSAGE_FILE;
 import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
@@ -123,11 +122,6 @@ public class NewWebServiceDialog extends NewServiceHelper {
                         JOptionPane.showMessageDialog(tg,
                             "Service: " + comp0.getText() + " has been successfully created",
                             TITLE, JOptionPane.INFORMATION_MESSAGE);
-
-                        File file = new File(GIT_INIT);
-                        if (file.exists()) {
-                            file.delete();
-                        }
 
                         b1.doClick();
                     } else {

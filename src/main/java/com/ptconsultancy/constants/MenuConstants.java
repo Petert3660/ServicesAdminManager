@@ -17,6 +17,7 @@ public class MenuConstants {
     public static final String SERVICES_MENU_LIST = "List Service Details";
     public static final String SERVICES_MENU_DELETE = "Delete Service";
     public static final String SERVICES_REVIEW_DELETE_EXCLUSION = "Update Delete Exclusions";
+    public static final String SERVICES_CHANGE_PORT = "Change Service Port";
 
     public static final String START_SERVICES_MENU = "Start Services";
     public static final String START_SERVICES_MENU_ALL = "Start All Services";

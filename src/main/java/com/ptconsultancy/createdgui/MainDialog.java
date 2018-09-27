@@ -177,6 +177,9 @@ public class MainDialog extends JFrame {
         menu1.addSeparator();
         JMenuItem menuItem16 = new JMenuItem(MenuConstants.SERVICES_MENU_LIST);
         menu1.add(menuItem16);
+        menu1.addSeparator();
+        JMenuItem menuItem19 = new JMenuItem(MenuConstants.SERVICES_CHANGE_PORT);
+        menu1.add(menuItem19);
 
         // This is the control for the Services/New REST Service menu item
         menuItem10.addActionListener(new ActionListener() {
@@ -262,6 +265,18 @@ public class MainDialog extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 UpdateDeleteExclusionsDialog updateDeleteExclusionsDialog = new UpdateDeleteExclusionsDialog(tg);
                 GuiHelper.showFrame(updateDeleteExclusionsDialog);
+            }
+        });
+
+        menuItem19.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (admin.noServices()) {
+                    JOptionPane.showMessageDialog(tg, "There are no services added as yet - you must add services before their details can be updated",
+                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    UpdateServicesPortDialog updateServicesPortDialog = new UpdateServicesPortDialog(tg, admin);
+                    GuiHelper.showFrame(updateServicesPortDialog);
+                }
             }
         });
 
