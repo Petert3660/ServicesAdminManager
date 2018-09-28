@@ -19,6 +19,7 @@ import com.ptconsultancy.domain.guicomponents.FreeButton;
 import com.ptconsultancy.domain.guicomponents.FreeLabel;
 import com.ptconsultancy.domain.guicomponents.FreeLabelComboBoxPair;
 import com.ptconsultancy.domain.guicomponents.FreeLabelTextFieldPair;
+import com.ptconsultancy.domain.utilities.CommonUtils;
 import com.ptconsultancy.domain.utilities.FileUtilities;
 import java.awt.Color;
 import java.awt.Font;
@@ -88,15 +89,7 @@ public class UpdateServicesPortDialog extends JFrame {
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                boolean isPortInteger = true;
-                // Check that port number is an integer
-                try {
-
-                    int portNum = Integer.parseInt(tf0.getText());
-
-                } catch (NumberFormatException nfe) {
-                    isPortInteger = false;
-                }
+                boolean isPortInteger = CommonUtils.isNumberAnInteger(tf0.getText());
 
                 if (!comp0.isFirstItemSelected() && isPortInteger) {
                     Service service = admin.getServiceByName(comp0.getSelectedItem());

@@ -15,6 +15,7 @@ import com.ptconsultancy.domain.guicomponents.FreeButton;
 import com.ptconsultancy.domain.guicomponents.FreeCheckBox;
 import com.ptconsultancy.domain.guicomponents.FreeLabel;
 import com.ptconsultancy.domain.guicomponents.FreeLabelTextFieldPair;
+import com.ptconsultancy.domain.utilities.CommonUtils;
 import com.ptconsultancy.domain.utilities.FileUtilities;
 import com.ptconsultancy.domain.utilities.GenerateRandomKeys;
 import com.ptconsultancy.helpers.NewServiceHelper;
@@ -92,15 +93,7 @@ public class NewServiceDialog extends NewServiceHelper {
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                boolean isPortInteger = true;
-                // Check that port number is an integer
-                try {
-                    if (!comp1.empty()) {
-                        int portNum = Integer.parseInt(comp1.getText());
-                    }
-                } catch (NumberFormatException nfe) {
-                    isPortInteger = false;
-                }
+                boolean isPortInteger = CommonUtils.isNumberAnInteger(comp1.getText());
 
                 if (!comp0.empty() && isPortInteger) {
                     File targDir = new File(LOCAL_SRC + "/" + comp0.getText());
