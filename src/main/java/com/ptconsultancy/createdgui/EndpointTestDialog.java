@@ -4,6 +4,7 @@
 
 package com.ptconsultancy.createdgui;
 
+import static com.ptconsultancy.constants.InformationMessages.NO_SERVICE_SELECT;
 import static com.ptconsultancy.constants.ServiceAdminConstants.DELETE_TYPE;
 import static com.ptconsultancy.constants.ServiceAdminConstants.FALSE;
 import static com.ptconsultancy.constants.ServiceAdminConstants.GET_TYPE;
@@ -57,7 +58,6 @@ public class EndpointTestDialog extends JFrame {
     private static final int FRAME_Y_SIZE = 900;
     private Color col = new Color(230, 255, 255);
 
-    private static final String SERVICE_ERROR = "No service selected - please select a service before continuing";
     private static final String ENDPOINT_ERROR = "No endpoint selected - please select an endpoint before continuing";
 
     private static final String BODY_TEXTAREA_LABEL = "Body:";
@@ -199,7 +199,7 @@ public class EndpointTestDialog extends JFrame {
                     }
                 } else {
                     if (comp1.getComboBox().getSelectedIndex() == 0) {
-                        JOptionPane.showMessageDialog(tg, SERVICE_ERROR,
+                        JOptionPane.showMessageDialog(tg, NO_SERVICE_SELECT,
                             TITLE, JOptionPane.INFORMATION_MESSAGE);
                     } else {
                         JOptionPane.showMessageDialog(tg, ENDPOINT_ERROR,
@@ -256,7 +256,7 @@ public class EndpointTestDialog extends JFrame {
                     comp2.setText(HEALTHCHECK);
                     b0.doClick();
                 } else {
-                    JOptionPane.showMessageDialog(tg, SERVICE_ERROR,
+                    JOptionPane.showMessageDialog(tg, NO_SERVICE_SELECT,
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 }
             }

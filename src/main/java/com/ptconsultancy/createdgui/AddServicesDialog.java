@@ -6,6 +6,7 @@ package com.ptconsultancy.createdgui;
 
 import static com.ptconsultancy.constants.FileSystemConstants.EXCLUSION_FILE;
 import static com.ptconsultancy.constants.FileSystemConstants.LOCAL_TEST_ENV;
+import static com.ptconsultancy.constants.InformationMessages.NO_SERVICE_SELECTED;
 import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
 import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
 
@@ -88,7 +89,7 @@ public class AddServicesDialog extends JFrame {
                     }
                     b1.doClick();
                 } else {
-                    JOptionPane.showMessageDialog(tg, "No service selected - please enter/select a service before continuing",
+                    JOptionPane.showMessageDialog(tg, NO_SERVICE_SELECTED,
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 }
             }

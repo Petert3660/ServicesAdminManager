@@ -6,6 +6,7 @@ package com.ptconsultancy.createdgui;
 
 import static com.ptconsultancy.constants.FileSystemConstants.GIT_INIT;
 import static com.ptconsultancy.constants.FileSystemConstants.LOCAL_SRC;
+import static com.ptconsultancy.constants.InformationMessages.NO_SERVICE_SELECT;
 import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
 import static com.ptconsultancy.constants.ServiceAdminConstants.STANDARD_DROPDOWN_SELECT;
 import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
@@ -98,7 +99,7 @@ public class UpdateServicesPortDialog extends JFrame {
                     admin.outputServiceStatus();
                     b1.doClick();
                 } else {
-                    JOptionPane.showMessageDialog(tg, "No service selected - please select a service before continuing",
+                    JOptionPane.showMessageDialog(tg, NO_SERVICE_SELECT,
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 }
             }
