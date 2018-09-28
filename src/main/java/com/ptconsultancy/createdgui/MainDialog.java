@@ -229,7 +229,7 @@ public class MainDialog extends JFrame {
                     JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("monitored"),
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else if (admin.noServiceRunning()) {
-                    JOptionPane.showMessageDialog(tg, "There are no services running yet - there must be services running before they can be monitored",
+                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoServicesRun("monitored"),
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     MonitorServicesDialog monitorServicesDialog = new MonitorServicesDialog(tg, admin);
@@ -249,7 +249,7 @@ public class MainDialog extends JFrame {
         menuItem16.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (admin.noServices()) {
-                    JOptionPane.showMessageDialog(tg, "There are no services added as yet - you must add services before their details can be viewed",
+                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoServicesAdded("viewed"),
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     ListServiceDetailsDialog listServiceDetailsDialog = new ListServiceDetailsDialog(tg, admin);
@@ -275,7 +275,7 @@ public class MainDialog extends JFrame {
         menuItem19.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (admin.noServices()) {
-                    JOptionPane.showMessageDialog(tg, "There are no services added as yet - you must add services before their details can be updated",
+                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoServicesAdded("updated"),
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     UpdateServicesPortDialog updateServicesPortDialog = new UpdateServicesPortDialog(tg, admin);
@@ -494,7 +494,7 @@ public class MainDialog extends JFrame {
                 try {
                     restTemplate.postForObject(endpoint, null, String.class);
                 } catch (Exception e1) {
-                    System.out.println("Exception during shutdown ignored");
+
                 }
                 admin.stopServiceRunningByName(service.getName());
             }
