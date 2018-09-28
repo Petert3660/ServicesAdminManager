@@ -79,12 +79,10 @@ public class MonitorServicesDialog extends JFrame {
                     } catch (Exception e1) {
                         message = "Still trying to connect....";
                     }
-                    JOptionPane.showMessageDialog(tg, message,
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(tg, message, TITLE, JOptionPane.INFORMATION_MESSAGE);
                     b1.setText(FreeButton.CLOSE);
                 } else {
-                    JOptionPane.showMessageDialog(tg, NO_SERVICE_SELECT ,
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(tg, NO_SERVICE_SELECT , TITLE, JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });

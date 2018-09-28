@@ -73,8 +73,7 @@ public class RemoveServicesDialog extends JFrame {
                     admin.outputServiceStatus();
                     b1.doClick();
                 } else {
-                    JOptionPane.showMessageDialog(tg, NO_SERVICE_SELECT,
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(tg, NO_SERVICE_SELECT, TITLE, JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });

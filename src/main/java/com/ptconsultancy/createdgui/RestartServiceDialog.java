@@ -81,7 +81,7 @@ public class RestartServiceDialog extends JFrame {
                             try {
                                 restTemplate.postForObject(endpoint, null, String.class);
                             } catch(Exception e1) {
-                                System.out.println("Exception during shutdown ignored");
+                                e1.printStackTrace();
                             }
                             admin.stopServiceRunningByName(service.getName());
                             admin.outputServiceStatus();
@@ -89,12 +89,10 @@ public class RestartServiceDialog extends JFrame {
                         mainDialog.prepareAndExecuteOutputFile(admin.getServiceByName(comp0.getSelectedItem()), 0);
                         b1.doClick();
                     } else {
-                        JOptionPane.showMessageDialog(tg, InformationMessages.reportPortConfilcts(comp0.getSelectedItem(), portConflicts),
-                            TITLE, JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(tg, InformationMessages.reportPortConfilcts(comp0.getSelectedItem(), portConflicts), TITLE, JOptionPane.INFORMATION_MESSAGE);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(tg, NO_SERVICE_SELECT,
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(tg, NO_SERVICE_SELECT, TITLE, JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });

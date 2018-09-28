@@ -2,6 +2,8 @@ package com.ptconsultancy.constants;
 
 public class InformationMessages {
 
+    public static final String SELECT = "Select";
+
     public static final String NO_SERVICE_SELECTED = "No service selected - please enter/select a service before continuing";
     public static final String NO_SERVICE_SELECT = "No service selected - please select a service before continuing";
 
@@ -51,4 +53,27 @@ public class InformationMessages {
     }
 
     public static final String UNABLE_TO_DELETE_DIRS = "Unable to delete all directories at this time - please close open files/directories and try again!";
+    public static final String SERVICE_DELETED = "service successfully deleted!";
+
+    public static String sureToDelete(String input) {
+        return "Are you sure you wish to delete the service " + input + "?";
+    }
+
+    public static String serviceAdded(String input) {
+        return "Service " + input + " has already been added";
+    }
+
+    public static String projectAdded(String input) {
+        return "Project: " + input + " has been successfully created";
+    }
+
+    public static String serviceSuccessfullyAdded(String input) {
+        return "Service: " + input + " has been successfully created";
+    }
+
+    public static String sureToRemoveExclusion(String input) {
+        return "Are you sure you wish to remove the project " + input + " from delete exclusions?";
+    }
+
+    public static final String GIT_PUSH = "IMPORTANT! Please push the port alteration to GitHub so that Jenkins can rebuild with this update";
 }

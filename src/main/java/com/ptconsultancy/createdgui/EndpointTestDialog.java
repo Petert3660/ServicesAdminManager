@@ -29,6 +29,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.ptconsultancy.admin.Admin;
 import com.ptconsultancy.admin.Service;
+import com.ptconsultancy.constants.ErrorMessages;
 import com.ptconsultancy.domain.guicomponents.FreeButton;
 import com.ptconsultancy.domain.guicomponents.FreeLabel;
 import com.ptconsultancy.domain.guicomponents.FreeLabelComboBoxPair;
@@ -57,8 +58,6 @@ public class EndpointTestDialog extends JFrame {
     private static final int FRAME_X_SIZE = 700;
     private static final int FRAME_Y_SIZE = 900;
     private Color col = new Color(230, 255, 255);
-
-    private static final String ENDPOINT_ERROR = "No endpoint selected - please select an endpoint before continuing";
 
     private static final String BODY_TEXTAREA_LABEL = "Body:";
 
@@ -199,11 +198,9 @@ public class EndpointTestDialog extends JFrame {
                     }
                 } else {
                     if (comp1.getComboBox().getSelectedIndex() == 0) {
-                        JOptionPane.showMessageDialog(tg, NO_SERVICE_SELECT,
-                            TITLE, JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(tg, NO_SERVICE_SELECT, TITLE, JOptionPane.INFORMATION_MESSAGE);
                     } else {
-                        JOptionPane.showMessageDialog(tg, ENDPOINT_ERROR,
-                            TITLE, JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(tg, ErrorMessages.ENDPOINT_ERROR, TITLE, JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
             }
@@ -239,7 +236,7 @@ public class EndpointTestDialog extends JFrame {
                     try {
                         restTemplate.postForObject(endpoint, null, String.class);
                     } catch(Exception e1) {
-                        System.out.println("Exception during shutdown ignored");
+
                     }
                     admin.stopServiceRunningByName(service.getName());
                     admin.outputServiceStatus();
@@ -256,8 +253,7 @@ public class EndpointTestDialog extends JFrame {
                     comp2.setText(HEALTHCHECK);
                     b0.doClick();
                 } else {
-                    JOptionPane.showMessageDialog(tg, NO_SERVICE_SELECT,
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(tg, NO_SERVICE_SELECT, TITLE, JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });

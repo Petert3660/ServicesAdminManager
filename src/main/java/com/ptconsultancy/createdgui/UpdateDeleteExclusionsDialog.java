@@ -6,10 +6,12 @@ package com.ptconsultancy.createdgui;
 
 import static com.ptconsultancy.constants.FileSystemConstants.EXCLUSION_FILE;
 import static com.ptconsultancy.constants.FileSystemConstants.LOCAL_TEST_ENV;
+import static com.ptconsultancy.constants.InformationMessages.NO_PROJ_SELECTED;
 import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
 import static com.ptconsultancy.constants.ServiceAdminConstants.STANDARD_DROPDOWN_SELECT;
 import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
 
+import com.ptconsultancy.constants.InformationMessages;
 import com.ptconsultancy.domain.guicomponents.FreeButton;
 import com.ptconsultancy.domain.guicomponents.FreeLabel;
 import com.ptconsultancy.domain.guicomponents.FreeLabelComboBoxPair;
@@ -69,7 +71,7 @@ public class UpdateDeleteExclusionsDialog extends NewServiceHelper {
                 JFileChooser fc = new JFileChooser();
                 fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
                 fc.setCurrentDirectory(new File(LOCAL_TEST_ENV));
-                int returnVal = fc.showDialog(tg, "Select");
+                int returnVal = fc.showDialog(tg, InformationMessages.SELECT);
                 if (returnVal == 0) {
                     String serviceName = fc.getSelectedFile().getName();
                     String exclusions = "";
@@ -96,8 +98,7 @@ public class UpdateDeleteExclusionsDialog extends NewServiceHelper {
         b2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (!comp0.isFirstItemSelected()) {
-                    int res = JOptionPane.showConfirmDialog(tg, "Are you sure you wish to remove the project " + comp0.getSelectedItem() + " from delete exclusions?",
-                        TITLE, JOptionPane.YES_NO_CANCEL_OPTION);
+                    int res = JOptionPane.showConfirmDialog(tg, InformationMessages.sureToRemoveExclusion(comp0.getSelectedItem()), TITLE, JOptionPane.YES_NO_CANCEL_OPTION);
                     if (res == 0) {
                         exclusions = exclusions.replace(comp0.getSelectedItem() + "\r\n", "");
                         try {
@@ -110,8 +111,7 @@ public class UpdateDeleteExclusionsDialog extends NewServiceHelper {
                         comp0.getPanel().repaint();
                     }
                 } else {
-                    JOptionPane.showMessageDialog(tg, "No project selected - please select a project before continuing",
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(tg, NO_PROJ_SELECTED, TITLE, JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });

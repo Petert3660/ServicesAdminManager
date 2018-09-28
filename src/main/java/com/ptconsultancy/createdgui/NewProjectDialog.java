@@ -71,18 +71,15 @@ public class NewProjectDialog extends JFrame {
                     File targetDir = new File(PROJECT_PATH + "/" + comp0.getText());
                     if (targetDir.mkdir()) {
                         JOptionPane.showMessageDialog(tg,
-                            "Project: " + comp0.getText() + " has been successfully created",
-                            TITLE, JOptionPane.INFORMATION_MESSAGE);
+                            InformationMessages.projectAdded(comp0.getText()), TITLE, JOptionPane.INFORMATION_MESSAGE);
                         mainDialog.updateProjectSelection(comp0.getText());
                         b1.doClick();
                     } else {
-                        JOptionPane.showMessageDialog(tg, InformationMessages.getUnable("project", comp0.getText()),
-                            TITLE, JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(tg, InformationMessages.getUnable("project", comp0.getText()), TITLE, JOptionPane.INFORMATION_MESSAGE);
                         comp0.clearAndFocus();
                     }
                 } else {
-                    JOptionPane.showMessageDialog(tg, PROJ_NAME_NOT_EMPTY,
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(tg, PROJ_NAME_NOT_EMPTY, TITLE, JOptionPane.INFORMATION_MESSAGE);
                     comp0.clearAndFocus();
                 }
             }

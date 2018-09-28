@@ -72,8 +72,7 @@ public class ListServiceDetailsDialog extends JFrame {
                     GuiHelper.showFrame(listServiceDetailsCard);
                     b1.doClick();
                 } else {
-                    JOptionPane.showMessageDialog(tg, NO_SERVICE_SELECT,
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(tg, NO_SERVICE_SELECT, TITLE, JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });

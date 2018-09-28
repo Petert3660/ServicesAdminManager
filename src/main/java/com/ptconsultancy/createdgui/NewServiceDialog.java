@@ -126,24 +126,20 @@ public class NewServiceDialog extends NewServiceHelper {
                         }
 
                         JOptionPane.showMessageDialog(tg,
-                            "Service: " + comp0.getText() + " has been successfully created",
-                            TITLE, JOptionPane.INFORMATION_MESSAGE);
+                            InformationMessages.serviceSuccessfullyAdded(comp0.getText()), TITLE, JOptionPane.INFORMATION_MESSAGE);
 
                         b1.doClick();
                     } else {
-                        JOptionPane.showMessageDialog(tg, InformationMessages.getUnable("service", comp0.getText()),
-                            TITLE, JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(tg, InformationMessages.getUnable("service", comp0.getText()), TITLE, JOptionPane.INFORMATION_MESSAGE);
                         comp0.clearAndFocus();
                     }
                 } else {
                     if (comp0.empty()) {
-                        JOptionPane.showMessageDialog(tg, SERVICE_NAME_NOT_EMPTY,
-                            TITLE, JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(tg, SERVICE_NAME_NOT_EMPTY, TITLE, JOptionPane.INFORMATION_MESSAGE);
                         comp0.clearAndFocus();
                     }
                     if (!isPortInteger) {
-                        JOptionPane.showMessageDialog(tg, SERVICE_PORT_INTEGER,
-                            TITLE, JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(tg, SERVICE_PORT_INTEGER, TITLE, JOptionPane.INFORMATION_MESSAGE);
                         comp1.clearAndFocus();
                     }
                 }

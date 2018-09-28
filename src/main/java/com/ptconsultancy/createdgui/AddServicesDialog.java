@@ -11,6 +11,7 @@ import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
 import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
 
 import com.ptconsultancy.admin.Admin;
+import com.ptconsultancy.constants.InformationMessages;
 import com.ptconsultancy.domain.guicomponents.FreeButton;
 import com.ptconsultancy.domain.guicomponents.FreeCheckBox;
 import com.ptconsultancy.domain.guicomponents.FreeLabel;
@@ -75,8 +76,7 @@ public class AddServicesDialog extends JFrame {
                 if (!StringUtils.isEmpty(comp0.getText())) {
                     String serviceName = comp0.getText();
                     if (!admin.addService(servicePath)) {
-                        JOptionPane.showMessageDialog(tg, "Service " + serviceName + " has already been added",
-                            TITLE, JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(tg, InformationMessages.serviceAdded(serviceName), TITLE, JOptionPane.INFORMATION_MESSAGE);
                     }
                     admin.outputServiceStatus();
 
@@ -89,8 +89,7 @@ public class AddServicesDialog extends JFrame {
                     }
                     b1.doClick();
                 } else {
-                    JOptionPane.showMessageDialog(tg, NO_SERVICE_SELECTED,
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(tg, NO_SERVICE_SELECTED, TITLE, JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });
@@ -109,7 +108,7 @@ public class AddServicesDialog extends JFrame {
                 JFileChooser fc = new JFileChooser();
                 fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
                 fc.setCurrentDirectory(new File(LOCAL_TEST_ENV));
-                int returnVal = fc.showDialog(tg, "Select");
+                int returnVal = fc.showDialog(tg, InformationMessages.SELECT);
                 if (returnVal == 0) {
                     comp0.setText(fc.getSelectedFile().getName());
                     servicePath = fc.getSelectedFile().getAbsolutePath();

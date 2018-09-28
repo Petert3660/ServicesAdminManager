@@ -224,8 +224,7 @@ public class MainDialog extends JFrame {
         menuItem13.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (admin.noServices()) {
-                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("removed"),
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("removed"), TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     RemoveServicesDialog removeServicesDialog = new RemoveServicesDialog(tg, admin);
                     GuiHelper.showFrame(removeServicesDialog);
@@ -237,11 +236,9 @@ public class MainDialog extends JFrame {
         menuItem14.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (admin.noServices()) {
-                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("monitored"),
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("monitored"), TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else if (admin.noServiceRunning()) {
-                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoServicesRun("monitored"),
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoServicesRun("monitored"), TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     MonitorServicesDialog monitorServicesDialog = new MonitorServicesDialog(tg, admin);
                     GuiHelper.showFrame(monitorServicesDialog);
@@ -260,8 +257,7 @@ public class MainDialog extends JFrame {
         menuItem16.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (admin.noServices()) {
-                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoServicesAdded("viewed"),
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoServicesAdded("viewed"), TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     ListServiceDetailsDialog listServiceDetailsDialog = new ListServiceDetailsDialog(tg, admin);
                     GuiHelper.showFrame(listServiceDetailsDialog);
@@ -286,8 +282,7 @@ public class MainDialog extends JFrame {
         menuItem19.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (admin.noServices()) {
-                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoServicesAdded("updated"),
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoServicesAdded("updated"), TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     UpdateServicesPortDialog updateServicesPortDialog = new UpdateServicesPortDialog(tg, admin);
                     GuiHelper.showFrame(updateServicesPortDialog);
@@ -312,11 +307,9 @@ public class MainDialog extends JFrame {
         menuItem20.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (admin.noServices()) {
-                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("started"),
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("started"), TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else if (admin.allServicesRunning()) {
-                    JOptionPane.showMessageDialog(tg, ALL_SERVICES_RUNNING,
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(tg, ALL_SERVICES_RUNNING, TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     updateServiceInfo();
                     startAllServices();
@@ -328,11 +321,9 @@ public class MainDialog extends JFrame {
         menuItem21.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (admin.noServices()) {
-                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("started"),
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("started"), TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else if (admin.allServicesRunning()) {
-                    JOptionPane.showMessageDialog(tg, ALL_SERVICES_RUNNING,
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(tg, ALL_SERVICES_RUNNING, TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     StartServiceDialog startServiceDialog = new StartServiceDialog(tg, admin);
                     GuiHelper.showFrame(startServiceDialog);
@@ -348,11 +339,9 @@ public class MainDialog extends JFrame {
                     startAllServices();
                 } else {
                     if (admin.noServices()) {
-                        JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("restarted"),
-                            TITLE, JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("restarted"), TITLE, JOptionPane.INFORMATION_MESSAGE);
                     } else if (!admin.allServicesRunning()) {
-                        JOptionPane.showMessageDialog(tg, NOT_ALL_SERVICES_RUNNING,
-                            TITLE, JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(tg, NOT_ALL_SERVICES_RUNNING, TITLE, JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
             }
@@ -362,8 +351,7 @@ public class MainDialog extends JFrame {
         menuItem24.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (admin.noServices()) {
-                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("restarted"),
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("restarted"), TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     RestartServiceDialog restartServiceDialog = new RestartServiceDialog(tg, admin);
                     GuiHelper.showFrame(restartServiceDialog);
@@ -383,11 +371,9 @@ public class MainDialog extends JFrame {
         menuItem30.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (admin.noServices()) {
-                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("stopped"),
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("stopped"), TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else if (admin.noServiceRunning()) {
-                    JOptionPane.showMessageDialog(tg, NO_SERVICES_RUNNING,
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(tg, NO_SERVICES_RUNNING, TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     stopAllServices();
                 }
@@ -398,11 +384,9 @@ public class MainDialog extends JFrame {
         menuItem31.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (admin.noServices()) {
-                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("stopped"),
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("stopped"), TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else if (admin.noServiceRunning()) {
-                    JOptionPane.showMessageDialog(tg, NO_SERVICES_RUNNING,
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(tg, NO_SERVICES_RUNNING, TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     StopServiceDialog stopServiceDialog = new StopServiceDialog(tg, admin);
                     GuiHelper.showFrame(stopServiceDialog);
@@ -420,11 +404,9 @@ public class MainDialog extends JFrame {
         menuItem50.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (admin.noServices()) {
-                    JOptionPane.showMessageDialog(tg, NO_SERVICES_ADDED_ENDPOINT,
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(tg, NO_SERVICES_ADDED_ENDPOINT, TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else if (admin.noServiceRunning()) {
-                    JOptionPane.showMessageDialog(tg, NO_SERVICES_RUNNING_ENDPOINT,
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(tg, NO_SERVICES_RUNNING_ENDPOINT, TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     EndpointTestDialog endpointTestDialog = new EndpointTestDialog(tg, admin);
                     GuiHelper.showFrame(endpointTestDialog);
@@ -505,7 +487,7 @@ public class MainDialog extends JFrame {
                 try {
                     restTemplate.postForObject(endpoint, null, String.class);
                 } catch (Exception e1) {
-
+                    e1.printStackTrace();
                 }
                 admin.stopServiceRunningByName(service.getName());
             }
@@ -522,8 +504,7 @@ public class MainDialog extends JFrame {
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(tg, ENDPOINT_CONFLICT,
-                TITLE, JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(tg, ENDPOINT_CONFLICT, TITLE, JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -545,8 +526,7 @@ public class MainDialog extends JFrame {
                 e.printStackTrace();
             }
         } else {
-            JOptionPane.showMessageDialog(tg, NO_PROJ_CONFIG,
-                TITLE, JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(tg, NO_PROJ_CONFIG, TITLE, JOptionPane.INFORMATION_MESSAGE);
         }
         p1.repaint();
     }
@@ -555,13 +535,12 @@ public class MainDialog extends JFrame {
         JFileChooser fc = new JFileChooser();
         fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         fc.setCurrentDirectory(new File(PROJECT_PATH));
-        int returnVal = fc.showDialog(tg, "Select");
+        int returnVal = fc.showDialog(tg, InformationMessages.SELECT);
 
         if (returnVal == 0) {
             File file = fc.getSelectedFile();
             if (file.getAbsolutePath().equals(PROJECT_PATH)) {
-                JOptionPane.showMessageDialog(tg, NO_PROJ_SELECTED,
-                    TITLE, JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(tg, NO_PROJ_SELECTED, TITLE, JOptionPane.INFORMATION_MESSAGE);
                 menuItem01.doClick();
             } else {
                 updateProjectSelection(file.getName());
@@ -577,18 +556,15 @@ public class MainDialog extends JFrame {
                     ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
                     objectOut.writeObject(admin);
                     objectOut.close();
-                    JOptionPane.showMessageDialog(tg, PROJ_SAVED,
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(tg, PROJ_SAVED, TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             } else {
-                JOptionPane.showMessageDialog(tg, NO_PROJ_SEL,
-                    TITLE, JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(tg, NO_PROJ_SEL, TITLE, JOptionPane.INFORMATION_MESSAGE);
             }
         } else {
-            int res = JOptionPane.showConfirmDialog(tg, STOP_BEFORE_SAVE,
-                TITLE, JOptionPane.YES_NO_OPTION);
+            int res = JOptionPane.showConfirmDialog(tg, STOP_BEFORE_SAVE, TITLE, JOptionPane.YES_NO_OPTION);
             if (res == 0) {
                 stopAllServices();
             }

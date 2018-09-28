@@ -6,6 +6,7 @@ package com.ptconsultancy.createdgui;
 
 import static com.ptconsultancy.constants.FileSystemConstants.GIT_INIT;
 import static com.ptconsultancy.constants.FileSystemConstants.LOCAL_SRC;
+import static com.ptconsultancy.constants.InformationMessages.GIT_PUSH;
 import static com.ptconsultancy.constants.InformationMessages.NO_SERVICE_SELECT;
 import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
 import static com.ptconsultancy.constants.ServiceAdminConstants.STANDARD_DROPDOWN_SELECT;
@@ -93,14 +94,11 @@ public class UpdateServicesPortDialog extends JFrame {
                     service.setUrl(newUrl);
                     admin.addService(service.getAbsolutePath());
                     updateGit(comp0);
-                    JOptionPane.showMessageDialog(tg,
-                        "IMPORTANT! Please push the port alteration to GitHub so that Jenkins can rebuild with this update",
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(tg, GIT_PUSH, TITLE, JOptionPane.INFORMATION_MESSAGE);
                     admin.outputServiceStatus();
                     b1.doClick();
                 } else {
-                    JOptionPane.showMessageDialog(tg, NO_SERVICE_SELECT,
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(tg, NO_SERVICE_SELECT, TITLE, JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });

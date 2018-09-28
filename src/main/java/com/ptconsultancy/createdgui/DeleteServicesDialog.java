@@ -7,11 +7,13 @@ package com.ptconsultancy.createdgui;
 import static com.ptconsultancy.constants.FileSystemConstants.EXCLUSION_FILE;
 import static com.ptconsultancy.constants.FileSystemConstants.LOCAL_TEST_ENV;
 import static com.ptconsultancy.constants.InformationMessages.NO_SERVICE_SELECT;
+import static com.ptconsultancy.constants.InformationMessages.SERVICE_DELETED;
 import static com.ptconsultancy.constants.InformationMessages.UNABLE_TO_DELETE_DIRS;
 import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
 import static com.ptconsultancy.constants.ServiceAdminConstants.STANDARD_DROPDOWN_SELECT;
 import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
 
+import com.ptconsultancy.constants.InformationMessages;
 import com.ptconsultancy.domain.guicomponents.FreeButton;
 import com.ptconsultancy.domain.guicomponents.FreeLabel;
 import com.ptconsultancy.domain.guicomponents.FreeLabelComboBoxPair;
@@ -77,22 +79,19 @@ public class DeleteServicesDialog extends NewServiceHelper {
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (!comp0.isFirstItemSelected()) {
-                    int res = JOptionPane.showConfirmDialog(tg, "Are you sure you wish to delete the service " + comp0.getSelectedItem() + "?",
-                        TITLE, JOptionPane.YES_NO_CANCEL_OPTION);
+                    int res = JOptionPane.showConfirmDialog(tg, InformationMessages.sureToDelete(comp0.getSelectedItem()), TITLE, JOptionPane.YES_NO_CANCEL_OPTION);
                     if (res == 0) {
-                        System.out.println("The service will be deleted here");
                         try {
                             deleteServiceFromSource(comp0.getSelectedItem());
                             deleteServiceFromJenkinsTarget(comp0.getSelectedItem());
+                            JOptionPane.showMessageDialog(tg, SERVICE_DELETED, TITLE, JOptionPane.INFORMATION_MESSAGE);
                         } catch (IOException e1) {
-                            JOptionPane.showMessageDialog(tg, UNABLE_TO_DELETE_DIRS,
-                                TITLE, JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(tg, UNABLE_TO_DELETE_DIRS, TITLE, JOptionPane.INFORMATION_MESSAGE);
                         }
                     }
                     b1.doClick();
                 } else {
-                    JOptionPane.showMessageDialog(tg, NO_SERVICE_SELECT,
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(tg, NO_SERVICE_SELECT, TITLE, JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });
