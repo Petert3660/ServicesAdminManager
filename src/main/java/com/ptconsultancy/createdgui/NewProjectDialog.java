@@ -4,9 +4,11 @@
 package com.ptconsultancy.createdgui;
 
 import static com.ptconsultancy.constants.FileSystemConstants.PROJECT_PATH;
+import static com.ptconsultancy.constants.InformationMessages.PROJ_NAME_NOT_EMPTY;
 import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
 import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
 
+import com.ptconsultancy.constants.InformationMessages;
 import com.ptconsultancy.domain.guicomponents.FreeButton;
 import com.ptconsultancy.domain.guicomponents.FreeLabel;
 import com.ptconsultancy.domain.guicomponents.FreeLabelTextFieldPair;
@@ -74,13 +76,12 @@ public class NewProjectDialog extends JFrame {
                         mainDialog.updateProjectSelection(comp0.getText());
                         b1.doClick();
                     } else {
-                        JOptionPane.showMessageDialog(tg, "Unable to create project: " + comp0.getText()
-                                + " , there may already be a project with this name",
+                        JOptionPane.showMessageDialog(tg, InformationMessages.getUnable("project", comp0.getText()),
                             TITLE, JOptionPane.INFORMATION_MESSAGE);
                         comp0.clearAndFocus();
                     }
                 } else {
-                    JOptionPane.showMessageDialog(tg, "The name of the new project cannot be empty - please choose a name",
+                    JOptionPane.showMessageDialog(tg, PROJ_NAME_NOT_EMPTY,
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                     comp0.clearAndFocus();
                 }

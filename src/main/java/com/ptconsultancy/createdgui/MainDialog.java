@@ -7,6 +7,17 @@ package com.ptconsultancy.createdgui;
 import static com.ptconsultancy.constants.FileSystemConstants.ADMIN_SAVE;
 import static com.ptconsultancy.constants.FileSystemConstants.LOCAL_TEST_ENV;
 import static com.ptconsultancy.constants.FileSystemConstants.PROJECT_PATH;
+import static com.ptconsultancy.constants.InformationMessages.ALL_SERVICES_RUNNING;
+import static com.ptconsultancy.constants.InformationMessages.ENDPOINT_CONFLICT;
+import static com.ptconsultancy.constants.InformationMessages.NOT_ALL_SERVICES_RUNNING;
+import static com.ptconsultancy.constants.InformationMessages.NO_PROJ_CONFIG;
+import static com.ptconsultancy.constants.InformationMessages.NO_PROJ_SEL;
+import static com.ptconsultancy.constants.InformationMessages.NO_PROJ_SELECTED;
+import static com.ptconsultancy.constants.InformationMessages.NO_SERVICES_ADDED_ENDPOINT;
+import static com.ptconsultancy.constants.InformationMessages.NO_SERVICES_RUNNING;
+import static com.ptconsultancy.constants.InformationMessages.NO_SERVICES_RUNNING_ENDPOINT;
+import static com.ptconsultancy.constants.InformationMessages.PROJ_SAVED;
+import static com.ptconsultancy.constants.InformationMessages.STOP_BEFORE_SAVE;
 import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
 
 import com.ptconsultancy.admin.Admin;
@@ -304,7 +315,7 @@ public class MainDialog extends JFrame {
                     JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("started"),
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else if (admin.allServicesRunning()) {
-                    JOptionPane.showMessageDialog(tg, "All available services are already running - you cannot run any further services",
+                    JOptionPane.showMessageDialog(tg, ALL_SERVICES_RUNNING,
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     updateServiceInfo();
@@ -320,7 +331,7 @@ public class MainDialog extends JFrame {
                     JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("started"),
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else if (admin.allServicesRunning()) {
-                    JOptionPane.showMessageDialog(tg, "All available services are already running - you cannot run any further services",
+                    JOptionPane.showMessageDialog(tg, ALL_SERVICES_RUNNING,
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     StartServiceDialog startServiceDialog = new StartServiceDialog(tg, admin);
@@ -340,7 +351,7 @@ public class MainDialog extends JFrame {
                         JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("restarted"),
                             TITLE, JOptionPane.INFORMATION_MESSAGE);
                     } else if (!admin.allServicesRunning()) {
-                        JOptionPane.showMessageDialog(tg, "Not all services are running - all services must be running before they can all be restarted",
+                        JOptionPane.showMessageDialog(tg, NOT_ALL_SERVICES_RUNNING,
                             TITLE, JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
@@ -375,7 +386,7 @@ public class MainDialog extends JFrame {
                     JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("stopped"),
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else if (admin.noServiceRunning()) {
-                    JOptionPane.showMessageDialog(tg, "There are no services currently running - there must be services running before they can be stopped",
+                    JOptionPane.showMessageDialog(tg, NO_SERVICES_RUNNING,
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     stopAllServices();
@@ -390,7 +401,7 @@ public class MainDialog extends JFrame {
                     JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("stopped"),
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else if (admin.noServiceRunning()) {
-                    JOptionPane.showMessageDialog(tg, "There are no services currently running - there must be services running before they can be stopped",
+                    JOptionPane.showMessageDialog(tg, NO_SERVICES_RUNNING,
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     StopServiceDialog stopServiceDialog = new StopServiceDialog(tg, admin);
@@ -409,10 +420,10 @@ public class MainDialog extends JFrame {
         menuItem50.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (admin.noServices()) {
-                    JOptionPane.showMessageDialog(tg, "There are no services added as yet - you must add services before they're endpoints may be tested",
+                    JOptionPane.showMessageDialog(tg, NO_SERVICES_ADDED_ENDPOINT,
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else if (admin.noServiceRunning()) {
-                    JOptionPane.showMessageDialog(tg, "There are no services currently running - there must be services running before they're endpoints may be tested",
+                    JOptionPane.showMessageDialog(tg, NO_SERVICES_RUNNING_ENDPOINT,
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     EndpointTestDialog endpointTestDialog = new EndpointTestDialog(tg, admin);
@@ -511,7 +522,7 @@ public class MainDialog extends JFrame {
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(tg, "There are host/port conflicts between imported services - please resolve before starting all",
+            JOptionPane.showMessageDialog(tg, ENDPOINT_CONFLICT,
                 TITLE, JOptionPane.INFORMATION_MESSAGE);
         }
     }
@@ -534,7 +545,7 @@ public class MainDialog extends JFrame {
                 e.printStackTrace();
             }
         } else {
-            JOptionPane.showMessageDialog(tg, "No project configuration was previously saved - cannot load!",
+            JOptionPane.showMessageDialog(tg, NO_PROJ_CONFIG,
                 TITLE, JOptionPane.INFORMATION_MESSAGE);
         }
         p1.repaint();
@@ -549,7 +560,7 @@ public class MainDialog extends JFrame {
         if (returnVal == 0) {
             File file = fc.getSelectedFile();
             if (file.getAbsolutePath().equals(PROJECT_PATH)) {
-                JOptionPane.showMessageDialog(tg, "No project selected - please try again!",
+                JOptionPane.showMessageDialog(tg, NO_PROJ_SELECTED,
                     TITLE, JOptionPane.INFORMATION_MESSAGE);
                 menuItem01.doClick();
             } else {
@@ -566,17 +577,17 @@ public class MainDialog extends JFrame {
                     ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
                     objectOut.writeObject(admin);
                     objectOut.close();
-                    JOptionPane.showMessageDialog(tg, "The project has been successfully saved",
+                    JOptionPane.showMessageDialog(tg, PROJ_SAVED,
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             } else {
-                JOptionPane.showMessageDialog(tg, "No project selected - cannot save configuration!",
+                JOptionPane.showMessageDialog(tg, NO_PROJ_SEL,
                     TITLE, JOptionPane.INFORMATION_MESSAGE);
             }
         } else {
-            int res = JOptionPane.showConfirmDialog(tg, "Services running, would you like to stop these before saving project",
+            int res = JOptionPane.showConfirmDialog(tg, STOP_BEFORE_SAVE,
                 TITLE, JOptionPane.YES_NO_OPTION);
             if (res == 0) {
                 stopAllServices();

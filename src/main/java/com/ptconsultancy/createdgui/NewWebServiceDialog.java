@@ -6,9 +6,12 @@ package com.ptconsultancy.createdgui;
 import static com.ptconsultancy.constants.FileSystemConstants.BANNER_FILE;
 import static com.ptconsultancy.constants.FileSystemConstants.LOCAL_SRC;
 import static com.ptconsultancy.constants.FileSystemConstants.MESSAGE_FILE;
+import static com.ptconsultancy.constants.InformationMessages.SERVICE_NAME_NOT_EMPTY;
+import static com.ptconsultancy.constants.InformationMessages.SERVICE_PORT_INTEGER;
 import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
 import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
 
+import com.ptconsultancy.constants.InformationMessages;
 import com.ptconsultancy.domain.guicomponents.FreeButton;
 import com.ptconsultancy.domain.guicomponents.FreeCheckBox;
 import com.ptconsultancy.domain.guicomponents.FreeLabel;
@@ -131,19 +134,18 @@ public class NewWebServiceDialog extends NewServiceHelper {
 
                         b1.doClick();
                     } else {
-                        JOptionPane.showMessageDialog(tg, "Unable to create service: " + comp0.getText()
-                                + " , there may already be a service with this name",
+                        JOptionPane.showMessageDialog(tg, InformationMessages.getUnable("service", comp0.getText()),
                             TITLE, JOptionPane.INFORMATION_MESSAGE);
                         comp0.clearAndFocus();
                     }
                 } else {
                     if (comp0.empty()) {
-                        JOptionPane.showMessageDialog(tg, "The name of the new service cannot be empty - please choose a name",
+                        JOptionPane.showMessageDialog(tg, SERVICE_NAME_NOT_EMPTY,
                             TITLE, JOptionPane.INFORMATION_MESSAGE);
                         comp0.clearAndFocus();
                     }
                     if (!isPortInteger) {
-                        JOptionPane.showMessageDialog(tg, "The new service port must be an integer - please re-enter or leave empty for default value",
+                        JOptionPane.showMessageDialog(tg, SERVICE_PORT_INTEGER,
                             TITLE, JOptionPane.INFORMATION_MESSAGE);
                         comp1.clearAndFocus();
                     }
