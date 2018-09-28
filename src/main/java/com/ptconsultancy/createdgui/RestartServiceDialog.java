@@ -11,6 +11,7 @@ import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
 
 import com.ptconsultancy.admin.Admin;
 import com.ptconsultancy.admin.Service;
+import com.ptconsultancy.constants.InformationMessages;
 import com.ptconsultancy.domain.guicomponents.FreeButton;
 import com.ptconsultancy.domain.guicomponents.FreeLabel;
 import com.ptconsultancy.domain.guicomponents.FreeLabelComboBoxPair;
@@ -88,7 +89,7 @@ public class RestartServiceDialog extends JFrame {
                         mainDialog.prepareAndExecuteOutputFile(admin.getServiceByName(comp0.getSelectedItem()), 0);
                         b1.doClick();
                     } else {
-                        JOptionPane.showMessageDialog(tg, "Cannot start service " + comp0.getSelectedItem() + " - there is/are currently " + portConflicts + " port/host conflict(s)",
+                        JOptionPane.showMessageDialog(tg, InformationMessages.reportPortConfilcts(comp0.getSelectedItem(), portConflicts),
                             TITLE, JOptionPane.INFORMATION_MESSAGE);
                     }
                 } else {

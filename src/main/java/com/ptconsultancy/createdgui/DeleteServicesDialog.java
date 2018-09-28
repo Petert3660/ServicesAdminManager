@@ -7,6 +7,7 @@ package com.ptconsultancy.createdgui;
 import static com.ptconsultancy.constants.FileSystemConstants.EXCLUSION_FILE;
 import static com.ptconsultancy.constants.FileSystemConstants.LOCAL_TEST_ENV;
 import static com.ptconsultancy.constants.InformationMessages.NO_SERVICE_SELECT;
+import static com.ptconsultancy.constants.InformationMessages.UNABLE_TO_DELETE_DIRS;
 import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
 import static com.ptconsultancy.constants.ServiceAdminConstants.STANDARD_DROPDOWN_SELECT;
 import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
@@ -84,7 +85,7 @@ public class DeleteServicesDialog extends NewServiceHelper {
                             deleteServiceFromSource(comp0.getSelectedItem());
                             deleteServiceFromJenkinsTarget(comp0.getSelectedItem());
                         } catch (IOException e1) {
-                            JOptionPane.showMessageDialog(tg, "Unable to delete all directories at this time - please close open files/directroies and try again!",
+                            JOptionPane.showMessageDialog(tg, UNABLE_TO_DELETE_DIRS,
                                 TITLE, JOptionPane.INFORMATION_MESSAGE);
                         }
                     }

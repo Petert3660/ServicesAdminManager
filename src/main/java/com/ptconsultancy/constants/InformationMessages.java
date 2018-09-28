@@ -45,4 +45,10 @@ public class InformationMessages {
     public static String getUnable(String type, String input) {
         return "Unable to create " + type + ": " + input + " , there may already be a service with this name";
     }
+
+    public static String reportPortConfilcts(String input, int numConflicts) {
+        return "Cannot start service " + input + " - there is/are currently " + String.valueOf(numConflicts) + " port/host conflict(s)";
+    }
+
+    public static final String UNABLE_TO_DELETE_DIRS = "Unable to delete all directories at this time - please close open files/directories and try again!";
 }
