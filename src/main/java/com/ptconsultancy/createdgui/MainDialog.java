@@ -11,6 +11,7 @@ import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
 
 import com.ptconsultancy.admin.Admin;
 import com.ptconsultancy.admin.Service;
+import com.ptconsultancy.constants.InformationMessages;
 import com.ptconsultancy.constants.MenuConstants;
 import com.ptconsultancy.domain.guicomponents.FreeButton;
 import com.ptconsultancy.domain.guicomponents.FreeLabel;
@@ -212,7 +213,7 @@ public class MainDialog extends JFrame {
         menuItem13.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (admin.noServices()) {
-                    JOptionPane.showMessageDialog(tg, "There are no services added as yet - you must add services before they can be removed",
+                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("removed"),
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     RemoveServicesDialog removeServicesDialog = new RemoveServicesDialog(tg, admin);
@@ -225,7 +226,7 @@ public class MainDialog extends JFrame {
         menuItem14.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (admin.noServices()) {
-                    JOptionPane.showMessageDialog(tg, "There are no services added as yet - you must add services before they can be monitored",
+                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("monitored"),
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else if (admin.noServiceRunning()) {
                     JOptionPane.showMessageDialog(tg, "There are no services running yet - there must be services running before they can be monitored",
@@ -300,7 +301,7 @@ public class MainDialog extends JFrame {
         menuItem20.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (admin.noServices()) {
-                    JOptionPane.showMessageDialog(tg, "There are no services added as yet - you must add services before they can be started",
+                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("started"),
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else if (admin.allServicesRunning()) {
                     JOptionPane.showMessageDialog(tg, "All available services are already running - you cannot run any further services",
@@ -316,7 +317,7 @@ public class MainDialog extends JFrame {
         menuItem21.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (admin.noServices()) {
-                    JOptionPane.showMessageDialog(tg, "There are no services added as yet - you must add services before they can be started",
+                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("started"),
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else if (admin.allServicesRunning()) {
                     JOptionPane.showMessageDialog(tg, "All available services are already running - you cannot run any further services",
@@ -336,7 +337,7 @@ public class MainDialog extends JFrame {
                     startAllServices();
                 } else {
                     if (admin.noServices()) {
-                        JOptionPane.showMessageDialog(tg, "There are no services added as yet - you must add services before they can be restarted",
+                        JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("restarted"),
                             TITLE, JOptionPane.INFORMATION_MESSAGE);
                     } else if (!admin.allServicesRunning()) {
                         JOptionPane.showMessageDialog(tg, "Not all services are running - all services must be running before they can all be restarted",
@@ -350,7 +351,7 @@ public class MainDialog extends JFrame {
         menuItem24.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (admin.noServices()) {
-                    JOptionPane.showMessageDialog(tg, "There are no services added as yet - you must add services before they can be restarted",
+                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("restarted"),
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     RestartServiceDialog restartServiceDialog = new RestartServiceDialog(tg, admin);
@@ -371,7 +372,7 @@ public class MainDialog extends JFrame {
         menuItem30.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (admin.noServices()) {
-                    JOptionPane.showMessageDialog(tg, "There are no services added as yet - you must add services before they can be stopped",
+                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("stopped"),
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else if (admin.noServiceRunning()) {
                     JOptionPane.showMessageDialog(tg, "There are no services currently running - there must be services running before they can be stopped",
@@ -386,7 +387,7 @@ public class MainDialog extends JFrame {
         menuItem31.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (admin.noServices()) {
-                    JOptionPane.showMessageDialog(tg, "There are no services added as yet - you must add services before they can be stopped",
+                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("stopped"),
                         TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else if (admin.noServiceRunning()) {
                     JOptionPane.showMessageDialog(tg, "There are no services currently running - there must be services running before they can be stopped",
