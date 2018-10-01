@@ -65,11 +65,12 @@ public class NewServiceDialog extends NewServiceHelper {
             file.mkdir();
         }
 
+        int xpos = FRAME_X_SIZE / 2 - 95;
         FreeLabel l0 = new FreeLabel(MAIN_HEADING, 30, 30, 500, 30, new Font("", Font.BOLD + Font.ITALIC, 20));
 
-        FreeButton b0 = new FreeButton(FreeButton.OK, 180, 250, 80);
+        FreeButton b0 = new FreeButton(FreeButton.OK, xpos, 250, 80);
 
-        FreeButton b1 = new FreeButton(FreeButton.CANCEL, 290, 250, 80);
+        FreeButton b1 = new FreeButton(FreeButton.CANCEL, xpos + 110, 250, 80);
 
         FreeLabelTextFieldPair comp0 = new FreeLabelTextFieldPair(col, "Please enter the new service name:", 30, 90, 240);
 

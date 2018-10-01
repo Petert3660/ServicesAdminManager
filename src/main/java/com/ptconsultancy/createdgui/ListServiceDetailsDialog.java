@@ -28,7 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class ListServiceDetailsDialog extends JFrame {
 
     private static final String TITLE = "List Service Details";
-    private static final int FRAME_X_SIZE = 550;
+    private static final int FRAME_X_SIZE = 650;
     private static final int FRAME_Y_SIZE = 250;
     private Color col = new Color(230, 255, 255);
 
@@ -51,18 +51,19 @@ public class ListServiceDetailsDialog extends JFrame {
         p1.setLayout(null);
         p1.setBackground(col);
 
+        int xpos = FRAME_X_SIZE / 2 - 95;
         FreeLabel l0 = new FreeLabel(MAIN_HEADING, 30, 30, 500, 30, new Font("", Font.BOLD + Font.ITALIC, 20));
 
-        FreeButton b0 = new FreeButton(FreeButton.OK, 180, 150, 80);
+        FreeButton b0 = new FreeButton(FreeButton.OK, xpos, 150, 80);
 
-        FreeButton b1 = new FreeButton(FreeButton.CANCEL, 290, 150, 80);
+        FreeButton b1 = new FreeButton(FreeButton.CANCEL, xpos + 110, 150, 80);
 
         ArrayList<String> items0 = new ArrayList<String>();
         items0.add(STANDARD_DROPDOWN_SELECT);
         for (Service service : admin.getAllServicesByName()) {
             items0.add(service.getName());
         }
-        FreeLabelComboBoxPair comp0 = new FreeLabelComboBoxPair(col, "Please select service whose details are required:", 30, 90, 240, items0);
+        FreeLabelComboBoxPair comp0 = new FreeLabelComboBoxPair(col, "Please select service whose details are required:", 30, 90, 340, items0);
 
         // This is the control for the OK button
         b0.addActionListener(new ActionListener() {

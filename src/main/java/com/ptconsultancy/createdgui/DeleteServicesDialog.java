@@ -51,11 +51,12 @@ public class DeleteServicesDialog extends NewServiceHelper {
         p1.setLayout(null);
         p1.setBackground(col);
 
+        int xpos = FRAME_X_SIZE / 2 - 95;
         FreeLabel l0 = new FreeLabel(MAIN_HEADING, 30, 30, 500, 30, new Font("", Font.BOLD + Font.ITALIC, 20));
 
-        FreeButton b0 = new FreeButton(FreeButton.OK, 180, 150, 80);
+        FreeButton b0 = new FreeButton(FreeButton.OK, xpos, 150, 80);
 
-        FreeButton b1 = new FreeButton(FreeButton.CANCEL, 290, 150, 80);
+        FreeButton b1 = new FreeButton(FreeButton.CANCEL, xpos + 110, 150, 80);
 
         String exclusions = "";
         try {

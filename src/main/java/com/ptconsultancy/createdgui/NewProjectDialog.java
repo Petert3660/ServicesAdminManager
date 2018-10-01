@@ -50,11 +50,12 @@ public class NewProjectDialog extends JFrame {
             file.mkdir();
         }
 
+        int xpos = FRAME_X_SIZE / 2 - 95;
         FreeLabel l0 = new FreeLabel(MAIN_HEADING, 30, 30, 500, 20, new Font("", Font.BOLD + Font.ITALIC, 20));
 
-        FreeButton b0 = new FreeButton(FreeButton.OK, 180, 150, 80);
+        FreeButton b0 = new FreeButton(FreeButton.OK, xpos, 150, 80);
 
-        FreeButton b1 = new FreeButton(FreeButton.CANCEL, 290, 150, 80);
+        FreeButton b1 = new FreeButton(FreeButton.CANCEL, xpos + 110, 150, 80);
 
         FreeLabelTextFieldPair comp0 = new FreeLabelTextFieldPair(col, "Please enter the new project name:", 30, 90, 240);
 
