@@ -56,13 +56,14 @@ public class UpdateDeleteExclusionsDialog extends NewServiceHelper {
         p1.setLayout(null);
         p1.setBackground(col);
 
+        int xpos = FRAME_X_SIZE / 2 - 150;
         FreeLabel l0 = new FreeLabel(MAIN_HEADING, 30, 30, 500, 30, new Font("", Font.BOLD + Font.ITALIC, 20));
 
-        FreeButton b0 = new FreeButton("Add", 125, 150, 80);
+        FreeButton b0 = new FreeButton("Add", xpos, 150, 80);
 
-        FreeButton b1 = new FreeButton(FreeButton.CANCEL, 345, 150, 80);
+        FreeButton b2 = new FreeButton("Remove", xpos + 110, 150, 80);
 
-        FreeButton b2 = new FreeButton("Remove", 235, 150, 80);
+        FreeButton b1 = new FreeButton(FreeButton.CANCEL, xpos + 220, 150, 80);
 
         comp0 = new FreeLabelComboBoxPair(col, "Select project to remove from the list:", 30, 90, 260, readFileAndPopulateList());
 

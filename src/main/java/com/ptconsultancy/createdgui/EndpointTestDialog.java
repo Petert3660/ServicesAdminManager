@@ -89,13 +89,14 @@ public class EndpointTestDialog extends JFrame {
         p1.setLayout(null);
         p1.setBackground(col);
 
+        int xpos = FRAME_X_SIZE / 2 - 150;
         FreeLabel l0 = new FreeLabel(MAIN_HEADING, 30, 30, 500, 30, new Font("", Font.BOLD + Font.ITALIC, 20));
 
-        FreeButton b0 = new FreeButton("Test", 200, 800, 80);
+        FreeButton b0 = new FreeButton("Test", xpos, 800, 80);
 
-        FreeButton b1 = new FreeButton(FreeButton.CLEAR, 310, 800, 80);
+        FreeButton b1 = new FreeButton(FreeButton.CLEAR, xpos + 110, 800, 80);
 
-        FreeButton b2 = new FreeButton(FreeButton.CANCEL, 420, 800, 80);
+        FreeButton b2 = new FreeButton(FreeButton.CANCEL, xpos + 220, 800, 80);
 
         FreeButton b3 = new FreeButton("Restart", 500, 140, 80);
         b3.setVisible(false);
