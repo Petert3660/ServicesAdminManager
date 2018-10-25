@@ -197,6 +197,7 @@ public class EndpointTestDialog extends JFrame {
 
                     if (output.getText().contains("Cannot issue a new token")) {
                         b3.setVisible(true);
+                        b5.setVisible(false);
                         p1.repaint();
                     }
                 } else {
