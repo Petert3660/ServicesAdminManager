@@ -213,6 +213,7 @@ public class EndpointTestDialog extends JFrame {
         b1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 rb0.doClick();
+                rb4.setSelected();
                 output.clearTextArea();
                 body.clearTextArea();
                 comp1.getComboBox().setSelectedIndex(0);
