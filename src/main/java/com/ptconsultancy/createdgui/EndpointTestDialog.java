@@ -37,6 +37,7 @@ import com.ptconsultancy.domain.guicomponents.FreeLabelTextFieldPair;
 import com.ptconsultancy.domain.guicomponents.FreeRadioButton;
 import com.ptconsultancy.domain.guicomponents.FreeRadioButtonGroup;
 import com.ptconsultancy.domain.guicomponents.FreeTextArea;
+import com.ptconsultancy.domain.guis.GuiHelper;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -74,6 +75,8 @@ public class EndpointTestDialog extends JFrame {
     private boolean getLastSelected = true;
 
     private RestTemplate restTemplate;
+
+    private FreeLabelTextFieldPair comp2 = new FreeLabelTextFieldPair(col, "Please enter endpoint:", 30, 190, 240);
 
     @Autowired
     public EndpointTestDialog(MainDialog mainDialog, Admin admin) {
@@ -138,8 +141,6 @@ public class EndpointTestDialog extends JFrame {
             }
         }
         FreeLabelComboBoxPair comp1 = new FreeLabelComboBoxPair(col, "Please select the service name:", 30, 140, 240, items1);
-
-        FreeLabelTextFieldPair comp2 = new FreeLabelTextFieldPair(col, "Please enter endpoint:", 30, 190, 240);
 
         comp2.getTextField().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -263,7 +264,12 @@ public class EndpointTestDialog extends JFrame {
         // This is the control for the Build URL button
         b5.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                
+                if (comp1.getComboBox().getSelectedIndex() > 0) {
+                    BuildEndpointURLDialog buildEndpointURLDialog = new BuildEndpointURLDialog(admin, tg, comp1.getSelectedItem());
+                    GuiHelper.showFrame(buildEndpointURLDialog);
+                } else {
+                    JOptionPane.showMessageDialog(tg, NO_SERVICE_SELECT, TITLE, JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         });
 
@@ -357,5 +363,9 @@ public class EndpointTestDialog extends JFrame {
             this.repaint();
             getLastSelected = false;
         }
+    }
+
+    public void setEndpointURL(String url) {
+        comp2.setText(url);
     }
 }
