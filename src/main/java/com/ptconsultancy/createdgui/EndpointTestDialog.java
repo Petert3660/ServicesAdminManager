@@ -102,6 +102,7 @@ public class EndpointTestDialog extends JFrame {
         b3.setVisible(false);
 
         FreeButton b4 = new FreeButton("Healthcheck", 500, 190, 120);
+        FreeButton b5 = new FreeButton("Build URL", 500, 140, 120);
 
         FreeRadioButton rb0 = new FreeRadioButton(col, GET_TYPE, 30, 90, 50, 20);
         rb0.setSelected();
@@ -297,6 +298,7 @@ public class EndpointTestDialog extends JFrame {
         p1.add(b2);
         p1.add(b3);
         p1.add(b4);
+        p1.add(b5);
         p1.add(rb0);
         p1.add(rb1);
         p1.add(rb2);
