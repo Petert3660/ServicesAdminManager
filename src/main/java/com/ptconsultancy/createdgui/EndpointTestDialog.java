@@ -260,6 +260,13 @@ public class EndpointTestDialog extends JFrame {
             }
         });
 
+        // This is the control for the Build URL button
+        b5.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        });
+
         // This is the control for the Get radio button
         rb0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
