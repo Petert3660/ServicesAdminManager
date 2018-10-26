@@ -217,8 +217,9 @@ public class EndpointTestDialog extends JFrame {
                 rb4.setSelected();
                 output.clearTextArea();
                 body.clearTextArea();
-                comp1.getComboBox().setSelectedIndex(0);
-                comp2.setText("");
+                comp1.getComboBox().setSelectedIndex(1);
+                comp2.setText(HEALTHCHECK);
+                b4.doClick();
             }
         });
 
