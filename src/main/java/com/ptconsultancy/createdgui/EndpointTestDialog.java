@@ -157,7 +157,7 @@ public class EndpointTestDialog extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (comp1.getComboBox().getSelectedIndex() > 0 && !StringUtils.isEmpty(comp2.getText())) {
                     if (rb0.isSelected()) {
-                        String url = getUrl(comp1.getSelectedItem(), comp2.getText(), TRUE);
+                        String url = getUrl(comp1.getSelectedItem(), comp2.getText());
                         output.clearTextArea();
                         try {
                             String response = restTemplate.getForObject(url, String.class);
@@ -174,7 +174,7 @@ public class EndpointTestDialog extends JFrame {
                             output.appendNewLine("Exception - " + e1.getMessage());
                         }
                     } else if (rb1.isSelected()) {
-                        String url = getUrl(comp1.getSelectedItem(), comp2.getText(), FALSE);
+                        String url = getUrl(comp1.getSelectedItem(), comp2.getText());
                         try {
                             ObjectMapper mapper = new ObjectMapper();
                             JsonNode request = mapper.readTree(body.getText());
@@ -188,7 +188,7 @@ public class EndpointTestDialog extends JFrame {
 
                     } else if (rb3.isSelected()) {
                         try {
-                            URI uri = new URI(getUrl(comp1.getSelectedItem(), comp2.getText(), FALSE));
+                            URI uri = new URI(getUrl(comp1.getSelectedItem(), comp2.getText()));
                             restTemplate.delete(uri);
                         } catch (URISyntaxException e1) {
                             e1.printStackTrace();
@@ -334,17 +334,12 @@ public class EndpointTestDialog extends JFrame {
         return restTemplate.getForObject(secureUrl, String.class);
     }
 
-    private String getUrl(String serviceName, String endpoint, boolean radioFlag) {
+    private String getUrl(String serviceName, String endpoint) {
 
         Service service = admin.getServiceByName(serviceName);
         String url = service.getUrl() + STANDARD_SEPARATOR + endpoint;
-        if (radioFlag) {
-            if (!endpoint.equals(HEALTHCHECK)) {
-                url = url + STANDARD_SEPARATOR + getSecurityToken(restTemplate, service);
-            }
-        } else {
-            url = url + STANDARD_SEPARATOR + service.getCredentials().getUserId() + STANDARD_SEPARATOR
-                + service.getCredentials().getPassword() + STANDARD_SEPARATOR + getSecurityToken(restTemplate, service);
+        if (!endpoint.equals(HEALTHCHECK)) {
+            url = url + STANDARD_SEPARATOR + getSecurityToken(restTemplate, service);
         }
 
         return url;
