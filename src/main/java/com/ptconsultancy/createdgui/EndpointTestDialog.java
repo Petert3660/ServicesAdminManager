@@ -330,7 +330,7 @@ public class EndpointTestDialog extends JFrame {
         this.add(p1);
     }
 
-    private String getSecurityToken(RestTemplate restTemplate, Service service) {
+    private String getSecurityToken(Service service) {
         String secureUrl = service.getUrl() + STANDARD_SEPARATOR  + SECURITY_TOKEN;
         return restTemplate.getForObject(secureUrl, String.class);
     }
@@ -340,7 +340,7 @@ public class EndpointTestDialog extends JFrame {
         Service service = admin.getServiceByName(serviceName);
         String url = service.getUrl() + STANDARD_SEPARATOR + endpoint;
         if (!endpoint.equals(HEALTHCHECK)) {
-            url = url + STANDARD_SEPARATOR + getSecurityToken(restTemplate, service);
+            url = url + STANDARD_SEPARATOR + getSecurityToken(service);
         }
 
         return url;
