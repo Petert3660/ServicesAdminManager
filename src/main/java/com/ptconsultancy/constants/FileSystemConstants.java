@@ -4,7 +4,6 @@ public class FileSystemConstants {
 
     public static final String LOCAL_TEST_ENV = "C:\\PTConsultancy\\LocalTestEnvironment";
     public static final String LOCAL_SRC = "C:\\GradleTutorials";
-    public static final String LOCAL_SRC_WINDOWS = "C:\\GradleTutorials";
 
     public static final String PROJECT_PATH = "C:\\GradleTutorials\\ServicesAdminManager\\ProjectFiles";
 
