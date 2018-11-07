@@ -8,7 +8,6 @@ import static com.ptconsultancy.constants.FileSystemConstants.EXCLUSION_FILE;
 import static com.ptconsultancy.constants.FileSystemConstants.LOCAL_TEST_ENV;
 import static com.ptconsultancy.constants.InformationMessages.NO_PROJ_SELECTED;
 import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
-import static com.ptconsultancy.constants.ServiceAdminConstants.STANDARD_DROPDOWN_SELECT;
 import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
 
 import com.ptconsultancy.constants.InformationMessages;
@@ -142,7 +141,6 @@ public class UpdateDeleteExclusionsDialog extends NewServiceHelper {
 
         String[] prepareItems = exclusions.split("\r\n");
         ArrayList<String> items0 = new ArrayList<String>();
-        items0.add(STANDARD_DROPDOWN_SELECT);
         for (String item: prepareItems) {
             if (!StringUtils.isEmpty(item) && !item.startsWith("#")) {
                 items0.add(item);

@@ -17,7 +17,6 @@ public class ServiceAdminConstants {
     public static final String XML = "XML";
 
     public static final String MAIN_HEADING = "Services Admin Manager";
-    public static final String STANDARD_DROPDOWN_SELECT = "--Select";
     public static final String STANDARD_TEXTAREA_LABEL = "The output will be shown below:";
 
     public static final boolean TRUE = true;

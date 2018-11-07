@@ -10,7 +10,6 @@ import static com.ptconsultancy.constants.InformationMessages.NO_SERVICE_SELECT;
 import static com.ptconsultancy.constants.InformationMessages.SERVICE_DELETED;
 import static com.ptconsultancy.constants.InformationMessages.UNABLE_TO_DELETE_DIRS;
 import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
-import static com.ptconsultancy.constants.ServiceAdminConstants.STANDARD_DROPDOWN_SELECT;
 import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
 
 import com.ptconsultancy.constants.InformationMessages;
@@ -66,7 +65,6 @@ public class DeleteServicesDialog extends NewServiceHelper {
         }
 
         ArrayList<String> items0 = new ArrayList<String>();
-        items0.add(STANDARD_DROPDOWN_SELECT);
         File targetDir = new File(LOCAL_TEST_ENV);
         File[] allFiles = targetDir.listFiles();
         for (File service : allFiles) {

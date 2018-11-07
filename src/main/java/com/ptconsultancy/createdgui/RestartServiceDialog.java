@@ -6,7 +6,6 @@ package com.ptconsultancy.createdgui;
 
 import static com.ptconsultancy.constants.InformationMessages.NO_SERVICE_SELECT;
 import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
-import static com.ptconsultancy.constants.ServiceAdminConstants.STANDARD_DROPDOWN_SELECT;
 import static com.ptconsultancy.constants.ServiceAdminConstants.TRUE;
 
 import com.ptconsultancy.admin.Admin;
@@ -60,7 +59,6 @@ public class RestartServiceDialog extends JFrame {
         FreeButton b1 = new FreeButton(FreeButton.CANCEL, xpos + 110, 150, 80);
 
         ArrayList<String> items0 = new ArrayList<String>();
-        items0.add(STANDARD_DROPDOWN_SELECT);
         for (Service service : admin.getAllServicesByName()) {
             if (service.isRunning()) {
                 items0.add(service.getName());

@@ -14,7 +14,6 @@ import static com.ptconsultancy.constants.ServiceAdminConstants.MAIN_HEADING;
 import static com.ptconsultancy.constants.ServiceAdminConstants.POST_TYPE;
 import static com.ptconsultancy.constants.ServiceAdminConstants.PUT_TYPE;
 import static com.ptconsultancy.constants.ServiceAdminConstants.SECURITY_TOKEN;
-import static com.ptconsultancy.constants.ServiceAdminConstants.STANDARD_DROPDOWN_SELECT;
 import static com.ptconsultancy.constants.ServiceAdminConstants.STANDARD_SEPARATOR;
 import static com.ptconsultancy.constants.ServiceAdminConstants.STANDARD_TEXTAREA_LABEL;
 import static com.ptconsultancy.constants.ServiceAdminConstants.TEXT;
@@ -134,7 +133,6 @@ public class EndpointTestDialog extends JFrame {
         rbgType.addButtons(rbgTypeButtons);
 
         ArrayList<String> items1 = new ArrayList<String>();
-        items1.add(STANDARD_DROPDOWN_SELECT);
         for (Service service : admin.getAllServicesByName()) {
             if (service.isRunning()) {
                 items1.add(service.getName());
