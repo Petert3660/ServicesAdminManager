@@ -87,12 +87,18 @@ public class BuildEndpointURLDialog extends JFrame {
             freeUserButtons[i] = new FreeButton("Use ID", 500, 190 + (i* 50), 120);
             freePassButtons[i] = new FreeButton("Use Pass", 650, 190 + (i* 50), 120);
 
+            if (i > 0) {
+                freeUserButtons[i].setVisible(false);
+                freePassButtons[i].setVisible(false);
+            }
+
             final int index = i;
             freeUserButtons[i].addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     Service service = admin.getServiceByName(serviceName);
                     freeLabelTextFieldPairs[index].setText(service.getCredentials().getUserId());
                     enableAllUserButtons(false);
+                    manageUserPassButtons(index);
                 }
             });
 
@@ -101,6 +107,15 @@ public class BuildEndpointURLDialog extends JFrame {
                     Service service = admin.getServiceByName(serviceName);
                     freeLabelTextFieldPairs[index].setText(service.getCredentials().getPassword());
                     enableAllPassButtons(false);
+                    manageUserPassButtons(index);
+                }
+            });
+
+            freeLabelTextFieldPairs[i].getTextField().addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    if (freeLabelTextFieldPairs[index].getTextField().isFocusOwner()) {
+                        manageUserPassButtons(index);
+                    }
                 }
             });
         }
@@ -133,12 +148,19 @@ public class BuildEndpointURLDialog extends JFrame {
         // This is the control for the Clear button
         b3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-               comp1.clearTextField();
                for (int i = 0; i < NUM_PARAMS; i++) {
                    freeLabelTextFieldPairs[i].clearTextField();
                    enableAllPassButtons(true);
                    enableAllUserButtons(true);
+                   if (i > 0) {
+                       freeUserButtons[i].setVisible(false);
+                       freePassButtons[i].setVisible(false);
+                   } else {
+                       freeUserButtons[i].setVisible(true);
+                       freePassButtons[i].setVisible(true);
+                   }
                }
+               comp1.clearAndFocus();
             }
         });
 
@@ -155,6 +177,17 @@ public class BuildEndpointURLDialog extends JFrame {
         }
         p1.add(l0);
         this.add(p1);
+    }
+
+    private void manageUserPassButtons(int index) {
+        freeUserButtons[index].setVisible(false);
+        freePassButtons[index].setVisible(false);
+        if (freeUserButtons[index + 1].isEnabled()) {
+            freeUserButtons[index + 1].setVisible(true);
+        }
+        if (freePassButtons[index + 1].isEnabled()) {
+            freePassButtons[index + 1].setVisible(true);
+        }
     }
 
     private String buildUrl(FreeLabelTextFieldPair comp1, FreeLabelTextFieldPair[] freeLabelTextFieldPairs) {
