@@ -183,7 +183,16 @@ public class EndpointTestDialog extends JFrame {
                             e1.printStackTrace();
                         }
                     } else if (rb2.isSelected()) {
-
+                        try {
+                            URI uri = new URI(getUrl(comp1.getSelectedItem(), comp2.getText()));
+                            ObjectMapper mapper = new ObjectMapper();
+                            JsonNode request = mapper.readTree(body.getText());
+                            restTemplate.put(uri, request);
+                        } catch (URISyntaxException e1) {
+                            e1.printStackTrace();
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
                     } else if (rb3.isSelected()) {
                         try {
                             URI uri = new URI(getUrl(comp1.getSelectedItem(), comp2.getText()));
