@@ -221,16 +221,15 @@ public class MainDialog extends JFrame {
         });
 
         // This is the control for the Remove Service menu item
-        menuItem13.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        menuItem13.addActionListener(
+            l -> {
                 if (admin.noServices()) {
                     JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("removed"), TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     RemoveServicesDialog removeServicesDialog = new RemoveServicesDialog(tg, admin);
                     GuiHelper.showFrame(removeServicesDialog);
                 }
-            }
-        });
+            });
 
         // This is the control for the Services/Monitor Service menu item
         menuItem14.addActionListener(new ActionListener() {
@@ -425,12 +424,12 @@ public class MainDialog extends JFrame {
 
         // This is the control for the Help/Help menu item
         menuItem40.addActionListener(
-            (l) -> GuiHelper.showFrame(new HelpDialog(tg))
+            l -> GuiHelper.showFrame(new HelpDialog(tg))
         );
 
         // This is the control for the Help/About menu item
         menuItem42.addActionListener(
-            (l) -> GuiHelper.showFrame(new AboutDialog(tg))
+            l -> GuiHelper.showFrame(new AboutDialog(tg))
         );
 
         menuBar.add(menu4);
