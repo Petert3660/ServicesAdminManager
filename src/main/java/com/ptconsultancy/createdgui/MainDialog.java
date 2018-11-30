@@ -424,20 +424,14 @@ public class MainDialog extends JFrame {
         menu4.add(menuItem42);
 
         // This is the control for the Help/Help menu item
-        menuItem40.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                HelpDialog helpDialog = new HelpDialog(tg);
-                GuiHelper.showFrame(helpDialog);
-            }
-        });
+        menuItem40.addActionListener(
+            (l) -> GuiHelper.showFrame(new HelpDialog(tg))
+        );
 
         // This is the control for the Help/About menu item
-        menuItem42.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                AboutDialog aboutDialog = new AboutDialog(tg);
-                GuiHelper.showFrame(aboutDialog);
-            }
-        });
+        menuItem42.addActionListener(
+            (l) -> GuiHelper.showFrame(new AboutDialog(tg))
+        );
 
         menuBar.add(menu4);
     }
