@@ -213,14 +213,8 @@ public class MainDialog extends JFrame {
 
         // This is the control for the Remove Service menu item
         menuItem13.addActionListener(
-            l -> {
-                if (admin.noServices()) {
-                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("removed"), TITLE, JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    RemoveServicesDialog removeServicesDialog = new RemoveServicesDialog(tg, admin);
-                    GuiHelper.showFrame(removeServicesDialog);
-                }
-            });
+            l -> showFrameTestingNoServices("removed", new RemoveServicesDialog(tg, admin))
+        );
 
         // This is the control for the Services/Monitor Service menu item
         menuItem14.addActionListener(
@@ -241,14 +235,8 @@ public class MainDialog extends JFrame {
         );
 
         menuItem16.addActionListener(
-            l -> {
-                if (admin.noServices()) {
-                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoServicesAdded("viewed"), TITLE, JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    ListServiceDetailsDialog listServiceDetailsDialog = new ListServiceDetailsDialog(tg, admin);
-                    GuiHelper.showFrame(listServiceDetailsDialog);
-                }
-            });
+            l -> showFrameTestingNoServices("viewed", new ListServiceDetailsDialog(tg, admin))
+        );
 
         menuItem17.addActionListener(
             l -> GuiHelper.showFrame(new DeleteServicesDialog(tg))
@@ -259,14 +247,8 @@ public class MainDialog extends JFrame {
         );
 
         menuItem19.addActionListener(
-            l -> {
-                if (admin.noServices()) {
-                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoServicesAdded("updated"), TITLE, JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    UpdateServicesPortDialog updateServicesPortDialog = new UpdateServicesPortDialog(tg, admin);
-                    GuiHelper.showFrame(updateServicesPortDialog);
-                }
-            });
+            l -> showFrameTestingNoServices("updated", new UpdateServicesPortDialog(tg, admin))
+        );
 
         menuBar.add(menu1);
 
@@ -342,8 +324,8 @@ public class MainDialog extends JFrame {
         menu3.add(menuItem31);
 
         // This is the control for the Stop Services/Stop All Services menu item
-        menuItem30.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        menuItem30.addActionListener(
+            l -> {
                 if (admin.noServices()) {
                     JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("stopped"), TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else if (admin.noServiceRunning()) {
@@ -351,8 +333,7 @@ public class MainDialog extends JFrame {
                 } else {
                     stopAllServices();
                 }
-            }
-        });
+            });
 
         // This is the control for the Stop Services/Stop Services menu item
         menuItem31.addActionListener(new ActionListener() {
@@ -408,6 +389,15 @@ public class MainDialog extends JFrame {
         );
 
         menuBar.add(menu4);
+    }
+
+    private void showFrameTestingNoServices(String message, JFrame dialog) {
+        if (admin.noServices()) {
+            JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService(message), TITLE, JOptionPane.INFORMATION_MESSAGE);
+            tg.setEnabled(true);
+        } else {
+            GuiHelper.showFrame(dialog);
+        }
     }
 
     public void updateServiceInfo() {
