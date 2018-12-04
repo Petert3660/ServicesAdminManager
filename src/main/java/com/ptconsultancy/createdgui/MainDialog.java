@@ -138,33 +138,24 @@ public class MainDialog extends JFrame {
         menu0.add(menuItem04);
 
         // This is the control for the Project/New Project menu item
-        menuItem00.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                NewProjectDialog newProjectDialog = new NewProjectDialog(tg);
-                GuiHelper.showFrame(newProjectDialog);
-            }
-        });
+        menuItem00.addActionListener(
+            l -> GuiHelper.showFrame(new NewProjectDialog(tg))
+        );
 
         // This is the control for the Project/Open Project  menu item
-        menuItem01.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                openProjectChoice();
-            }
-        });
+        menuItem01.addActionListener(
+            l -> openProjectChoice()
+        );
 
         // This is the control for the Project/Save Project menu item
-        menuItem02.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                saveProjectObject();
-            }
-        });
+        menuItem02.addActionListener(
+            l -> saveProjectObject()
+        );
 
         // This is the control for the Project/Exit-implement menu item
-        menuItem04.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                b0.doClick();
-            }
-        });
+        menuItem04.addActionListener(
+            l -> b0.doClick()
+        );
 
         menuBar.add(menu0);
 
