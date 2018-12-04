@@ -297,14 +297,8 @@ public class MainDialog extends JFrame {
 
         // This is the control for the Start Services/Restart Services menu item
         menuItem24.addActionListener(
-            l -> {
-                if (admin.noServices()) {
-                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("restarted"), TITLE, JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    RestartServiceDialog restartServiceDialog = new RestartServiceDialog(tg, admin);
-                    GuiHelper.showFrame(restartServiceDialog);
-                }
-            });
+            l -> showFrameTestingNoServices("restarted", new RestartServiceDialog(tg, admin))
+        );
 
         menuBar.add(menu2);
 
