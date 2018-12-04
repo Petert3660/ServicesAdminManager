@@ -197,28 +197,19 @@ public class MainDialog extends JFrame {
         menu1.add(menuItem19);
 
         // This is the control for the Services/New REST Service menu item
-        menuItem10.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                NewServiceDialog newServiceDialog = new NewServiceDialog(tg, env);
-                GuiHelper.showFrame(newServiceDialog);
-            }
-        });
+        menuItem10.addActionListener(
+            l -> GuiHelper.showFrame(new NewServiceDialog(tg, env))
+        );
 
         // This is the control for the Services/New Web Service menu item
-        menuItem11.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                NewWebServiceDialog newWebServiceDialog = new NewWebServiceDialog(tg, env);
-                GuiHelper.showFrame(newWebServiceDialog);
-            }
-        });
+        menuItem11.addActionListener(
+            l -> GuiHelper.showFrame(new NewWebServiceDialog(tg, env))
+        );
 
         // This is the control for the Add Existing Service menu item
-        menuItem12.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                AddServicesDialog addServicesDialog = new AddServicesDialog(tg, admin);
-                GuiHelper.showFrame(addServicesDialog);
-            }
-        });
+        menuItem12.addActionListener(
+            l -> GuiHelper.showFrame(new AddServicesDialog(tg, admin))
+        );
 
         // This is the control for the Remove Service menu item
         menuItem13.addActionListener(
@@ -232,8 +223,8 @@ public class MainDialog extends JFrame {
             });
 
         // This is the control for the Services/Monitor Service menu item
-        menuItem14.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        menuItem14.addActionListener(
+            l -> {
                 if (admin.noServices()) {
                     JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("monitored"), TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else if (admin.noServiceRunning()) {
@@ -242,52 +233,40 @@ public class MainDialog extends JFrame {
                     MonitorServicesDialog monitorServicesDialog = new MonitorServicesDialog(tg, admin);
                     GuiHelper.showFrame(monitorServicesDialog);
                 }
-            }
-        });
+            });
 
         // This is the control for the Services/Generate Password menu item
-        menuItem15.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                GeneratePasswordDialog generatePasswordDialog = new GeneratePasswordDialog(tg);
-                GuiHelper.showFrame(generatePasswordDialog);
-            }
-        });
+        menuItem15.addActionListener(
+            l -> GuiHelper.showFrame(new GeneratePasswordDialog(tg))
+        );
 
-        menuItem16.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        menuItem16.addActionListener(
+            l -> {
                 if (admin.noServices()) {
                     JOptionPane.showMessageDialog(tg, InformationMessages.updateNoServicesAdded("viewed"), TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     ListServiceDetailsDialog listServiceDetailsDialog = new ListServiceDetailsDialog(tg, admin);
                     GuiHelper.showFrame(listServiceDetailsDialog);
                 }
-            }
-        });
+            });
 
-        menuItem17.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                DeleteServicesDialog deleteServicesDialog = new DeleteServicesDialog(tg);
-                GuiHelper.showFrame(deleteServicesDialog);
-            }
-        });
+        menuItem17.addActionListener(
+            l -> GuiHelper.showFrame(new DeleteServicesDialog(tg))
+        );
 
-        menuItem18.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                UpdateDeleteExclusionsDialog updateDeleteExclusionsDialog = new UpdateDeleteExclusionsDialog(tg);
-                GuiHelper.showFrame(updateDeleteExclusionsDialog);
-            }
-        });
+        menuItem18.addActionListener(
+            l -> GuiHelper.showFrame(new UpdateDeleteExclusionsDialog(tg))
+        );
 
-        menuItem19.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        menuItem19.addActionListener(
+            l -> {
                 if (admin.noServices()) {
                     JOptionPane.showMessageDialog(tg, InformationMessages.updateNoServicesAdded("updated"), TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     UpdateServicesPortDialog updateServicesPortDialog = new UpdateServicesPortDialog(tg, admin);
                     GuiHelper.showFrame(updateServicesPortDialog);
                 }
-            }
-        });
+            });
 
         menuBar.add(menu1);
 
