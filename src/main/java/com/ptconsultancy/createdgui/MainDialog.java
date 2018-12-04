@@ -209,16 +209,8 @@ public class MainDialog extends JFrame {
 
         // This is the control for the Services/Monitor Service menu item
         menuItem14.addActionListener(
-            l -> {
-                if (admin.noServices()) {
-                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("monitored"), TITLE, JOptionPane.INFORMATION_MESSAGE);
-                } else if (admin.noServiceRunning()) {
-                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoServicesRun("monitored"), TITLE, JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    MonitorServicesDialog monitorServicesDialog = new MonitorServicesDialog(tg, admin);
-                    GuiHelper.showFrame(monitorServicesDialog);
-                }
-            });
+            l -> showFrameTestingNoServiceAndNoRunningServices("monitored", new MonitorServicesDialog(tg, admin))
+        );
 
         // This is the control for the Services/Generate Password menu item
         menuItem15.addActionListener(
@@ -321,18 +313,9 @@ public class MainDialog extends JFrame {
             });
 
         // This is the control for the Stop Services/Stop Services menu item
-        menuItem31.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (admin.noServices()) {
-                    JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("stopped"), TITLE, JOptionPane.INFORMATION_MESSAGE);
-                } else if (admin.noServiceRunning()) {
-                    JOptionPane.showMessageDialog(tg, NO_SERVICES_RUNNING, TITLE, JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    StopServiceDialog stopServiceDialog = new StopServiceDialog(tg, admin);
-                    GuiHelper.showFrame(stopServiceDialog);
-                }
-            }
-        });
+        menuItem31.addActionListener(
+            l -> showFrameTestingNoServiceAndNoRunningServices("stopped", new StopServiceDialog(tg, admin))
+        );
 
         menuBar.add(menu3);
 
@@ -379,6 +362,18 @@ public class MainDialog extends JFrame {
     private void showFrameTestingNoServices(String message, JFrame dialog) {
         if (admin.noServices()) {
             JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService(message), TITLE, JOptionPane.INFORMATION_MESSAGE);
+            tg.setEnabled(true);
+        } else {
+            GuiHelper.showFrame(dialog);
+        }
+    }
+
+    private void showFrameTestingNoServiceAndNoRunningServices(String message, JFrame dialog) {
+        if (admin.noServices()) {
+            JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService(message), TITLE, JOptionPane.INFORMATION_MESSAGE);
+            tg.setEnabled(true);
+        } else if (admin.noServiceRunning()) {
+            JOptionPane.showMessageDialog(tg, InformationMessages.updateNoServicesRun(message), TITLE, JOptionPane.INFORMATION_MESSAGE);
             tg.setEnabled(true);
         } else {
             GuiHelper.showFrame(dialog);
