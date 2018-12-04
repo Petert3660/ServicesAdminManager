@@ -282,8 +282,8 @@ public class MainDialog extends JFrame {
         menu2.add(menuItem24);
 
         // This is the control for the Start Services/Start All Services menu item
-        menuItem20.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        menuItem20.addActionListener(
+            l -> {
                 if (admin.noServices()) {
                     JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("started"), TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else if (admin.allServicesRunning()) {
@@ -292,12 +292,11 @@ public class MainDialog extends JFrame {
                     updateServiceInfo();
                     startAllServices();
                 }
-            }
-        });
+            });
 
         // This is the control for the Start Services/Start Services menu item
-        menuItem21.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        menuItem21.addActionListener(
+            l -> {
                 if (admin.noServices()) {
                     JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("started"), TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else if (admin.allServicesRunning()) {
@@ -306,12 +305,11 @@ public class MainDialog extends JFrame {
                     StartServiceDialog startServiceDialog = new StartServiceDialog(tg, admin);
                     GuiHelper.showFrame(startServiceDialog);
                 }
-            }
-        });
+            });
 
         // This is the control for the Start Services/Restart All Services menu item
-        menuItem23.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        menuItem23.addActionListener(
+            l -> {
                 if (!admin.noServices() && admin.allServicesRunning()) {
                     stopAllServices();
                     startAllServices();
@@ -322,20 +320,18 @@ public class MainDialog extends JFrame {
                         JOptionPane.showMessageDialog(tg, NOT_ALL_SERVICES_RUNNING, TITLE, JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
-            }
-        });
+            });
 
         // This is the control for the Start Services/Restart Services menu item
-        menuItem24.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        menuItem24.addActionListener(
+            l -> {
                 if (admin.noServices()) {
                     JOptionPane.showMessageDialog(tg, InformationMessages.updateNoService("restarted"), TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     RestartServiceDialog restartServiceDialog = new RestartServiceDialog(tg, admin);
                     GuiHelper.showFrame(restartServiceDialog);
                 }
-            }
-        });
+            });
 
         menuBar.add(menu2);
 
